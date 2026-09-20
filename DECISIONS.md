@@ -113,3 +113,7 @@ Week 2 must report how many correct runs fail only the new checks.
 - Found while checking: Ollama's newest release is 0.34.2 (2026-09-15). The study is pinned to 0.33.2, so the desktop app will offer an update. Do not accept it before the tag `analysis-frozen` (rule D-003c). `code/auditarch/llm.py` stops every run if the version differs.
 - Still open from week 1: supervisor email (yours), `OLLAMA_NUM_PARALLEL=1` and auto-update off (your machine), your hours in `hours.csv`, your reading (3 h), Friday status entry.
 - To confirm before week 2 starts: D-005 (tool behaviour), D-006 (gate). To discuss with the supervisor: D-007 (outcome labels, power).
+
+## D-005 and D-006 confirmed (2026-09-20)
+
+Confirmed by Ahmad after reading the plain-English explanation. D-006 is no longer "proposed": it is the gate for week 2. D-007 stays open until the supervisor meeting.
