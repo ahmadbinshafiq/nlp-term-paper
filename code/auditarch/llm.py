@@ -49,6 +49,9 @@ def check_pins(model: str) -> dict:
     return {"ollama_version": version, "model_tag": model, "model_digest": digests[model], "options": OPTIONS}
 
 
-def chat_model(model: str = AGENT_MODEL, **overrides) -> ChatOllama:
-    """A ChatOllama with the pinned options and thinking off."""
-    return ChatOllama(model=model, reasoning=False, keep_alive="30m", **{**OPTIONS, **overrides})
+def make_llm(model: str = AGENT_MODEL, think: bool = False, **overrides):
+    """Returns (llm, pins). `pins` holds everything that decides an answer, so it is part of every cache key."""
+    pins = check_pins(model)
+    options = {**OPTIONS, **overrides}
+    pins["options"] = {**options, "think": think}
+    return ChatOllama(model=model, reasoning=think, keep_alive="30m", **options), pins

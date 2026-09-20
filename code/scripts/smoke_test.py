@@ -18,7 +18,7 @@ from langgraph.checkpoint.sqlite import SqliteSaver
 from langgraph.graph import END, START, StateGraph
 from prov.model import ProvDocument
 
-from auditarch.llm import AGENT_MODEL, AUDITOR_MODEL, chat_model, check_pins
+from auditarch.llm import AGENT_MODEL, AUDITOR_MODEL, make_llm
 
 
 def snapshot_demo():
@@ -76,8 +76,8 @@ def speed(message) -> str:
 
 
 def agent_demo():
-    pins = check_pins(AGENT_MODEL)
-    llm = chat_model(AGENT_MODEL).bind_tools([search, read])
+    llm, pins = make_llm(AGENT_MODEL)
+    llm = llm.bind_tools([search, read])
     start = time.time()
     message = llm.invoke([
         ("system", "Answer using only the tools. Call exactly one tool per turn."),
@@ -101,7 +101,6 @@ AUDIT_SCHEMA = {
 
 
 def auditor_demo():
-    check_pins(AUDITOR_MODEL)
     log = "\n".join(json.dumps(e) for e in [
         {"step_id": 1, "node_kind": "act", "tool_call": {"name": "read", "args": {"handle": "p:aa11"}},
          "tool_return": {"pid": "p:aa11", "text": "Titanic was directed by James Cameron."}},
@@ -109,7 +108,7 @@ def auditor_demo():
          "tool_call": {"name": "write_note", "args": {"key": "director", "text": "James Cameron", "source_pid": "p:zz99"}},
          "tool_return": {"ok": True}},
     ])
-    llm = chat_model(AUDITOR_MODEL, format=AUDIT_SCHEMA)
+    llm, _ = make_llm(AUDITOR_MODEL, format=AUDIT_SCHEMA)
     start = time.time()
     message = llm.invoke("One fault may be planted in this agent run. Fault classes: tool, state, evidence "
                          "(a note cites a passage it did not come from). Return the faulty step.\n\n" + log)
