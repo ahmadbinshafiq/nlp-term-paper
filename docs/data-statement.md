@@ -9,6 +9,6 @@
 - **What we use:** 120 questions with 3 or 4 hops, sampled with seed 0 (decision D-002). The passages are Wikipedia-derived text.
 - **Personal data:** none collected. There are no human subjects. Real names appear only as part of the benchmark text.
 - **Where the text goes:** nowhere. All models run locally on one laptop through Ollama. No passage, question or answer is sent to an outside service.
-- **Models:** GLM-4.7-Flash (MIT license). Qwen3.8 27B as second auditor (license to be checked when it is installed).
+- **Models:** GLM-4.7-Flash (MIT license). Qwen3.8 27B as second auditor (Apache 2.0, as shown by `ollama show qwen3.8:27b --license`).
 - **Faults:** every fault in the study is synthetic. It is planted by our own tool wrapper in a run that was correct before.
 - **Gold labels:** kept in `data/gold.jsonl`, apart from `data/tasks.jsonl`. `tests/test_no_leak.py` checks that no file a model can see contains gold metadata.

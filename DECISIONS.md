@@ -71,3 +71,10 @@ Open option, not taken: let `search` return the top 5 (recall 0.912). It would h
 - Done: repo skeleton, `uv` environment with `uv.lock`, smoke test (StateSnapshot, PROV-JSON with wasDerivedFrom, tool call, auditor JSON), 120-task slice, leak test, BM25 recall gate passed, `docs/schema.md`, `docs/data-statement.md`, `docs/compute.md`, `docs/supervisor-brief.md`, `code/auditarch/schema.py` with fold/unfold tests (11 tests green).
 - Not done yet from week 1: supervisor email (yours to send), `prereg/preregistration.md` v0, `prereg/fault_catalogue.md`, `analysis/schema.md`, reading kit, Qwen smoke test (download still running).
 - Hours: `hours.csv` is empty; fill in your own hours.
+
+## D-003d (2026-09-20) Second auditor pinned
+
+`qwen3.8:27b`, digest `22130167c4c20e20c7b71454612966ca8e8171e9b3cc8ab6ce8aa6cbfec79643` (17.7 GB, Q4_K_M, 27.3B dense, Apache 2.0).
+Probe passed: two correct tool-call turns, auditor JSON parsed and named the planted step, 3 repeats byte-identical.
+Speed: about 110 tokens per second reading and 8-12 writing, so 4 to 5 times slower than GLM. Fine for the 180 second-auditor calls (about 5 hours), too slow to be the primary auditor for 1,380 calls unless GLM fails.
+`gpt-oss:20b` is no longer needed as a stand-in.

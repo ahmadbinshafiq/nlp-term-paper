@@ -19,6 +19,7 @@ SECOND_AUDITOR_MODEL = "qwen3.8:27b"
 # model tag -> full sha256 digest. A tag can be re-uploaded; a digest cannot change.
 PINNED_DIGESTS = {
     "glm-4.7-flash:q8_0": "a035bf4bc812e1408631c2d2b14581b99dfe39f71d895aceb269b4a886080196",
+    "qwen3.8:27b": "22130167c4c20e20c7b71454612966ca8e8171e9b3cc8ab6ce8aa6cbfec79643",
 }
 
 # The same options for every call. num_ctx is fixed for good in week 3.
