@@ -19,6 +19,7 @@ from langchain_core.messages import AIMessage, HumanMessage, SystemMessage
 from langgraph.graph import END, START, StateGraph
 
 from auditarch.cache import cached_invoke
+from auditarch.faults import plant
 from auditarch.schema import Event, empty_state
 from auditarch.tools import TOOLS, action_schema
 
@@ -74,9 +75,10 @@ def apply_patch(app: dict, patch: list) -> dict:
     return jsonpatch.apply_patch(copy.deepcopy(app), patch)
 
 
-def build_agent(thinker, actor, index, strict: bool = False):
+def build_agent(thinker, actor, index, strict: bool = False, fault: dict | None = None):
     """Returns a compiled LangGraph.
 
+    fault = {"type": ..., "k": ...} plants one fault at step k (auditarch/faults.py). None gives a clean run.
     thinker and actor are (llm, pins) pairs from make_llm. They can be the same pair, or the
     thinker can have thinking switched on while the actor has it off (rule D-003b).
     `strict` means replay from the cache only.
@@ -101,8 +103,14 @@ def build_agent(thinker, actor, index, strict: bool = False):
             action = json.loads(text)                   # the schema was enforced, so this only fails ...
         except json.JSONDecodeError:                    # ... when the reply was cut off at num_predict
             return {"usage": [usage], "ended": "failed_step"}
-        tool_call = {"name": action["tool"], "args": action["args"]}
-        tool_return, effect = TOOLS[tool_call["name"]](tool_call["args"], state["app"], index)
+        asked = {"name": action["tool"], "args": action["args"]}
+        if fault and step == fault["k"]:
+            tool_call, tool_return, effect = plant(fault["type"], asked, state["app"], index)
+            if tool_call != asked:                      # the fault looks like the agent's own mistake (catalogue rule 2):
+                text = json.dumps({"tool": tool_call["name"], "args": tool_call["args"]}, ensure_ascii=False)   # the history shows the changed action
+        else:
+            tool_call = asked
+            tool_return, effect = TOOLS[asked["name"]](asked["args"], state["app"], index)
 
         # The recorder copies the call and its return into the state, so the patch alone carries everything.
         patch = [{"op": "add", "path": f"/calls/{step}", "value": {"tool_call": tool_call, "tool_return": tool_return}}] + effect

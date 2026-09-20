@@ -40,15 +40,18 @@ def set_op(state: dict, section: str, key: str, value) -> dict:
     return {"op": op, "path": f"/{section}/{escape(key)}", "value": value}
 
 
+def result_list(index, pids: list) -> list:
+    """How a search shows passages: handle, title and the first words of the text."""
+    return [{"handle": pid, "title": index.corpus[pid]["title"], "snippet": index.corpus[pid]["text"][:SNIPPET_CHARS]}
+            for pid in pids]
+
+
 def search(args, state, index):
     query = str(args.get("query", ""))
     earlier = [c["tool_call"]["args"].get("query") for c in state["calls"].values() if c["tool_call"]["name"] == "search"]
     if query in earlier:
         return {"error": "you already sent this query; use other words"}, []
-    pids = index.search(query, k=SEARCH_RESULTS)
-    results = [{"handle": pid, "title": index.corpus[pid]["title"], "snippet": index.corpus[pid]["text"][:SNIPPET_CHARS]}
-               for pid in pids]
-    return {"results": results}, []
+    return {"results": result_list(index, index.search(query, k=SEARCH_RESULTS))}, []
 
 
 def read(args, state, index):
