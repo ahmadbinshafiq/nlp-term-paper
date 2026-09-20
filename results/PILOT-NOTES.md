@@ -6,6 +6,7 @@ All numbers below are from the 5 development tasks: 5 clean runs, 5 sham runs, 1
 |---|---|---|---|---|---|
 | `pilot-w3` | GLM, thinking off, first prompt | 100% | 15 of 15 | 22 of 30 | 11 |
 | `pilot-w3b` | GLM, thinking off, prompt fix ("many runs are clean", analysis written first) | 97% | 11 of 15 | 19 of 30 | 16 |
+| `pilot-w3d-qwen` | Qwen3.8 27B, thinking off, same prompt | 97% | 7 of 15 | 30 of 30 | 69 |
 | `pilot-w3c-think` | GLM, thinking on, 4,096 output tokens | 68% | 1 of 9 finished answers (6 of 15 never finished) | 20 of 23 finished answers (7 of 30 never finished) | 102 |
 
 What this shows:
@@ -14,4 +15,12 @@ What this shows:
 - `wrong_source` is found 5 of 5 times in every format with thinking off: a ceiling. The week-4 check must look at this fault.
 - The truncation check (`record too long for num_ctx`) fired once, as designed: thinking with 8,192 output tokens does not fit next to a record in a 16,384 window.
 
-Next: `pilot-w3d-qwen` (Qwen3.8 27B as auditor, thinking off), which is the plan's next step. It starts by itself when the clean runs are finished, because both models do not fit into memory together.
+Qwen as auditor (`pilot-w3d-qwen`):
+- It found every planted fault in every format (30 of 30). That is a ceiling: with these two faults Qwen leaves no room for a difference between formats.
+- Its 7 "false alarms" on clean runs are not plain errors. Six of them are the same two steps, flagged in all three formats, and both are real flaws of the agent:
+  task 0, step 18: the think text before says "I will search", but the act is write_note (the round structure forces a note there);
+  task 1, step 6: the note says "Williamsburg is located in Richmond", which the passage does not say.
+- So the "clean" runs are not perfectly clean. In the 55 passing runs, 12 of 173 notes (in 12 runs) follow a think text that talks about searching instead of the note. Wrong note texts cannot be counted mechanically.
+- Consequence: the false-alarm rate measures "the auditor flags something", not only auditor error. The primary test uses faulty runs only, where the planted fault was found despite these flaws.
+
+Next: `validation-w4-glm` and `validation-w4-qwen`: all six faults on the five development tasks (30 faulty runs, 5 sham, 5 clean), audited by both models. This is the pre-registered floor/ceiling check and decides the auditor before the tag.
