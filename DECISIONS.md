@@ -142,3 +142,7 @@ Confirmed by Ahmad after reading the plain-English explanation. D-006 is no long
 - Why: at about 30 percent pass rate, 120 candidates give about 36 passing tasks; 55 are needed (5 development, 50 sweep). The cap of 120 came from the time when each run cost money. A run now costs about 55 seconds.
 - BM25 recall on the larger pool (gold-style queries): 0.833 at top 3, 0.898 at top 5 (the agent gets 5), 0.939 at top 10.
 - The pass rate over all candidates that were run is reported in the paper.
+
+## D-011 confirmed (2026-09-20)
+
+Ahmad confirmed 250 candidate tasks. D-011 is no longer "proposed".
