@@ -78,3 +78,31 @@ Open option, not taken: let `search` return the top 5 (recall 0.912). It would h
 Probe passed: two correct tool-call turns, auditor JSON parsed and named the planted step, 3 repeats byte-identical.
 Speed: about 110 tokens per second reading and 8-12 writing, so 4 to 5 times slower than GLM. Fine for the 180 second-auditor calls (about 5 hours), too slow to be the primary auditor for 1,380 calls unless GLM fails.
 `gpt-oss:20b` is no longer needed as a stand-in.
+
+## D-005 (2026-09-20) Tool behaviour (must hold before the first clean run in week 2)
+
+- `search` returns a list of `{handle, title}`, not bare handles. Titles are already visible to the agent in `tasks.jsonl`, so nothing leaks. Without titles, a corrupted search result could not be seen at step k in any format.
+- The tools never raise. `finish` is always the last step. If the named note does not exist, `finish` returns `ok` and writes `cited_pid: null`. An error line at the last step would be a loud position cue and would point the auditor at the symptom, not the cause.
+
+## D-006 (2026-09-20) Gate for clean runs (proposed; confirm before week 2, because it changes the pass rate)
+
+The plan's gate (correct answer, finished within the step cap, one cited passage) plus mechanical checks:
+the `note_key` given to `finish` exists; the final `cited_pid` is a gold supporting passage; no note key is written twice; no `source_pid` is null; every `source_pid` was read before its note; and all six faults can be built in the run (catalogue, rule 5).
+Why: a "clean" run that already holds one of our fault patterns would break the ground truth. An auditor that flags it would be right and still be scored wrong.
+If fewer than 45 tasks are projected to pass: drop "correct answer" and "cited_pid is gold" from the gate and keep them as covariates; then D-003b.
+Week 2 must report how many correct runs fail only the new checks.
+
+## D-007 (2026-09-20) Outcome labels and the equivalence bound (proposed; discuss with the supervisor, question 5)
+
+- The plan's three outcome branches overlapped and left gaps (example: one format best everywhere by 1 point was both "null" and "refuted"). The pre-registration now has seven labels walked in a fixed order: not interpretable, one format dominates, confirmed, partly confirmed, another interaction, null, underpowered.
+- A margin "meets the rule" only if it is at least 10 points, its 95 percent interval is above zero, and the predicted format is the best one in its class.
+- Power problem found by two reviewers and re-checked by simulation: with 50 tasks one margin has a standard error of about 5.5 points, so a 95 percent interval is about +/-11 points wide. "All intervals inside +/-10" can then almost never happen, and the plan's promise of a reportable null result could not be kept. The chance that all three margins pass is about 0.08 if the true margins are 10 points, 0.46 at 15, 0.85 at 20.
+- Rule adopted: `prereg/power.md` (week 4) simulates the whole decision tree. The bound B is the smallest of 10, 15, 20 points that gives at least 0.80 chance of "Null" when the true margins are 0; else B = 20 with the chance printed. The Null label uses 90 percent intervals (the usual equivalence test). This departs from sections 2 and 10 of the plan.
+- Open option, not taken yet: compute is free now, so the number of faulty runs could be doubled (two k per task and fault, 600 runs, 1,800 primary audits, about twice the machine time). That would shrink the intervals by up to about 30 percent. To be decided with the power file in week 4, before the tag.
+
+## D-008 (2026-09-20) Selection rules and new result columns
+
+- k and the hook tool are set by a formula from the task position and the fault row (catalogue, rule 5). Nothing is drawn at random.
+- Clean controls: the first 25 sweep tasks in seed order. Sham controls: the last 20. The sham check is a hash check; the false-alarm rate is reported over all distinct no-fault tasks.
+- The 60-run subsample (second auditor, 3-repeat rule, thinking-on re-audit) = the 6 faulty runs of the first 10 sweep tasks in seed order.
+- New columns in `analysis/schema.md`: `hook_tool`, `n_steps`, `rel_pos`, `auditor_role`.

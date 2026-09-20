@@ -27,13 +27,14 @@ Notes and answers are effects of tools. They are not extra kinds of step.
 
 | Tool | Returns | State effect |
 |---|---|---|
-| `search(query)` | passage handles (top 3 from BM25) | none |
+| `search(query)` | a list of `{handle, title}` (top 3 from BM25) | none |
 | `read(handle)` | the passage text | writes `evidence[pid]` |
 | `write_note(key, text, source_pid)` | `ok` | writes `notes[key]` |
 | `finish(answer, note_key)` | `ok` | writes `answer` and `decision` = `{note_key, cited_pid}` |
 
 `cited_pid` is copied by the tool from the note's `source_pid`. The model never chooses it.
 So a wrong source on a note travels to the final claim by itself, and no fault hook is needed on `finish`.
+The tools never raise. `finish` is always the last step. If `notes[note_key]` does not exist, `finish` still returns `ok` and writes `decision = {note_key, cited_pid: null}` (decision D-005).
 
 ## The application state
 
@@ -59,7 +60,15 @@ This is what makes the diff format lossless.
 - Passage: `ent:passage:<pid>`, where `pid` is the first 12 hex characters of sha1(title + newline + text).
 - Note: `ent:note:<key>@<step_id>`.
 
+## PROV edges
+
+- A `read` step: `used(activity k, ent:passage:<pid>)`, and activity k generates the evidence entity.
+- A `write_note` step: `wasGeneratedBy(ent:note:<key>@k, activity k)` plus `wasDerivedFrom(note, ent:passage:<source_pid>)`. No `used` edge, and no `wasDerivedFrom` edge if `source_pid` is null.
+- Every edge comes from a field of the event stream. An edge that is guessed afterwards is an inferred edge and belongs to the fourth arm only.
+
 ## Where faults are planted
+
+The exact rules are in `prereg/fault_catalogue.md`. Short version:
 
 | Fault class | Fault type | Hook | What happens |
 |---|---|---|---|
@@ -69,7 +78,7 @@ This is what makes the diff format lossless.
 | state | overwritten note | `write_note` step | the text is written to another existing key |
 | evidence | wrong source | `write_note` step, `source_pid` only | `source_pid` is set to another passage |
 | evidence | no source | `write_note` step, `source_pid` only | `source_pid` is set to null |
-| (control) | sham | any hook | the wrapper is engaged but returns the identical output |
+| none (control) | sham | `write_note` step | the wrapper is engaged but returns the identical output |
 
 ## Three hand-written events
 
