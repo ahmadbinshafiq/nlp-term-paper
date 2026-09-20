@@ -21,10 +21,14 @@ Rule of thumb from these numbers: reading about 500 tokens per second, writing a
 
 ## The three machine-hour lines (gate: 60 machine-hours in total, plan section 4)
 
-| Line | Calls | Seconds per call | Machine-hours |
+| Line | Calls | Seconds per call (measured) | Machine-hours |
 |---|---|---|---|
-| Generation: clean runs (up to 120) plus 300 continuations | to be measured in week 2 (plan section 3, steps 3 and 6) | | rough guess 10-15 |
-| Sweep audits: 1,380 calls, plus 180 second-auditor calls | to be measured in week 3 (step 7) | | rough guess 8-12 |
-| Development: probe, pilot, 18 validation continuations, re-audits, re-generation | | | rough guess 3-5 |
+| Generation: clean runs | 155 runs, done 2026-09-20 | 87 s per run while sharing the GPU, about 55 s alone | 3.8 (spent) |
+| Generation: 300 faulty continuations + 20 sham replays | 300 live, 20 from the cache | 10 to 55 s per continuation in the pilot (one outlier of 333 s) | about 3 (estimate) |
+| Sweep audits with GLM, thinking off: 1,380 calls | records are 3,500 to 4,500 tokens, longest 6,800 | 11 to 16 s | about 5 |
+| Sweep audits with GLM, thinking on | same | about 100 s, and one call in three never finishes | about 38, not usable as it is |
+| Sweep audits with Qwen3.8 27B, thinking off | same | to be measured in `pilot-w3d-qwen` | estimate 20 |
+| Second auditor on the 60-run subsample: 180 calls | | | 1 to 3 |
+| Development: probes and pilots so far | | | about 2 (spent) |
 
-The guesses assume records of about 10,000 tokens. Record length is not measured yet.
+Sizes of one record (mean over the saved runs): log 16.6 KB, diff 20.8 KB, PROV 20.4 KB.

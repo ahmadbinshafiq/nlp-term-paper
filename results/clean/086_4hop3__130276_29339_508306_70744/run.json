@@ -1,0 +1,35 @@
+{
+ "task_id": "4hop3__130276_29339_508306_70744",
+ "order": 86,
+ "hops": 4,
+ "ended": "step_cap",
+ "n_steps": 38,
+ "step_cap": 38,
+ "answer": null,
+ "gold_answer": "University of South Carolina",
+ "gate_failed": [
+  "answer_wrong",
+  "not_finished:step_cap",
+  "cited_pid_not_gold"
+ ],
+ "flags": [],
+ "model_calls": 38,
+ "tokens_in": 119483,
+ "tokens_out": 1240,
+ "seconds": 52.6,
+ "ollama_version": "0.33.2",
+ "model_tag": "glm-4.7-flash:q8_0",
+ "model_digest": "a035bf4bc812e1408631c2d2b14581b99dfe39f71d895aceb269b4a886080196",
+ "options": {
+  "temperature": 0,
+  "seed": 0,
+  "num_ctx": 16384,
+  "num_predict": 1024,
+  "stop": [
+   "</think>",
+   "ACT turn",
+   "{\"tool\""
+  ],
+  "think": false
+ }
+}

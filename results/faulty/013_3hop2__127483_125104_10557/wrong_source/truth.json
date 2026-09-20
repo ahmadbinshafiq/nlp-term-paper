@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop2__127483_125104_10557",
+ "fault_type": "wrong_source",
+ "fault_class": "evidence",
+ "k": 12,
+ "k_bin": 0,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "rotrude_father",
+    "text": "Rotrude's father was Charlemagne.",
+    "source_pid": "952447ed7bac"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "rotrude_father",
+       "text": "Rotrude's father was Charlemagne.",
+       "source_pid": "952447ed7bac"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/rotrude_father",
+    "value": {
+     "text": "Rotrude's father was Charlemagne.",
+     "source_pid": "952447ed7bac"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "rotrude_father",
+    "text": "Rotrude's father was Charlemagne.",
+    "source_pid": "a06580aea9a2"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "rotrude_father",
+       "text": "Rotrude's father was Charlemagne.",
+       "source_pid": "a06580aea9a2"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/rotrude_father",
+    "value": {
+     "text": "Rotrude's father was Charlemagne.",
+     "source_pid": "a06580aea9a2"
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 26,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 45.9
+}

@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop2__127483_125104_10557",
+ "fault_type": "wrong_argument",
+ "fault_class": "tool",
+ "k": 16,
+ "k_bin": 2,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "a968d3f22af2"
+   }
+  },
+  "tool_return": {
+   "pid": "a968d3f22af2",
+   "title": "Charlemagne",
+   "text": "Charlemagne (/ ˈʃɑːrləmeɪn /) or Charles the Great (2 April 742 -- 28 January 814), numbered Charles I, was King of the Franks from 768, King of the Lombards from 774, and Holy Roman Emperor from 800. He united much of western and central Europe during the early Middle Ages. He was the first recognized emperor to rule from western Europe since the fall of the Western Roman Empire three centuries earlier. The expanded Frankish state that Charlemagne founded is called the Carolingian Empire. He was later invalidly canonized by the antipope Paschal III."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "a968d3f22af2"
+      }
+     },
+     "tool_return": {
+      "pid": "a968d3f22af2",
+      "title": "Charlemagne",
+      "text": "Charlemagne (/ ˈʃɑːrləmeɪn /) or Charles the Great (2 April 742 -- 28 January 814), numbered Charles I, was King of the Franks from 768, King of the Lombards from 774, and Holy Roman Emperor from 800. He united much of western and central Europe during the early Middle Ages. He was the first recognized emperor to rule from western Europe since the fall of the Western Roman Empire three centuries earlier. The expanded Frankish state that Charlemagne founded is called the Carolingian Empire. He was later invalidly canonized by the antipope Paschal III."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/a968d3f22af2",
+    "value": {
+     "title": "Charlemagne",
+     "text": "Charlemagne (/ ˈʃɑːrləmeɪn /) or Charles the Great (2 April 742 -- 28 January 814), numbered Charles I, was King of the Franks from 768, King of the Lombards from 774, and Holy Roman Emperor from 800. He united much of western and central Europe during the early Middle Ages. He was the first recognized emperor to rule from western Europe since the fall of the Western Roman Empire three centuries earlier. The expanded Frankish state that Charlemagne founded is called the Carolingian Empire. He was later invalidly canonized by the antipope Paschal III."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "0e135733d68a"
+   }
+  },
+  "tool_return": {
+   "pid": "0e135733d68a",
+   "title": "Middle Ages",
+   "text": "Charlemagne's court in Aachen was the centre of the cultural revival sometimes referred to as the \"Carolingian Renaissance\". Literacy increased, as did development in the arts, architecture and jurisprudence, as well as liturgical and scriptural studies. The English monk Alcuin (d. 804) was invited to Aachen and brought the education available in the monasteries of Northumbria. Charlemagne's chancery—or writing office—made use of a new script today known as Carolingian minuscule,[M] allowing a common writing style that advanced communication across much of Europe. Charlemagne sponsored changes in church liturgy, imposing the Roman form of church service on his domains, as well as the Gregorian chant in liturgical music for the churches. An important activity for scholars during this period was the copying, correcting, and dissemination of basic works on religious and secular topics, with the aim of encouraging learning. New works on religious topics and schoolbooks were also produced. Grammarians of the period modified the Latin language, changing it from the Classical Latin of the Roman Empire into a more flexible form to fit the needs of the church and government. By the reign of Charlemagne, the language had so diverged from the classical that it was later called Medieval Latin."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "0e135733d68a"
+      }
+     },
+     "tool_return": {
+      "pid": "0e135733d68a",
+      "title": "Middle Ages",
+      "text": "Charlemagne's court in Aachen was the centre of the cultural revival sometimes referred to as the \"Carolingian Renaissance\". Literacy increased, as did development in the arts, architecture and jurisprudence, as well as liturgical and scriptural studies. The English monk Alcuin (d. 804) was invited to Aachen and brought the education available in the monasteries of Northumbria. Charlemagne's chancery—or writing office—made use of a new script today known as Carolingian minuscule,[M] allowing a common writing style that advanced communication across much of Europe. Charlemagne sponsored changes in church liturgy, imposing the Roman form of church service on his domains, as well as the Gregorian chant in liturgical music for the churches. An important activity for scholars during this period was the copying, correcting, and dissemination of basic works on religious and secular topics, with the aim of encouraging learning. New works on religious topics and schoolbooks were also produced. Grammarians of the period modified the Latin language, changing it from the Classical Latin of the Roman Empire into a more flexible form to fit the needs of the church and government. By the reign of Charlemagne, the language had so diverged from the classical that it was later called Medieval Latin."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/0e135733d68a",
+    "value": {
+     "title": "Middle Ages",
+     "text": "Charlemagne's court in Aachen was the centre of the cultural revival sometimes referred to as the \"Carolingian Renaissance\". Literacy increased, as did development in the arts, architecture and jurisprudence, as well as liturgical and scriptural studies. The English monk Alcuin (d. 804) was invited to Aachen and brought the education available in the monasteries of Northumbria. Charlemagne's chancery—or writing office—made use of a new script today known as Carolingian minuscule,[M] allowing a common writing style that advanced communication across much of Europe. Charlemagne sponsored changes in church liturgy, imposing the Roman form of church service on his domains, as well as the Gregorian chant in liturgical music for the churches. An important activity for scholars during this period was the copying, correcting, and dissemination of basic works on religious and secular topics, with the aim of encouraging learning. New works on religious topics and schoolbooks were also produced. Grammarians of the period modified the Latin language, changing it from the Classical Latin of the Roman Empire into a more flexible form to fit the needs of the church and government. By the reign of Charlemagne, the language had so diverged from the classical that it was later called Medieval Latin."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 12.3
+}

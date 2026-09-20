@@ -146,3 +146,23 @@ Confirmed by Ahmad after reading the plain-English explanation. D-006 is no long
 ## D-011 confirmed (2026-09-20)
 
 Ahmad confirmed 250 candidate tasks. D-011 is no longer "proposed".
+
+## Week-2 result (2026-09-20) Clean runs and the pools
+
+Command: `uv run python code/scripts/run_clean.py --passers 55` (agent as in D-009 and D-010).
+
+| Measure | Value |
+|---|---|
+| Candidate tasks run, in seed order | 155 of 250 (the script stops at 55 passing tasks) |
+| Passed the gate | 55 (35 percent): 46 of 106 three-hop tasks, 9 of 49 four-hop tasks |
+| How runs ended | 73 reached `finish`, 82 hit the step cap of 38 |
+| Why runs failed (a run can have several reasons) | wrong answer 100, cited passage not gold 92, step cap 82, a fault not buildable 6 |
+| Runs that failed only on the extra D-006 checks | 0 |
+| Steps of a passing run | mean 21.0; 14 steps: 9 runs, 20: 31, 26: 12, 30 to 34: 3 |
+| Flag "tried the same query twice" (refused by the tool) | 52 of 155 runs |
+| Time and tokens per run | 87 s while other jobs shared the GPU (about 55 s alone); 90,000 tokens read, 1,300 written |
+| Machine time for all 155 runs | 3.8 hours |
+
+Pools (fixed from now on): **development tasks** = the first 5 passing tasks in seed order (orders 0, 1, 2, 11, 13). **Sweep pool** = the other 50 passing tasks, so **N = 50**.
+Step cap stays 38. The loosening rules (drop the answer check, D-003b) were not needed.
+To say in the paper: only 9 of the 55 tasks have 4 hops, because 4-hop tasks pass less often (18 percent against 43 percent).

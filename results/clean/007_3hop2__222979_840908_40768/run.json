@@ -1,0 +1,33 @@
+{
+ "task_id": "3hop2__222979_840908_40768",
+ "order": 7,
+ "hops": 3,
+ "ended": "finish",
+ "n_steps": 38,
+ "step_cap": 38,
+ "answer": "1983",
+ "gold_answer": "1981",
+ "gate_failed": [
+  "answer_wrong"
+ ],
+ "flags": [],
+ "model_calls": 38,
+ "tokens_in": 131560,
+ "tokens_out": 1697,
+ "seconds": 65.3,
+ "ollama_version": "0.33.2",
+ "model_tag": "glm-4.7-flash:q8_0",
+ "model_digest": "a035bf4bc812e1408631c2d2b14581b99dfe39f71d895aceb269b4a886080196",
+ "options": {
+  "temperature": 0,
+  "seed": 0,
+  "num_ctx": 16384,
+  "num_predict": 1024,
+  "stop": [
+   "</think>",
+   "ACT turn",
+   "{\"tool\""
+  ],
+  "think": false
+ }
+}

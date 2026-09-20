@@ -1,0 +1,31 @@
+{
+ "task_id": "3hop1__579562_629431_64412",
+ "order": 146,
+ "hops": 3,
+ "ended": "finish",
+ "n_steps": 20,
+ "step_cap": 38,
+ "answer": "11 February 1929",
+ "gold_answer": "11 February 1929",
+ "gate_failed": [],
+ "flags": [],
+ "model_calls": 20,
+ "tokens_in": 42778,
+ "tokens_out": 729,
+ "seconds": 26.2,
+ "ollama_version": "0.33.2",
+ "model_tag": "glm-4.7-flash:q8_0",
+ "model_digest": "a035bf4bc812e1408631c2d2b14581b99dfe39f71d895aceb269b4a886080196",
+ "options": {
+  "temperature": 0,
+  "seed": 0,
+  "num_ctx": 16384,
+  "num_predict": 1024,
+  "stop": [
+   "</think>",
+   "ACT turn",
+   "{\"tool\""
+  ],
+  "think": false
+ }
+}

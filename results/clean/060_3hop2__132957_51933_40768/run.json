@@ -1,0 +1,34 @@
+{
+ "task_id": "3hop2__132957_51933_40768",
+ "order": 60,
+ "hops": 3,
+ "ended": "finish",
+ "n_steps": 32,
+ "step_cap": 38,
+ "answer": "1982, 1983, and 1984",
+ "gold_answer": "1981",
+ "gate_failed": [
+  "answer_wrong",
+  "cited_pid_not_gold"
+ ],
+ "flags": [],
+ "model_calls": 32,
+ "tokens_in": 92114,
+ "tokens_out": 1231,
+ "seconds": 46.0,
+ "ollama_version": "0.33.2",
+ "model_tag": "glm-4.7-flash:q8_0",
+ "model_digest": "a035bf4bc812e1408631c2d2b14581b99dfe39f71d895aceb269b4a886080196",
+ "options": {
+  "temperature": 0,
+  "seed": 0,
+  "num_ctx": 16384,
+  "num_predict": 1024,
+  "stop": [
+   "</think>",
+   "ACT turn",
+   "{\"tool\""
+  ],
+  "think": false
+ }
+}
