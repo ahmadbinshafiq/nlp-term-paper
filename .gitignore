@@ -1,0 +1,12 @@
+# macOS
+.DS_Store
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Large or re-creatable files (back these up by zip, see research/next-steps.md week 6)
+cache/
+data/raw/

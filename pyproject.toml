@@ -1,0 +1,30 @@
+[project]
+name = "auditarch"
+version = "0.1.0"
+description = "Term paper harness: does the best audit-record format depend on the fault type?"
+requires-python = ">=3.13,<3.14"
+dependencies = [
+    "langgraph",
+    "langgraph-checkpoint-sqlite",
+    "langchain-core",
+    "langchain-ollama",
+    "ollama",
+    "prov[dot]>=3.2",
+    "jsonpatch",
+    "rank-bm25",
+    "pydantic",
+    "pandas",
+]
+
+[dependency-groups]
+dev = ["pytest"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["code/auditarch"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
