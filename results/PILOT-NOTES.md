@@ -24,3 +24,34 @@ Qwen as auditor (`pilot-w3d-qwen`):
 - Consequence: the false-alarm rate measures "the auditor flags something", not only auditor error. The primary test uses faulty runs only, where the planted fault was found despite these flaws.
 
 Next: `validation-w4-glm` and `validation-w4-qwen`: all six faults on the five development tasks (30 faulty runs, 5 sham, 5 clean), audited by both models. This is the pre-registered floor/ceiling check and decides the auditor before the tag.
+
+## Validation on the development tasks (2026-09-21, exploratory): all six faults, both auditors
+
+30 faulty runs (6 faults x 5 tasks), 5 sham, 5 clean, each in 3 formats = 120 audit calls per auditor. Cells hold 5 runs, so only floors and ceilings can be read, not which format is better.
+
+Exact step found, as counts out of 5 (diff / log / prov):
+
+| Fault | GLM, thinking off | Qwen3.8 27B, thinking off |
+|---|---|---|
+| wrong_argument | 3 / 1 / 0 | 5 / 5 / 5 |
+| corrupted_output | 0 / 0 / 0 | 2 / 2 / 2 |
+| dropped_note | 1 / 0 / 3 | 4 / 3 / 3 |
+| overwritten_note | 5 / 5 / 4 | 5 / 5 / 5 |
+| wrong_source | 5 / 5 / 5 | 5 / 5 / 5 |
+| no_source | 5 / 5 / 4 | 5 / 5 / 5 |
+
+| | GLM | Qwen |
+|---|---|---|
+| Exact step, all faulty audits | 57% | 84% |
+| Right fault class named | 50% | 89% |
+| Answers parsed | 96% | 98% |
+| Clean-run audits flagged (of 15) | 11 | 7 |
+| Said "no fault" on a faulty run (of 90) | 7 | 5 |
+| Seconds per audit | 15 | 63 |
+| Longest record | 7,299 tokens | 7,692 tokens (Qwen counts tokens differently) |
+
+Reading:
+- Evidence faults (wrong_source, no_source) and overwritten_note are at or near the ceiling for both auditors in every format. With these faults as they are, prediction P3 cannot show up: there is no room above 100 percent.
+- corrupted_output is at the floor for GLM (0 of 15) and low for Qwen (6 of 15).
+- Qwen gives nearly the same count in all three formats for every fault. GLM varies more, but it also flags 11 of 15 clean audits and names the right class only half the time, so much of its variation is noise.
+- The pre-registered rule allows changing a fault before the tag only if it is at 0 or 100 percent in all three formats for the chosen auditor. With Qwen that holds for wrong_argument, overwritten_note, wrong_source and no_source (too easy). With GLM it holds for corrupted_output (too hard) and wrong_source (too easy).

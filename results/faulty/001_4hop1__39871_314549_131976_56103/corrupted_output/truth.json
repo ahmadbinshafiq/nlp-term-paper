@@ -1,0 +1,99 @@
+{
+ "task_id": "4hop1__39871_314549_131976_56103",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 4,
+ "k_bin": 0,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 4,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "ad23187479f5"
+   }
+  },
+  "tool_return": {
+   "pid": "ad23187479f5",
+   "title": "Richmond, Virginia",
+   "text": "The Richmond area also has two railroad stations served by Amtrak. Each station receives regular service from north of Richmond including Washington, D.C., Philadelphia, and New York. The suburban Staples Mill Road Station is located on a major north-south freight line and receives all service to and from all points south including, Raleigh, Durham, Savannah, Newport News, Williamsburg and Florida. Richmond's only railway station located within the city limits, the historic Main Street Station, was renovated in 2004. As of 2010, the station only receives trains headed to and from Newport News and Williamsburg due to track layout. As a result, the Staples Mill Road station receives more trains and serves more passengers overall."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/4",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "ad23187479f5"
+      }
+     },
+     "tool_return": {
+      "pid": "ad23187479f5",
+      "title": "Richmond, Virginia",
+      "text": "The Richmond area also has two railroad stations served by Amtrak. Each station receives regular service from north of Richmond including Washington, D.C., Philadelphia, and New York. The suburban Staples Mill Road Station is located on a major north-south freight line and receives all service to and from all points south including, Raleigh, Durham, Savannah, Newport News, Williamsburg and Florida. Richmond's only railway station located within the city limits, the historic Main Street Station, was renovated in 2004. As of 2010, the station only receives trains headed to and from Newport News and Williamsburg due to track layout. As a result, the Staples Mill Road station receives more trains and serves more passengers overall."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/ad23187479f5",
+    "value": {
+     "title": "Richmond, Virginia",
+     "text": "The Richmond area also has two railroad stations served by Amtrak. Each station receives regular service from north of Richmond including Washington, D.C., Philadelphia, and New York. The suburban Staples Mill Road Station is located on a major north-south freight line and receives all service to and from all points south including, Raleigh, Durham, Savannah, Newport News, Williamsburg and Florida. Richmond's only railway station located within the city limits, the historic Main Street Station, was renovated in 2004. As of 2010, the station only receives trains headed to and from Newport News and Williamsburg due to track layout. As a result, the Staples Mill Road station receives more trains and serves more passengers overall."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 4,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "ad23187479f5"
+   }
+  },
+  "tool_return": {
+   "pid": "ad23187479f5",
+   "title": "Richmond, Virginia",
+   "text": "The Dufferin Street bridges are two inter-connected vehicular bridges in Toronto, Ontario, Canada. The bridges carry Dufferin Street over a railway corridor and the Gardiner Expressway to Exhibition Place. The bridges closed to vehicular traffic in 2013. Temporary structures, namely Bailey bridges over the railway tracks, will be built in 2013-2014 to allow a resumption of traffic in early 2014. Beginning in 2016 the bridges will be completely rebuilt to allow more tracks to cross underneath and create a single span to the CNE grounds. As of March 2019 the spans over the Gardiner Expressway remain in place and the bailey bridges replacing the older outer pedestrian bridges of the northern span with the inner vehicular steel plate box girder bridge still in place."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/4",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "ad23187479f5"
+      }
+     },
+     "tool_return": {
+      "pid": "ad23187479f5",
+      "title": "Richmond, Virginia",
+      "text": "The Dufferin Street bridges are two inter-connected vehicular bridges in Toronto, Ontario, Canada. The bridges carry Dufferin Street over a railway corridor and the Gardiner Expressway to Exhibition Place. The bridges closed to vehicular traffic in 2013. Temporary structures, namely Bailey bridges over the railway tracks, will be built in 2013-2014 to allow a resumption of traffic in early 2014. Beginning in 2016 the bridges will be completely rebuilt to allow more tracks to cross underneath and create a single span to the CNE grounds. As of March 2019 the spans over the Gardiner Expressway remain in place and the bailey bridges replacing the older outer pedestrian bridges of the northern span with the inner vehicular steel plate box girder bridge still in place."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/ad23187479f5",
+    "value": {
+     "title": "Richmond, Virginia",
+     "text": "The Dufferin Street bridges are two inter-connected vehicular bridges in Toronto, Ontario, Canada. The bridges carry Dufferin Street over a railway corridor and the Gardiner Expressway to Exhibition Place. The bridges closed to vehicular traffic in 2013. Temporary structures, namely Bailey bridges over the railway tracks, will be built in 2013-2014 to allow a resumption of traffic in early 2014. Beginning in 2016 the bridges will be completely rebuilt to allow more tracks to cross underneath and create a single span to the CNE grounds. As of March 2019 the spans over the Gardiner Expressway remain in place and the bailey bridges replacing the older outer pedestrian bridges of the northern span with the inner vehicular steel plate box girder bridge still in place."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 34,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": true,
+ "seconds": 43.4
+}
