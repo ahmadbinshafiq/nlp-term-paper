@@ -27,13 +27,15 @@ def main():
     parser.add_argument("--model", default=AGENT_MODEL)
     parser.add_argument("--think", action="store_true", help="thinking on in THINK turns (rule D-003b)")
     parser.add_argument("--out", default="clean", help="folder under results/")
+    parser.add_argument("--guided", action="store_true", help="TRIAL: show the agent MuSiQue's sub-questions (no answers)")
     args = parser.parse_args()
 
     tasks = load_tasks()
     with open(ROOT / "data" / "gold.jsonl", encoding="utf-8") as f:
         gold = {g["id"]: g for g in map(json.loads, f)}
     actor = make_llm(args.model)                                           # ACT turns: thinking off, JSON action
-    thinker = make_llm(args.model, think=True, num_predict=8192) if args.think else actor
+    stop = ["\nACT turn", "\n{\"tool\""]                                  # a THINK turn must not run on into the next act
+    thinker = make_llm(args.model, think=args.think, stop=stop, **({"num_predict": 8192} if args.think else {}))
     pins = thinker[1]
     agent = build_agent(thinker, actor, Bm25Index(build_corpus(tasks)))
     out = ROOT / "results" / args.out
@@ -42,7 +44,11 @@ def main():
     for task in tasks[: args.max_runs]:
         run_dir = out / f"{task['order']:03d}_{task['id']}"
         if not (run_dir / "run.json").exists():
-            final = run_task(agent, task["question"])
+            question = task["question"]
+            if args.guided:
+                steps = [f"{i}. {s['question']}" for i, s in enumerate(gold[task["id"]]["decomposition"], start=1)]
+                question += "\nPlan, one round per line (#1 means the answer of line 1):\n" + "\n".join(steps)
+            final = run_task(agent, question)
             gate = check_clean_run(final["events"], final["app"], final["ended"], gold[task["id"]])
             live = [u for u in final["usage"] if not u["cached"]]
             summary = {

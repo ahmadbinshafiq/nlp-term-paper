@@ -30,7 +30,8 @@ def action_schema(allowed: list) -> dict:
     return {"anyOf": [one(name) for name in allowed]}
 
 
-SNIPPET_CHARS = 200   # how much of a passage a search result shows
+SEARCH_RESULTS = 5    # how many passages a search returns
+SNIPPET_CHARS = 200    # how much of a passage a search result shows
 
 
 def set_op(state: dict, section: str, key: str, value) -> dict:
@@ -40,7 +41,11 @@ def set_op(state: dict, section: str, key: str, value) -> dict:
 
 
 def search(args, state, index):
-    pids = index.search(str(args.get("query", "")), k=3)
+    query = str(args.get("query", ""))
+    earlier = [c["tool_call"]["args"].get("query") for c in state["calls"].values() if c["tool_call"]["name"] == "search"]
+    if query in earlier:
+        return {"error": "you already sent this query; use other words"}, []
+    pids = index.search(query, k=SEARCH_RESULTS)
     results = [{"handle": pid, "title": index.corpus[pid]["title"], "snippet": index.corpus[pid]["text"][:SNIPPET_CHARS]}
                for pid in pids]
     return {"results": results}, []
@@ -50,6 +55,8 @@ def read(args, state, index):
     pid = str(args.get("handle", ""))
     if pid not in index.corpus:
         return {"error": "unknown handle"}, []
+    if pid in state["evidence"]:
+        return {"error": "you already read this passage; read another result or search again"}, []
     passage = index.corpus[pid]
     seen = {"title": passage["title"], "text": passage["text"]}
     return {"pid": pid, **seen}, [set_op(state, "evidence", pid, seen)]
@@ -57,6 +64,8 @@ def read(args, state, index):
 
 def write_note(args, state, index):
     key = str(args.get("key", ""))
+    if key in state["notes"]:
+        return {"error": "this key already exists; use a new key"}, []
     note = {"text": str(args.get("text", "")), "source_pid": args.get("source_pid")}
     return {"ok": True}, [set_op(state, "notes", key, note)]
 

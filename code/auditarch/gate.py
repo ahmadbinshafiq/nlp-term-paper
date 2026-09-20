@@ -37,7 +37,9 @@ def answers_match(answer: str, gold_answers: list) -> bool:
 def check_clean_run(events: list, app: dict, ended: str, gold: dict) -> dict:
     """Returns {"failed": [...names of failed checks...], "flags": [...]}. An empty "failed" list means pass."""
     failed, flags = [], []
-    calls = [(e.step_id, e.tool_call.name, e.tool_call.args, e.tool_return) for e in events if e.tool_call]
+    # only calls that ran; a refused call (the tool returned an error) changed nothing
+    calls = [(e.step_id, e.tool_call.name, e.tool_call.args, e.tool_return) for e in events
+             if e.tool_call and "error" not in e.tool_return]
 
     # 1. the answer is correct
     if not answers_match(app["answer"] or "", [gold["answer"], *gold["answer_aliases"]]):

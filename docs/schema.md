@@ -20,6 +20,11 @@ Ground truth about a planted fault lives in `truth.json`, outside the stream. No
 
 - **think**: the model reasons, no tool is called. The patch touches `scratch[step_id]` only.
 - **act**: exactly one tool call. The patch touches `calls[step_id]` plus the state effect of that tool.
+  The model writes the call as one JSON action, `{"tool": ..., "args": {...}}`. Ollama forces the reply to fit a JSON schema
+  of the tools that are allowed at that point, so an action always parses and never names a tool that is not allowed.
+
+The agent works in rounds: search, read, write_note. After a note it may search again or finish (`NEXT_TOOLS` in `code/auditarch/agent.py`).
+A think step comes before every act step.
 
 Notes and answers are effects of tools. They are not extra kinds of step.
 
@@ -27,13 +32,14 @@ Notes and answers are effects of tools. They are not extra kinds of step.
 
 | Tool | Returns | State effect |
 |---|---|---|
-| `search(query)` | a list of `{handle, title}` (top 3 from BM25) | none |
-| `read(handle)` | the passage text | writes `evidence[pid]` |
+| `search(query)` | the 5 best passages from BM25, each as `{handle, title, snippet}`; the snippet is the first 200 characters | none |
+| `read(handle)` | `{pid, title, text}`; the handle of a passage is its pid | writes `evidence[pid]` |
 | `write_note(key, text, source_pid)` | `ok` | writes `notes[key]` |
 | `finish(answer, note_key)` | `ok` | writes `answer` and `decision` = `{note_key, cited_pid}` |
 
 `cited_pid` is copied by the tool from the note's `source_pid`. The model never chooses it.
 So a wrong source on a note travels to the final claim by itself, and no fault hook is needed on `finish`.
+The tools never raise. A call that makes no sense is refused with `{"error": ...}` and changes nothing: an unknown handle, a query that was already sent, a passage that was already read, a note key that already exists. So a clean run never reads a passage twice and never overwrites a note.
 The tools never raise. `finish` is always the last step. If `notes[note_key]` does not exist, `finish` still returns `ok` and writes `decision = {note_key, cited_pid: null}` (decision D-005).
 
 ## The application state
@@ -57,13 +63,14 @@ This is what makes the diff format lossless.
 
 ## Ids
 
-- Passage: `ent:passage:<pid>`, where `pid` is the first 12 hex characters of sha1(title + newline + text).
-- Note: `ent:note:<key>@<step_id>`.
+- Passage: `passage:<pid>`, where `pid` is the first 12 hex characters of sha1(title + newline + text).
+- Note: `note:<key>@<step_id>`. Step: `step:<step_id>`. Thought: `thought:<step_id>`. Answer: `answer:<step_id>`.
+- These ids are used in the PROV graph. In calls and returns a passage is named by its bare `pid`.
 
 ## PROV edges
 
-- A `read` step: `used(activity k, ent:passage:<pid>)`, and activity k generates the evidence entity.
-- A `write_note` step: `wasGeneratedBy(ent:note:<key>@k, activity k)` plus `wasDerivedFrom(note, ent:passage:<source_pid>)`. No `used` edge, and no `wasDerivedFrom` edge if `source_pid` is null.
+- A `read` step: `used(step:k, passage:<pid>)`; the passage entity carries the title and the text that the read returned.
+- A `write_note` step: `wasGeneratedBy(note:<key>@k, step:k)` plus `wasDerivedFrom(note, passage:<source_pid>)`. No `used` edge, and no `wasDerivedFrom` edge if `source_pid` is null.
 - Every edge comes from a field of the event stream. An edge that is guessed afterwards is an inferred edge and belongs to the fourth arm only.
 
 ## Where faults are planted
@@ -91,10 +98,10 @@ A think step, a read step, and a note step. Values are shortened.
 
 ```json
 {"step_id": 5, "node_kind": "act",
- "tool_call": {"name": "read", "args": {"handle": "ent:passage:0123abcd4567"}},
+ "tool_call": {"name": "read", "args": {"handle": "0123abcd4567"}},
  "tool_return": {"pid": "0123abcd4567", "title": "Titanic (1997 film)", "text": "Titanic is a 1997 film directed by James Cameron. ..."},
  "state_patch": [
-   {"op": "add", "path": "/calls/5", "value": {"tool_call": {"name": "read", "args": {"handle": "ent:passage:0123abcd4567"}},
+   {"op": "add", "path": "/calls/5", "value": {"tool_call": {"name": "read", "args": {"handle": "0123abcd4567"}},
                                                "tool_return": {"pid": "0123abcd4567", "title": "Titanic (1997 film)", "text": "Titanic is a 1997 film directed by James Cameron. ..."}}},
    {"op": "add", "path": "/evidence/0123abcd4567", "value": {"title": "Titanic (1997 film)", "text": "Titanic is a 1997 film directed by James Cameron. ..."}}
  ]}

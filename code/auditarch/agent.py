@@ -22,13 +22,13 @@ from auditarch.cache import cached_invoke
 from auditarch.schema import Event, empty_state
 from auditarch.tools import TOOLS, action_schema
 
-STEP_CAP = 30
+STEP_CAP = 38   # 6 rounds of 6 steps, plus think and finish
 
 SYSTEM_PROMPT = """You answer a question that needs several facts chained together.
 You can only learn facts through the tools. Do not answer from memory.
 
 Tools:
-- search(query): returns the 3 best passages, each with handle, title and the first words of its text.
+- search(query): returns the 5 best passages, each with handle, title and the first words of its text.
 - read(handle): returns the full text of one passage and its pid.
 - write_note(key, text, source_pid): saves one fact. source_pid is the pid of the passage the fact came from.
 - finish(answer, note_key): gives the final answer. note_key is the key of the note that holds the final fact.
@@ -48,11 +48,13 @@ NEXT_TOOLS = {None: ["search"], "search": ["read"], "read": ["write_note"], "wri
 # What the THINK turn is asked, given the tool it called last. It names the act that comes next.
 THINK_CUES = {
     None: "Your next act is search. Split the question into a chain of simple facts, then say what you will search for first.",
-    "search": "Your next act is read. Say which one of the results you will read, and why.",
+    "search": "Your next act is read. Say which one of the results you will read, and why. "
+              "If no title fits, pick the result whose text is closest: the fact may be inside it.",
     "read": "Your next act is write_note. Say which fact from the passage you just read you will save, "
             "or that the passage did not help.",
-    "write_note": "Your next act is search or finish. If your notes hold the final answer, say that you will finish and with "
-                  "which short answer. If not, say which single fact you need next and what you will search for.",
+    "write_note": "Look at your notes. If they already give the final answer to the question, your next act is finish: "
+                  "say the short answer and the key of the note that holds it. "
+                  "If not, your next act is search: say which single fact you need next and what you will search for.",
 }
 
 

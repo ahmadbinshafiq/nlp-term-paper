@@ -33,13 +33,21 @@ def test_read_writes_evidence_and_unknown_handle_is_an_error_not_an_exception():
     assert TOOLS["read"]({"handle": "nope"}, empty_state(), FakeIndex()) == ({"error": "unknown handle"}, [])
 
 
-def test_write_note_adds_then_replaces():
+def test_write_note_adds_and_refuses_an_existing_key():
     state = empty_state()
     _, effect = TOOLS["write_note"]({"key": "director", "text": "Cameron", "source_pid": "p1"}, state, FakeIndex())
     assert effect == [{"op": "add", "path": "/notes/director", "value": {"text": "Cameron", "source_pid": "p1"}}]
     state["notes"]["director"] = effect[0]["value"]
-    _, effect = TOOLS["write_note"]({"key": "director", "text": "x", "source_pid": "p2"}, state, FakeIndex())
-    assert effect[0]["op"] == "replace"
+    ret, effect = TOOLS["write_note"]({"key": "director", "text": "x", "source_pid": "p2"}, state, FakeIndex())
+    assert "error" in ret and effect == []          # an existing key is refused, so clean runs never overwrite a note
+
+
+def test_repeated_query_and_repeated_read_are_refused():
+    state = empty_state()
+    state["calls"]["2"] = {"tool_call": {"name": "search", "args": {"query": "titanic"}}, "tool_return": {}}
+    state["evidence"]["p1"] = {"title": "t", "text": "x"}
+    assert "error" in TOOLS["search"]({"query": "titanic"}, state, FakeIndex())[0]
+    assert "error" in TOOLS["read"]({"handle": "p1"}, state, FakeIndex())[0]
 
 
 def test_finish_copies_the_source_and_never_fails_on_a_missing_note():
