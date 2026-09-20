@@ -106,3 +106,10 @@ Week 2 must report how many correct runs fail only the new checks.
 - Clean controls: the first 25 sweep tasks in seed order. Sham controls: the last 20. The sham check is a hash check; the false-alarm rate is reported over all distinct no-fault tasks.
 - The 60-run subsample (second auditor, 3-repeat rule, thinking-on re-audit) = the 6 faulty runs of the first 10 sweep tasks in seed order.
 - New columns in `analysis/schema.md`: `hook_tool`, `n_steps`, `rel_pos`, `auditor_role`.
+
+## Status 2026-09-20, evening (week-1 items 8 to 10 done)
+
+- Done: `prereg/preregistration.md` v0.1 and `prereg/fault_catalogue.md` v0.1 (both revised after a four-reviewer check), `analysis/schema.md`, reading kit (`paper/references.bib` with 36 entries read from their primary sources and re-checked, `papers/do-not-cite.md`, `papers/injection-recipe-notes.md`, Gupta PDF moved to `papers/untrusted/`).
+- Found while checking: Ollama's newest release is 0.34.2 (2026-09-15). The study is pinned to 0.33.2, so the desktop app will offer an update. Do not accept it before the tag `analysis-frozen` (rule D-003c). `code/auditarch/llm.py` stops every run if the version differs.
+- Still open from week 1: supervisor email (yours), `OLLAMA_NUM_PARALLEL=1` and auto-update off (your machine), your hours in `hours.csv`, your reading (3 h), Friday status entry.
+- To confirm before week 2 starts: D-005 (tool behaviour), D-006 (gate). To discuss with the supervisor: D-007 (outcome labels, power).

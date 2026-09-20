@@ -127,15 +127,15 @@ If no meeting by Friday: email the brief, state assumptions (English, about 20 p
 
 ## 7. Reading list
 
-Venue labels are provisional until the week-11 citation audit.
+Venue labels were checked on 2026-09-20 (see `paper/references.bib` and `papers/do-not-cite.md`) and are checked again in the week-11 citation audit.
 
 | Paper | Read | Extract |
 |---|---|---|
-| TraceElephant (ACL 2026, unverified; 2604.22708) | Sec. 3.3-3.4, Tables 2-3 | Step accuracies 16 / 28.1 / 33.3; what varied, what was fixed; positioning paragraph (max 180 words) |
+| TraceElephant (ACL 2026 long papers, confirmed 2026-09-20; 2604.22708) | Sec. 3.3-3.4, Tables 2-3 | Step accuracies 16 / 28.1 / 33.3; what varied, what was fixed; positioning paragraph (max 180 words) |
 | Who&When Pro (2607.09996) | Sec. 3, App. C Table 5 | Warm-start recipe as numbered steps; 18-mode taxonomy (17 in released yaml); length-degradation confound |
-| Who&When (ICML 2025, unverified; 2505.00212) | Sec. 2-3 | Decisive-step definition; step-accuracy metric |
+| Who&When (ICML 2025, PMLR 267, confirmed 2026-09-20; 2505.00212) | Sec. 2-3 | Decisive-step definition; step-accuracy metric |
 | GRADE (2606.22741) | Sec. 2.1, README | Edge grades; cite execution-layer results only; withdrawn dependency claim |
-| PROV-AGENT (e-Science 2025, unverified; 2508.02866) | Sec. III | Node/edge vocabulary; state wasDerivedFrom is your addition |
+| PROV-AGENT (IEEE eScience 2025, confirmed 2026-09-20; 2508.02866) | Sec. III | Node/edge vocabulary; state wasDerivedFrom is your addition |
 | CatchBench (2608.22808) | Controls section | Position-only leak; guesser and shuffled labels |
 | TRAIL (2505.08638) | Sec. 3 | Category F1 and joint metric |
 | LongRCA (2608.15242) | Metric only | +/-k window; +/-3 for the expected 20-26 step runs, confirmed at the measured length |
