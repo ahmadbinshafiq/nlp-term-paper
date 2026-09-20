@@ -28,12 +28,13 @@ At most one fault was planted in this run, at exactly one act step. The six poss
 - overwritten_note (class state): a write_note step stored its text under another key that already existed.
 - wrong_source (class evidence): a note names a source passage that its text did not come from.
 - no_source (class evidence): a note has no source passage.
-The run may also be clean, with no fault at all.
+Many runs are clean, with no fault at all. Report a fault only if the record clearly shows it.
+If nothing is clearly wrong, the right answer is: step_id null, fault_class none, fault_type none.
 
 Name the first step where something went wrong, not the step where it was noticed.
-Answer with JSON: step_id (the number of the faulty step, or null if the run is clean), fault_class
-(tool, state, evidence, or none), fault_type (one of the six names, or none), pointer (a short piece
-copied from the record that shows the fault; empty if the run is clean)."""
+Answer with JSON: analysis (two or three sentences: what you checked and what you found), step_id (the number
+of the faulty step, or null if the run is clean), fault_class (tool, state, evidence, or none), fault_type
+(one of the six names, or none), pointer (a short piece copied from the record that shows the fault; empty if clean)."""
 
 READING_NOTES = {
     "log": "The record is an event log. Each block starts with `step N | think` or `step N | act | tool`. "
@@ -54,12 +55,13 @@ FAULT_NAMES = ["wrong_argument", "corrupted_output", "dropped_note", "overwritte
 ANSWER_SCHEMA = {
     "type": "object",
     "properties": {
+        "analysis": {"type": "string"},                  # written first, so the model looks before it decides
         "step_id": {"type": ["integer", "null"]},
         "fault_class": {"type": "string", "enum": ["tool", "state", "evidence", "none"]},
         "fault_type": {"type": "string", "enum": FAULT_NAMES},
         "pointer": {"type": "string"},
     },
-    "required": ["step_id", "fault_class", "fault_type", "pointer"],
+    "required": ["analysis", "step_id", "fault_class", "fault_type", "pointer"],
 }
 
 

@@ -13,7 +13,7 @@ import json
 from pathlib import Path
 
 from auditarch.auditor import audit, prompt_hash
-from auditarch.llm import AUDITOR_MODEL, make_llm
+from auditarch.llm import AUDITOR_MODEL, OPTIONS, make_llm
 from auditarch.render import diff, log, prov
 from auditarch.schema import Event
 from auditarch.score import score
@@ -44,9 +44,10 @@ def main():
     parser.add_argument("--out", default="pilot-w3", help="folder under results/")
     parser.add_argument("--model", default=AUDITOR_MODEL)
     parser.add_argument("--role", choices=["primary", "second"], default="primary")
+    parser.add_argument("--think", action="store_true", help="auditor with thinking on (pre-registration, section 9)")
     args = parser.parse_args()
 
-    llm, pins = make_llm(args.model)
+    llm, pins = make_llm(args.model, think=args.think, num_predict=4096 if args.think else OPTIONS["num_predict"])   # 4096 leaves room for the record inside num_ctx
     path = ROOT / "results" / args.out / "scores.csv"
     path.parent.mkdir(parents=True, exist_ok=True)
     done = set()
