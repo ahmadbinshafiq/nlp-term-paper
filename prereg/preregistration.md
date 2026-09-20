@@ -1,6 +1,6 @@
 # Pre-registration: Record Format x Fault Type
 
-Version: **v0.1 (draft), 2026-09-20.** It becomes binding when the git tag `prereg-v1` is set at the end of week 4, before any sweep run is generated.
+Version: **v0.2 (draft), 2026-09-20.** It becomes binding when the git tag `prereg-v1` is set at the end of week 4, before any sweep run is generated.
 
 Everything done before that tag (probe, pilot, validation runs) is **exploratory**, uses development tasks only, and is reported apart from the main results. Every change before the tag goes into the changes log with its reason. Allowed reasons: answers that cannot be parsed; floor or ceiling (section 9); a leak found by a control; a rule that turned out to be unclear. Not allowed: a change made because one format did better or worse than another on development runs.
 
@@ -23,7 +23,7 @@ Honest note: each fault class was chosen to match the natural unit of one format
 
 ## 2. Design in short
 
-- **Agent:** one LangGraph agent with four tools (search, read, write_note, finish) on MuSiQue questions with 3 or 4 hops, over a fixed passage pool (`DECISIONS.md`, D-002). Step cap: 30. It may be raised once to 35 in week 2 if 4-hop runs come close. The final value is logged in `DECISIONS.md` before any sweep-pool task is run, and every candidate is judged with that one cap.
+- **Agent:** one LangGraph agent with four tools (search, read, write_note, finish) on MuSiQue questions with 3 or 4 hops, over a fixed passage pool (`DECISIONS.md`, D-002). With the question the agent gets MuSiQue's sub-questions as a plan, without answers (D-010). It works in rounds (search, read, write note); each act is one JSON action that must fit a schema of the allowed tools. Step cap: 38 = six rounds of six steps plus think and finish (D-009); every candidate is judged with that one cap.
 - **Faults:** a correct run is replayed to step k and one fault is planted there by a tool wrapper. Six fault types in three classes, plus a sham control (`prereg/fault_catalogue.md`). `fault_class` is one of `tool`, `state`, `evidence`, `none`. `fault_type` is one of `wrong_argument`, `corrupted_output`, `dropped_note`, `overwritten_note`, `wrong_source`, `no_source`, or `sham` / `clean` for the controls.
 - **Formats:** each run is written in three formats made from one event stream (`docs/schema.md`): `log`, `diff`, `prov`. Each format can be turned back into the identical event stream (round-trip test). So the three formats hold the same information. The renderers are chosen by the round-trip test only, never by how well the auditor does on a format.
 - **Auditor:** `glm-4.7-flash:q8_0` on Ollama 0.33.2, temperature 0, seed 0, thinking off, 1,024 output tokens, one fixed context size. One answer per record, as JSON: `{step_id or null, fault_class, fault_type, pointer}`.
@@ -32,15 +32,17 @@ Honest note: each fault class was chosen to match the natural unit of one format
 ## 3. Sample
 
 **Gate.** A task enters only if its clean run passes all of these. All checks are mechanical.
-1. The answer is correct (normalized exact match against the gold answer and its aliases).
+1. The answer is correct: after normalization (lowercase, no punctuation, no articles, number words as digits) it equals the gold answer or an alias, or one is a run of whole words inside the other ("summer or fall" matches "usually in the summer or fall"; "1" does not match "1952"). MuSiQue gold answers are often long phrases, so plain exact match would reject correct runs (D-009).
 2. The run reached `finish` within the step cap, and the `note_key` given to `finish` exists.
-3. The final `cited_pid` is one of the gold supporting passages (checked offline; no model ever sees gold data).
-4. No hidden fault of our own kinds: no note key is written twice, no `source_pid` is null, and every `source_pid` was read before its note was written.
+3. The final `cited_pid` is one of the gold supporting passages (checked offline; no model ever sees gold answers or gold passage labels).
+4. No hidden fault of our own kinds: no `source_pid` is null, and every `source_pid` was read before its note was written. (A note key cannot be written twice and a passage cannot be read twice: the tools refuse that.)
 5. All six faults can be built: for each fault, the set of eligible steps k (catalogue, rule 5) is not empty.
 
-Two more natural patterns (the same query searched twice; a read of a handle that no search returned) do not fail the gate. They are stored as flags and their counts are reported.
+Two more natural patterns (the agent tried to send the same query twice, which the tool refuses; a read of a handle that no search returned) do not fail the gate. They are stored as flags and their counts are reported.
 
-**If too few tasks pass.** If the week-2 pass rate, projected to 120 candidates, gives fewer than 45 passing tasks: first drop checks 1 and 3 from the gate ("reaches finish with a cited answer") and keep both as covariates in a secondary model; the primary formula does not change. If still below 45, use rule D-003b (agent with thinking on, then `qwen3.8:27b` as agent).
+**If too few tasks pass.** If the 250 candidates give fewer than 45 passing tasks: first drop checks 1 and 3 from the gate ("reaches finish with a cited answer") and keep both as covariates in a secondary model; the primary formula does not change. If still below 45, use rule D-003b (agent with thinking on, then `qwen3.8:27b` as agent).
+
+**Candidates.** 250 questions with 3 or 4 hops in seed order: the first 120 (D-002) plus 130 more, added when the measured pass rate (about 30 percent) showed that 120 cannot give 55 passing tasks (D-011). The pass rate is reported in the paper.
 
 **Pools.** The first 5 passing tasks in seed order are **development tasks** (pilot, validation), never in the main analysis. The sweep pool is the next passing tasks, capped at 50. N is written into `DECISIONS.md` before the first audit call of the sweep, and no sweep run is audited before all sweep runs are generated. If N is below 40 after both fallbacks, the primary test is still run, but every outcome label is reported as exploratory.
 
@@ -147,6 +149,7 @@ Any change after `prereg-v1` is written into `results/deviations.md` with date, 
 
 - The three formats are three ways to show one recorded run, not three recording systems. Real recorders also differ in what they record. This study removes that difference on purpose. So a result here says how a record should be shown to an LLM auditor once the information is there. It does not say that logging, checkpointing or provenance capture is the better architecture. The native-recorder table is a separate coverage check, filled by scripts. The state-diff format is computed by us; what LangGraph's SqliteSaver really stores is checked in week 5.
 - One agent design. One dataset. Six synthetic faults, two per class.
+- The agent is given MuSiQue's question decomposition as a plan, because this study tests auditors, not question answering. Only tasks that the agent solves cleanly enter the study (about 30 percent of the candidates), so the runs are the easier ones.
 - One small open-weights model as auditor, which also produced the runs. The second auditor is a partial answer and may be dropped under the cut order; if so, the paper says that the shared-model concern has no answer.
 - The study can detect large differences only (section 5).
 
@@ -172,4 +175,5 @@ Any change after `prereg-v1` is written into `results/deviations.md` with date, 
 | Date | Version | Change |
 |---|---|---|
 | 2026-09-20 | v0 | First draft. Local models (D-003, D-003d). |
+| 2026-09-20 | v0.2 | Week-2 build: agent gets the sub-questions as a plan (D-010); 250 candidates (D-011); step cap 38, answer-match rule, JSON actions, tools that refuse repeats, 5 search results (D-009). Gate check 4 shortened because the tools now make two of its parts impossible. |
 | 2026-09-20 | v0.1 | After a four-reviewer check (39 confirmed points). Decision tree with seven labels in fixed order replaces the five overlapping outcomes (D-007). Margin rule now also needs "predicted format is best in its class". Equivalence bound B set by a power rule, 90 percent intervals for the Null label; first simulation says margins near 20 points are what this study can detect (D-007). Fit-failure ladder made exact. Gate extended by mechanical checks and "all six faults buildable" (D-006). Controls given numbers and fixed algorithms; the sham check is now a hash check; the structure-only guesser is a baseline, not a pass/fail control, for faults whose cue is structural. Rules for kept runs, too-long records, the subsample, clean and sham selection. Second auditor is description only. Limits rewritten. Glossary added. The outcome column is named `exact` (the plan's formula wrote `correct`). |

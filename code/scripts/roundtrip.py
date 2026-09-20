@@ -5,7 +5,6 @@ Run:  uv run python code/scripts/roundtrip.py
 """
 
 import csv
-import hashlib
 import json
 from pathlib import Path
 
@@ -16,22 +15,21 @@ ROOT = Path(__file__).resolve().parents[2]
 
 
 def main():
+    modules = {"log": log, "diff": diff, "prov": prov}
     rows = []
     for path in sorted((ROOT / "results").glob("*/*/events.jsonl")):
-        events = [Event(**json.loads(line)) for line in path.read_text(encoding="utf-8").splitlines()]
+        with open(path, encoding="utf-8") as f:
+            events = [Event(**json.loads(line)) for line in f]
         if not events:
             continue
-        texts = {"log": log.render(events), "diff": diff.render(events), "prov": prov.render(events)}
-        parsers = {"log": lambda: log.parse(texts["log"]), "diff": lambda: diff.parse(texts["diff"]),
-                   "prov": lambda: prov.parse(prov.render_json(events))}
         row = {"run": str(path.parent.relative_to(ROOT / "results")), "steps": len(events)}
-        for name in texts:
+        for name, module in modules.items():
+            text = module.render(events)
             try:
-                row[name + "_ok"] = "ok" if parsers[name]() == events else "FAIL"
+                row[name + "_ok"] = "ok" if module.parse(text) == events else "FAIL"
             except Exception as error:                     # a rendering that cannot be read back is a failure too
                 row[name + "_ok"] = f"FAIL ({type(error).__name__})"
-            row[name + "_bytes"] = len(texts[name].encode("utf-8"))
-        row["distinct_hashes"] = len({hashlib.sha256(t.encode("utf-8")).hexdigest() for t in texts.values()})
+            row[name + "_bytes"] = len(text.encode("utf-8"))
         rows.append(row)
 
     with open(ROOT / "results" / "roundtrip.csv", "w", newline="", encoding="utf-8") as f:
@@ -39,9 +37,9 @@ def main():
         writer.writeheader()
         writer.writerows(rows)
     failures = [r["run"] for r in rows if any(str(v).startswith("FAIL") for v in r.values())]
-    mean = lambda key: round(sum(r[key] for r in rows) / len(rows))
     print(f"runs: {len(rows)} | round-trip failures: {len(failures)} {failures[:5]}")
-    print(f"mean bytes  log {mean('log_bytes')}  diff {mean('diff_bytes')}  prov {mean('prov_bytes')}")
+    for name in modules:
+        print(f"mean bytes {name}: {round(sum(r[name + '_bytes'] for r in rows) / len(rows))}")
 
 
 if __name__ == "__main__":

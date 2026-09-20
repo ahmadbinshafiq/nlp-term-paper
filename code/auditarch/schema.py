@@ -11,8 +11,6 @@ from typing import Literal
 import jsonpatch
 from pydantic import BaseModel, ConfigDict, model_validator
 
-TOOL_NAMES = ("search", "read", "write_note", "finish")
-
 
 def empty_state() -> dict:
     # Every top-level key is a dict keyed by an id, never a list (JSON Patch is unreliable on lists).
@@ -46,8 +44,10 @@ class Event(BaseModel):
         else:
             if self.tool_call is None or self.tool_return is None:
                 raise ValueError("an act event has exactly one tool call and its return")
-            if f"/calls/{self.step_id}" not in paths:
-                raise ValueError("an act event must copy its tool call into calls[step_id]")
+            copy_of_call = {"op": "add", "path": f"/calls/{self.step_id}",
+                            "value": {"tool_call": self.tool_call.model_dump(), "tool_return": self.tool_return}}
+            if self.state_patch[:1] != [copy_of_call]:
+                raise ValueError("an act event starts with calls[step_id], an exact copy of its tool call and return")
         return self
 
 
@@ -63,15 +63,9 @@ def fold(events: list[Event]) -> list[dict]:
 
 
 def unfold(states: list[dict]) -> list[list[dict]]:
-    """The patch between each state and the one before it. Checked, with a safe fallback."""
+    """The patch between each state and the one before it."""
     patches, prev = [], empty_state()
     for curr in states:
-        patch = jsonpatch.make_patch(prev, curr)
-        if patch.apply(copy.deepcopy(prev)) != curr:
-            # Rare jsonpatch bug on nested lists: replace every changed top-level key as a whole.
-            patch = jsonpatch.JsonPatch(
-                [{"op": "replace", "path": f"/{key}", "value": curr[key]} for key in curr if curr[key] != prev[key]]
-            )
-        patches.append(patch.patch)
+        patches.append(jsonpatch.make_patch(prev, curr).patch)
         prev = curr
     return patches

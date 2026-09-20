@@ -1,4 +1,4 @@
-# Fault catalogue (v0.1, 2026-09-20)
+# Fault catalogue (v0.2, 2026-09-20)
 
 Seven rows: six faults in three classes, plus the sham control. Rows 1 and 2 have two variants (a: `search`, b: `read`).
 Read `docs/schema.md` first. Status: draft, to be tested in week 3 (2 faults plus sham) and week 4 (all rows).
@@ -6,32 +6,32 @@ Read `docs/schema.md` first. Status: draft, to be tested in week 3 (2 faults plu
 ## Rules that hold for every row
 
 1. **One fault per run.** A clean run is replayed from the cache up to step k-1. At step k the wrapper `FaultyTool(tool, fault, k)` fires once. After k the run goes on live, with the same model and options. Exception: a sham run changes nothing, so every later model call hits the cache and the run replays with no live model call. A cache miss during a sham run is an error and fails the run.
-2. **The fault looks like the agent's own mistake.** The record and the message history that the model sees afterwards always agree. Rows 1, 5 and 6: the arguments in the model's own tool-call message at step k are rewritten to the changed values; the tool call id and every message before k stay byte-identical. Row 2: only the tool's return message changes. Rows 3 and 4: no message changes, only the state. Reason: `docs/schema.md` says that nothing lives only in chat messages. If the history kept the original call while the record shows the changed one, the record could no longer explain what the agent did next. The original values go only into `truth.json`, which no model ever sees.
+2. **The fault looks like the agent's own mistake.** The record and the message history that the model sees afterwards always agree. An act is one message that holds the agent's JSON action, followed by one `RESULT:` message with the tool return. Rows 1, 5 and 6: the JSON action at step k is rewritten to the changed action (and for row 1 the `RESULT:` message holds the return for the changed call); every message before step k stays byte-identical. Row 2: only the `RESULT:` message of step k changes. Rows 3 and 4: no message changes (the agent sees `RESULT: {"ok": true}`), only the state. Reason: `docs/schema.md` says that nothing lives only in chat messages. If the history kept the original call while the record shows the changed one, the record could no longer explain what the agent did next. The original values go only into `truth.json`, which no model ever sees.
 3. **Ground-truth step = k**, the step where the wrapper fired. This holds even if the visible damage shows up later.
 4. **Every choice is fixed by a rule**, never random. So the same (task, fault) always gives the same run.
 5. **How k and the hook tool are set.**
    - Let i be the position of the task in its pool in seed order (from 0) and j the row number (1 to 7).
    - Rows 1 and 2: the hook tool is `search` if i + j is even, else `read`. If that variant is not reachable in this run, the other one is used.
-   - Eligible steps = the act steps of the hook tool in the clean run that meet the column "Reachable if", sorted: e[0] ... e[m-1].
+   - Eligible steps = the act steps of the hook tool in the clean run that meet the column "Reachable if", sorted: e[0] ... e[m-1]. A call that the tool refused (it returned an error and changed nothing) is never eligible. The rules are coded in `code/auditarch/eligible.py`.
    - Stratum s = (i + j) mod 3, with 0 = early, 1 = middle, 2 = late. Then **k = e[floor((2s + 1) x m / 6)]**. This gives positions 0, 1, 1 for m = 2; 0, 1, 2 for m = 3; 0, 2, 3 for m = 4; 1, 3, 5 for m = 6.
    - `k_bin` of the chosen step with rank r is floor(3 x (r + 0.5) / m). It stores the part the step really lies in, which can differ from s when m is small.
    - Sweep tasks always have m >= 1 for every row, because the gate demands it (pre-registration, section 3, check 5).
    - Validation runs (week 4): row j in stratum s uses development task (j + s) mod 5. If the fault cannot be built there, the next development task is used. If none works, the run is recorded as "not buildable" and counted.
    - Sham (row 7): k = the middle eligible `write_note` step, e[floor(m / 2)].
 6. **Proof that only the fault differs.** The record of a faulty run is byte-identical to the clean run on every line before step k. For the sham row, `events.jsonl` and every rendering are byte-identical to the clean run on every line; only `truth.json` differs. Both are checked on every run.
-7. **`truth.json`** holds: `fault_type`, `fault_class`, k, `k_bin`, `hook_tool`, original value, changed value, and these flags, which are reported and never used to drop runs: `answer_changed`, `ended` (`finish`, `step_cap`, `failed_step`), `finish_note_missing`, `requeried_after_k`, `reread_after_k`, `natural_signature` (same query twice, or a read of a handle no search returned, anywhere in the run).
-8. **The plain tools never raise.** `finish` is always the last step. If `notes[note_key]` does not exist, `finish` still returns `ok` and writes `decision = {note_key, cited_pid: null}`. This is the plain tool's behaviour in clean runs too, so the wrapper changes step k only. `search` returns a list of `{handle, title}`, so the agent (and the auditor) can see what a search found. (Decision D-005.)
+7. **`truth.json`** holds: `fault_type`, `fault_class`, k, `k_bin`, `hook_tool`, original value, changed value, and these flags, which are reported and never used to drop runs: `answer_changed`, `ended` (`finish`, `step_cap`, or `failed_step` if an action was cut off before it was complete), `finish_note_missing`, `requeried_after_k`, `reread_after_k`, `natural_signature` (same query twice, or a read of a handle no search returned, anywhere in the run).
+8. **The plain tools never raise.** `finish` is always the last step. If `notes[note_key]` does not exist, `finish` still returns `ok` and writes `decision = {note_key, cited_pid: null}`. This is the plain tool's behaviour in clean runs too, so the wrapper changes step k only. `search` returns the 5 best passages as `{handle, title, snippet}`, so the agent (and the auditor) can see what a search found. The plain tools refuse a repeated query, a second read of the same passage and an existing note key: they return `{"error": ...}` and change nothing. The fault wrapper goes around these refusals where a row needs it (rows 1a and 4): it builds the return and the state effect itself. (Decisions D-005 and D-009.)
 
 ## The rows
 
 | # | Code (`fault_type`) | Class | Hook tool | Exact operation at step k | Reachable if |
 |---|---|---|---|---|---|
-| 1a | `wrong_argument` | `tool` | `search` | The query is replaced by the agent's own previous search query (a stale query). The tool runs on the replaced query. | an earlier `search` step has a different query, and step k-1 is a think step |
-| 1b | `wrong_argument` | `tool` | `read` | The handle is replaced by another handle from the latest search result: rank 2 if the agent asked for rank 1, else rank 1. If that passage was already read before k, the next rank is taken. The tool reads that other passage. | the latest search returned a handle that was not asked for and not read before k, and step k-1 is a think step |
-| 2a | `corrupted_output` | `tool` | `search` | The tool runs on the right query, but the returned handles and titles are ranks 51-53 instead of ranks 1-3. | always |
+| 1a | `wrong_argument` | `tool` | `search` | The query is replaced by the agent's own previous search query (a stale query). The wrapper returns the BM25 results for that query, without the refusal that the plain tool gives for a repeated query. | an earlier `search` step has a different query, and step k-1 is a think step with a non-empty text |
+| 1b | `wrong_argument` | `tool` | `read` | The handle is replaced by another handle from the latest search result: rank 2 if the agent asked for rank 1, else rank 1. If that passage was already read before k, the next rank is taken. The tool reads that other passage. | the latest search returned a handle that was not asked for and not read before k, and step k-1 is a think step with a non-empty text |
+| 2a | `corrupted_output` | `tool` | `search` | The tool runs on the right query, but the returned handles, titles and snippets are ranks 51-55 instead of ranks 1-5. | always |
 | 2b | `corrupted_output` | `tool` | `read` | The tool runs on the right handle. The returned `pid` and `title` stay, but `text` is replaced by the text of the rank-51 passage of the latest search query. `evidence[pid]` stores the wrong text. | there was a search before this read, and this pid was not read before step k |
 | 3 | `dropped_note` | `state` | `write_note` | The write is swallowed. The tool still returns `ok`. The patch adds `calls[k]` only, no `notes[key]`. | always |
-| 4 | `overwritten_note` | `state` | `write_note` | The text and source are written to the most recently written other key. The key the agent named is not created. The tool returns `ok`. | at least one other note exists |
+| 4 | `overwritten_note` | `state` | `write_note` | The text and source are written to the most recently written other key (the wrapper does this itself; the plain tool would refuse an existing key). The key the agent named is not created. The tool returns `ok`. | at least one other note exists |
 | 5 | `wrong_source` | `evidence` | `write_note` (`source_pid` only) | `source_pid` is replaced by the pid of the most recently read other passage. Key and text stay. | at least one other passage was read before step k |
 | 6 | `no_source` | `evidence` | `write_note` (`source_pid` only) | `source_pid` is set to null. Key and text stay. | always |
 | 7 | `sham` | `none` (control row) | `write_note` | The wrapper is engaged at step k but passes call and return through unchanged. | always |
@@ -54,11 +54,12 @@ Format codes: `log`, `diff`, `prov`. All three hold the same information; the qu
 | 6 | `no_source` | yes | `source_pid: null` in the call. | `source_pid: null` in `notes[key]`. | The note entity has no `wasDerivedFrom` edge, while every other note has one. `source_pid: null` is also an attribute of activity k (needed for the round trip). | `prov` |
 | 7 | `sham` | nothing to see | identical to the clean run | identical | identical | none: the right answer is "no fault" |
 
-**How the log shows effects.** After each act step the log prints one line per patch operation other than `/calls/<k>`: `effect: <op> <path>`, plus the value when that value is not already printed in the call or return line of the same step (today only `finish`: `/decision`). The exact layout is settled in week 3 by the round-trip test only, never by auditor accuracy per format.
+**How the log shows effects.** After each act step the log prints one effect line per patch operation other than `/calls/<k>`, for example `effect: ["add", "/notes/director"]`. The value is added when it is not already visible in the call or return line of the same step (layout: `code/auditarch/render/log.py`). The layout was settled by the round-trip test only, never by auditor accuracy per format.
 
-**PROV edge rules** (also in `docs/schema.md`): a `read` step gets `used(activity k, ent:passage:<pid>)` and generates the evidence entity. A `write_note` step gets `wasGeneratedBy(note, activity k)` plus `wasDerivedFrom(note, passage)` built from `source_pid`, and no `used` edge. Any edge that is not in the event stream would be an inferred edge; those belong to the fourth arm only.
+**PROV edge rules** (also in `docs/schema.md`): a `read` step gets `used(step:k, passage:<pid>)`; the passage entity carries the title and text that the read returned. A `write_note` step gets `wasGeneratedBy(note, step:k)` plus `wasDerivedFrom(note, passage)` built from `source_pid`, and no `used` edge. A `finish` step gets `wasDerivedFrom(answer, note)` built from `note_key`. Any edge that is not in the event stream would be an inferred edge; those belong to the fourth arm only.
 
 **Honest notes.**
+- Row 1a can be found by a one-line rule too: in a clean run a repeated query is always refused with an error, so a repeated query that returns results marks the fault. It is reported with the rule baselines, like rows 3, 4 and 6.
 - Rows 3, 4 and 6 (and maybe 5) can be found by a one-line rule on the structure, without reading any text. The pre-registration therefore reports a structure-only guesser and one rule auditor as baselines for these rows (section 7, control 3).
 - Row 6 may be near ceiling in all three formats. It is part of the week-4 floor/ceiling check per fault type.
 - Four of six faults hook `write_note`, which is only about 3 to 4 of about 22 steps. A guesser that picks a random `write_note` step therefore scores far above uniform chance. This "tool-prior baseline" is the reference for the structure-only guesser.
@@ -71,6 +72,6 @@ The sham is a pipeline check: the hash of each sham rendering equals the hash of
 ## Open points (decide before `prereg-v1`, log each in `DECISIONS.md`)
 
 1. **Rank 51** (rows 2a, 2b) makes the wrong content clearly unrelated. It may be changed to a nearer rank (4-6) only under the rule in the pre-registration, section 9: `exact` for that fault type is 0 or 100 percent in all three formats on its development runs.
-2. **Does the agent really think before every act step?** Row 1 needs a think step at k-1. If the week-2 agent design does not give one, row 1 must be reworked before the gate is logged.
 
 Closed in v0.1: hidden faults in clean runs (now gate check 4, D-006); message history (rule 2); how the log shows effects (rule above).
+Closed in v0.2: the agent thinks before every act step (built that way in week 2); rule 2 rewritten for JSON actions; rows 1a, 2a and 4 adapted to tools that refuse repeats and to 5 search results.

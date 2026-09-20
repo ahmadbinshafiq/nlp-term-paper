@@ -5,7 +5,7 @@ Every node execution becomes one canonical event (docs/schema.md):
   act:   the model writes one JSON action; the tool runs.  patch: calls[step_id] + the tool's state effect
 
 The agent works in rounds of three acts: search, read, write_note. After a note it may
-start a new round or finish. NEXT_TOOLS below is the whole rule. Ollama forces each
+start a new round or finish. With the question it gets MuSiQue's sub-questions as a plan. NEXT_TOOLS below is the whole rule. Ollama forces each
 action to fit a JSON schema of the allowed tools, so an act can never be malformed.
 """
 
@@ -43,7 +43,8 @@ You work in turns. In a THINK turn you write one to three sentences.
 In an ACT turn you write one JSON action: {"tool": ..., "args": {...}}."""
 
 # Which tools the agent may call next, given the tool it called last.
-NEXT_TOOLS = {None: ["search"], "search": ["read"], "read": ["write_note"], "write_note": ["search", "finish"]}
+NEXT_TOOLS = {None: ["search"], "search": ["read"], "read": ["write_note"], "write_note": ["search", "finish"],
+              "read_refused": ["read", "search"]}      # a refused read may be followed by a new search, else the agent could get stuck
 
 # What the THINK turn is asked, given the tool it called last. It names the act that comes next.
 THINK_CUES = {
@@ -52,6 +53,7 @@ THINK_CUES = {
               "If no title fits, pick the result whose text is closest: the fact may be inside it.",
     "read": "Your next act is write_note. Say which fact from the passage you just read you will save, "
             "or that the passage did not help.",
+    "read_refused": "That passage was already read. Your next act is read (another result) or search (other words). Say which, and why.",
     "write_note": "Look at your notes. If they already give the final answer to the question, your next act is finish: "
                   "say the short answer and the key of the note that holds it. "
                   "If not, your next act is search: say which single fact you need next and what you will search for.",
@@ -64,8 +66,8 @@ class RunState(TypedDict):
     usage: Annotated[list, operator.add]      # tokens and seconds per model call
     app: dict                                 # application state: scratch, calls, evidence, notes, answer, decision
     step_id: int
-    last_tool: str | None                     # the last tool that ran without an error
-    ended: str                                # "" while running, then "finish" or "step_cap"
+    last_tool: str | None                     # the last tool that ran without an error (or "read_refused")
+    ended: str                                # "" while running, then "finish", "step_cap" or "failed_step"
 
 
 def apply_patch(app: dict, patch: list) -> dict:
@@ -95,7 +97,10 @@ def build_agent(thinker, actor, index, strict: bool = False):
         cue = HumanMessage("ACT turn. Write one JSON action. Allowed tools: " + ", ".join(allowed) + ".")
         text, usage = cached_invoke(*actor, state["messages"] + [cue], schema=action_schema(allowed), strict=strict)
 
-        action = json.loads(text)                       # valid because the schema was enforced (actor has thinking off)
+        try:
+            action = json.loads(text)                   # the schema was enforced, so this only fails ...
+        except json.JSONDecodeError:                    # ... when the reply was cut off at num_predict
+            return {"usage": [usage], "ended": "failed_step"}
         tool_call = {"name": action["tool"], "args": action["args"]}
         tool_return, effect = TOOLS[tool_call["name"]](tool_call["args"], state["app"], index)
 
@@ -103,28 +108,41 @@ def build_agent(thinker, actor, index, strict: bool = False):
         patch = [{"op": "add", "path": f"/calls/{step}", "value": {"tool_call": tool_call, "tool_return": tool_return}}] + effect
         event = Event(step_id=step, node_kind="act", tool_call=tool_call, tool_return=tool_return, state_patch=patch)
         result = HumanMessage("RESULT: " + json.dumps(tool_return, ensure_ascii=False))
-        return {"messages": [cue, AIMessage(text), result], "events": [event], "usage": [usage],
-                "app": apply_patch(state["app"], patch), "step_id": step,
-                "last_tool": state["last_tool"] if "error" in tool_return else tool_call["name"],
-                "ended": "finish" if tool_call["name"] == "finish" else ""}
 
-    def after_act(state: RunState):
-        if state["ended"]:
-            return END
-        return "think" if state["step_id"] < STEP_CAP else "cap"
+        if "error" not in tool_return:
+            last_tool = tool_call["name"]
+        elif tool_call["name"] == "read":
+            last_tool = "read_refused"
+        else:
+            last_tool = state["last_tool"]              # a refused search or note: the same tools are offered again
+
+        if tool_call["name"] == "finish":
+            ended = "finish"
+        elif step >= STEP_CAP:
+            ended = "step_cap"
+        else:
+            ended = ""
+        return {"messages": [cue, AIMessage(text), result], "events": [event], "usage": [usage],
+                "app": apply_patch(state["app"], patch), "step_id": step, "last_tool": last_tool, "ended": ended}
 
     graph = StateGraph(RunState)
     graph.add_node("think", think)
     graph.add_node("act", act)
-    graph.add_node("cap", lambda state: {"ended": "step_cap"})
     graph.add_edge(START, "think")
     graph.add_edge("think", "act")
-    graph.add_conditional_edges("act", after_act, ["think", "cap", END])
-    graph.add_edge("cap", END)
+    graph.add_conditional_edges("act", lambda state: END if state["ended"] else "think", ["think", END])
     return graph.compile()
 
 
-def run_task(agent, question: str) -> RunState:
-    start = {"messages": [SystemMessage(SYSTEM_PROMPT), HumanMessage("Question: " + question)],
+def question_text(task: dict) -> str:
+    """What the agent is asked: the question plus MuSiQue's sub-questions as a plan (no answers). Decision D-010."""
+    plan = [f"{i}. {line}" for i, line in enumerate(task["plan"], start=1)]
+    return ("Question: " + task["question"] +
+            "\nPlan, one round per line (#1 means the answer of line 1):\n" + "\n".join(plan))
+
+
+def run_task(agent, task: dict) -> RunState:
+    start = {"messages": [SystemMessage(SYSTEM_PROMPT), HumanMessage(question_text(task))],
              "events": [], "usage": [], "app": empty_state(), "step_id": 0, "last_tool": None, "ended": ""}
-    return agent.invoke(start, {"recursion_limit": 4 * STEP_CAP})
+    # LangGraph stops a graph after 25 node runs unless told otherwise. STEP_CAP is what ends our runs; this only has to be larger.
+    return agent.invoke(start, {"recursion_limit": 2 * STEP_CAP})

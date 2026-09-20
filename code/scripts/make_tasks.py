@@ -1,6 +1,7 @@
 """Build data/tasks.jsonl and data/gold.jsonl from the MuSiQue dev file (decision D-002).
 
-tasks.jsonl holds only what the agent may see. gold.jsonl holds everything else.
+tasks.jsonl holds only what the agent may see: the question, the passages and MuSiQue's sub-questions
+as a plan (no answers, decision D-010). gold.jsonl holds everything else.
 Run:  uv run python code/scripts/make_tasks.py
 """
 
@@ -13,7 +14,8 @@ from auditarch.retrieval import make_pid
 
 ROOT = Path(__file__).resolve().parents[2]
 RAW = ROOT / "data" / "raw" / "musique_ans_v1.0_dev.jsonl"
-N_CANDIDATES = 120
+N_CANDIDATES = 120    # the first sample (decision D-002)
+N_EXTRA = 130         # more candidates, added after the pass rate was measured (decision D-011)
 SEED = 0
 
 
@@ -26,6 +28,8 @@ def main():
 
     ids = sorted(i for i in rows if i.startswith(("3hop", "4hop")))
     sample = random.Random(SEED).sample(ids, N_CANDIDATES)  # this order is the "seed order"
+    rest = [i for i in ids if i not in set(sample)]
+    sample += random.Random(SEED).sample(rest, N_EXTRA)      # the first 120 stay exactly as they were
 
     with open(ROOT / "data" / "tasks.jsonl", "w", encoding="utf-8") as tasks_f, \
          open(ROOT / "data" / "gold.jsonl", "w", encoding="utf-8") as gold_f:
@@ -38,6 +42,7 @@ def main():
                 "order": order,
                 "hops": int(task_id[0]),
                 "question": row["question"],
+                "plan": [step["question"] for step in row["question_decomposition"]],
                 "paragraphs": [
                     {"idx": p["idx"], "pid": pid_of[p["idx"]], "title": p["title"], "text": p["paragraph_text"]}
                     for p in row["paragraphs"]

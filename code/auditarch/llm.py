@@ -23,7 +23,9 @@ PINNED_DIGESTS = {
 }
 
 # The same options for every call. num_ctx is fixed for good in week 3.
+# THINK turns also get THINK_STOP; ACT turns also get a JSON schema (agent.py).
 OPTIONS = {"temperature": 0, "seed": 0, "num_ctx": 16384, "num_predict": 1024}
+THINK_STOP = ["</think>", "ACT turn", '{"tool"']      # a THINK turn must not run on into the next act
 
 
 def _get(path: str) -> dict:

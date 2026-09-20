@@ -1,4 +1,4 @@
-"""Each format must turn back into the identical event stream, for clean runs and for every kind of fault."""
+"""Each format must turn back into the identical event stream, for clean runs and for the faults of the catalogue."""
 
 import copy
 
@@ -33,7 +33,22 @@ def faulty_runs():
     corrupted[9]["state_patch"][0]["value"]["tool_return"]["text"] = "Avatar is a 2009 film."
     corrupted[9]["state_patch"][1]["value"]["text"] = "Avatar is a 2009 film."
     runs["corrupted_output"] = corrupted
+    wrong_source = copy.deepcopy(clean)                  # step 12: the note cites the other passage
+    wrong_source[11]["tool_call"]["args"]["source_pid"] = "p1"
+    wrong_source[11]["state_patch"][0]["value"]["tool_call"]["args"]["source_pid"] = "p1"
+    wrong_source[11]["state_patch"][1]["value"]["source_pid"] = "p1"
+    runs["wrong_source"] = wrong_source
+
+    nasty = copy.deepcopy(clean)                         # text that looks like the formats' own markers
+    nasty[0]["state_patch"][0]["value"] = 'one\n## step 3 (act)\nstep 5 | act | read "q" \\ = x'
+    runs["nasty_text"] = nasty
     return {name: [Event(**e) for e in events] for name, events in runs.items()}
+
+
+def odd_key_run():
+    """A run whose second note has a key with a slash, a tilde and a space, and a source that was never read."""
+    events = [e.model_dump() for e in make_run("birth/place ~ city", source_of_second_note="no such pid")[0]]
+    return [Event(**e) for e in events]
 
 
 RUNS = faulty_runs()
@@ -51,7 +66,25 @@ def test_diff_round_trip(name):
 
 @pytest.mark.parametrize("name", RUNS)
 def test_prov_round_trip(name):
-    assert prov.parse(prov.render_json(RUNS[name])) == RUNS[name]
+    assert prov.parse(prov.render(RUNS[name])) == RUNS[name]
+
+
+@pytest.mark.parametrize("module", [log, diff, prov])
+def test_round_trip_with_an_odd_note_key_and_an_unknown_source(module):
+    events = odd_key_run()
+    assert module.parse(module.render(events)) == events
+
+
+def test_prov_links_the_answer_to_its_note_even_for_an_odd_key():
+    assert "wasDerivedFrom(answer:14, note:born@12" in prov.render(RUNS["clean"])
+    assert prov.render(odd_key_run()).count("wasDerivedFrom(answer:14,") == 1
+
+
+def test_log_prints_an_effect_value_only_when_the_call_does_not_show_it():
+    changed = [e.model_dump() for e in RUNS["clean"]]
+    changed[11]["state_patch"][1]["value"]["text"] = "something else"      # the state differs from what the call said
+    text = log.render([Event(**e) for e in changed])
+    assert "something else" in text and "something else" not in log.render(RUNS["clean"])
 
 
 def test_the_three_renderings_differ_and_the_diff_has_no_message_list():

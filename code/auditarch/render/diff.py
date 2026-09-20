@@ -23,8 +23,8 @@ def render(events: list) -> str:
 
 def parse(text: str) -> list:
     events = []
-    for block in text.strip().split("## step ")[1:]:
-        head, *body = block.strip().split("\n")
+    for block in ("\n" + text.strip()).split("\n## step ")[1:]:      # a block starts at a line that begins with "## step "
+        head, *body = block.split("\n")
         step, kind = int(head.split(" ")[0]), head.split("(")[1].rstrip(")")
         patch = [json.loads(line) for line in body]
         call = patch[0]["value"] if kind == "act" else {"tool_call": None, "tool_return": None}   # calls[step] holds both

@@ -1,6 +1,7 @@
 """The gate: is this clean run good enough to plant faults into? (DECISIONS.md, D-006)
 
-All checks are mechanical. Gold data is used here, offline, and is never shown to a model.
+All checks are mechanical. Gold answers and gold passage labels are used here, offline, and are never shown to a model.
+(The agent does see MuSiQue's sub-questions as a plan, without answers: decision D-010.)
 """
 
 import re
@@ -25,11 +26,10 @@ def answers_match(answer: str, gold_answers: list) -> bool:
 
     So "summer or fall" matches "usually in the summer or fall", but "1" does not match "1952".
     """
-    a = normalize(answer).split()
-    for gold in gold_answers:
-        g = normalize(gold).split()
-        short, long = sorted([a, g], key=len)
-        if short and any(long[i:i + len(short)] == short for i in range(len(long) - len(short) + 1)):
+    answer = normalize(answer)
+    for gold in map(normalize, gold_answers):
+        # the spaces on both sides make whole words match only
+        if answer and gold and (f" {answer} " in f" {gold} " or f" {gold} " in f" {answer} "):
             return True
     return False
 
@@ -62,7 +62,7 @@ def check_clean_run(events: list, app: dict, ended: str, gold: dict) -> dict:
         if name == "read" and "pid" in ret:
             read_so_far.add(ret["pid"])
         if name == "write_note":
-            if args.get("key") in keys_so_far:
+            if args.get("key") in keys_so_far:      # cannot happen while write_note refuses an existing key; D-006 names this check
                 failed.append(f"note_key_written_twice@{step}")
             if args.get("source_pid") is None:
                 failed.append(f"null_source@{step}")
@@ -76,13 +76,14 @@ def check_clean_run(events: list, app: dict, ended: str, gold: dict) -> dict:
             failed.append("not_buildable:" + fault_type)
 
     # natural patterns that do not fail the gate but are counted
-    queries = [args.get("query") for _, name, args, _ in calls if name == "search"]
+    # (the repeated query itself is refused by the tool, so look at all search events, refused ones too)
+    queries = [e.tool_call.args.get("query") for e in events if e.tool_call and e.tool_call.name == "search"]
     if len(queries) != len(set(queries)):
         flags.append("same_query_twice")
     offered = set()
     for _, name, args, ret in calls:
         if name == "search":
             offered |= {r["handle"] for r in ret.get("results", [])}
-        if name == "read" and args.get("handle") not in offered:
+        if name == "read" and args.get("handle") not in offered and "read_of_unoffered_handle" not in flags:
             flags.append("read_of_unoffered_handle")
     return {"failed": failed, "flags": flags}

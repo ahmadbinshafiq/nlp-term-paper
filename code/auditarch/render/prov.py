@@ -11,13 +11,19 @@ How the state effects of a step become graph items:
   write_note  -> entity note:<key>@k,   wasGeneratedBy(note, step), wasDerivedFrom(note, passage:<source_pid>)
   finish      -> entity answer:k,       wasGeneratedBy(answer, step), wasDerivedFrom(answer, note)
 Every edge comes from a field of the event stream. Nothing is guessed.
+(The answer's edge goes to the latest note with the key that `finish` named.)
 
-render() gives PROV-N, the standard text form, which is what the auditor reads.
-The round trip goes through PROV-JSON, the same document in the form the prov library can read back.
+render() gives PROV-N, the standard text form. It is what the auditor reads, and parse() reads it back.
+
+Assumes what the tools and the fault catalogue guarantee: a read that worked stores exactly the title and
+text it returned; a step has at most one effect per state section; finish replaces answer, then decision;
+a passage is read at most once.
 """
 
 import json
+from urllib.parse import unquote
 
+from jsonpointer import escape, unescape
 from prov.model import ProvDocument
 
 from auditarch.schema import Event
@@ -50,11 +56,12 @@ def build(events: list) -> ProvDocument:
 
         if "evidence" in effects:
             op = effects["evidence"]
-            passage = doc.entity(f"passage:{ret['pid']}", {"aa:pid": ret["pid"], "aa:op": op["op"], **{f"aa:{f}": v for f, v in op["value"].items()}})
+            passage = doc.entity(f"passage:{ret['pid']}", {"aa:pid": ret["pid"], "aa:op": op["op"],
+                                                           "aa:title": op["value"]["title"], "aa:text": op["value"]["text"]})
             doc.used(step, passage)
         if "notes" in effects:
             op = effects["notes"]
-            key = op["path"].split("/", 2)[2]
+            key = unescape(op["path"].split("/", 2)[2])            # the path holds the key in JSON-pointer escaping
             note = doc.entity(f"note:{key}@{k}", {"aa:key": key, "aa:op": op["op"], "aa:text": op["value"]["text"]})
             doc.wasGeneratedBy(note, step)
             if op["value"]["source_pid"] is not None:
@@ -73,12 +80,9 @@ def render(events: list) -> str:
     return build(events).get_provn() + "\n"
 
 
-def render_json(events: list) -> str:
-    return build(events).serialize(format="json")
-
-
-def parse(json_text: str) -> list:
-    data = json.loads(json_text)
+def parse(text: str) -> list:
+    # the prov library reads the PROV-N text; its JSON form is only a handy way to walk the records
+    data = json.loads(ProvDocument.deserialize(content=text, format="provn").serialize(format="json"))
     entities = data.get("entity", {})
     made_by, used_by, source_of = {}, {}, {}               # step -> entity ids, step -> entity id, note id -> passage id
     for edge in data.get("wasGeneratedBy", {}).values():
@@ -89,8 +93,9 @@ def parse(json_text: str) -> list:
         source_of[edge["prov:generatedEntity"]] = edge["prov:usedEntity"]
 
     events = []
-    for step_name, a in sorted(data["activity"].items(), key=lambda item: int(item[0].removeprefix("step:"))):
-        k = int(step_name.removeprefix("step:"))
+    for k in sorted(int(name.removeprefix("step:")) for name in data["activity"]):
+        step_name = f"step:{k}"
+        a = data["activity"][step_name]
         if a["aa:kind"] == "think":
             text = entities[made_by[step_name][0]]["aa:text"]
             patch = [{"op": "add", "path": f"/scratch/{k}", "value": text}]
@@ -109,8 +114,9 @@ def parse(json_text: str) -> list:
             item = entities[entity_id]
             if "aa:key" in item:                           # a note
                 source = source_of.get(entity_id)
-                value = {"text": item["aa:text"], "source_pid": source.removeprefix("passage:") if source else None}
-                effects.append({"op": item["aa:op"], "path": f"/notes/{item['aa:key']}", "value": value})
+                # PROV-N writes ids with percent-encoding (a space becomes %20), so decode the source id
+                value = {"text": item["aa:text"], "source_pid": unquote(source.removeprefix("passage:")) if source else None}
+                effects.append({"op": item["aa:op"], "path": f"/notes/{escape(item['aa:key'])}", "value": value})
             else:                                          # the answer
                 effects.append({"op": "replace", "path": "/answer", "value": item["aa:answer"]})
                 effects.append({"op": "replace", "path": "/decision", "value": json.loads(item["aa:decision"])})

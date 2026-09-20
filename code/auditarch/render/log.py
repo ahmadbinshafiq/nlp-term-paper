@@ -47,7 +47,7 @@ def render(events: list) -> str:
 
 def parse(text: str) -> list:
     events = []
-    for block in ("\n" + text.strip()).split("\nstep ")[1:]:
+    for block in ("\n" + text.strip()).split("\nstep ")[1:]:         # a block starts at a line that begins with "step "
         head, *body = block.split("\n")
         fields = [line.strip().split(": ", 1) for line in body]
         step, kind = int(head.split(" | ")[0]), head.split(" | ")[1]

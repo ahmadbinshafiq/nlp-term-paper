@@ -117,3 +117,28 @@ Week 2 must report how many correct runs fail only the new checks.
 ## D-005 and D-006 confirmed (2026-09-20)
 
 Confirmed by Ahmad after reading the plain-English explanation. D-006 is no longer "proposed": it is the gate for week 2. D-007 stays open until the supervisor meeting.
+
+## D-009 (2026-09-20) Week-2 build choices (one entry, because they came out of one round of trials on the first 40 tasks)
+
+- **JSON actions and rounds.** Each act is one JSON action, and Ollama forces it to fit a schema of the tools allowed at that point. Native tool calling failed too often (the model named tools that were not offered, or wrote broken call markup). The agent works in rounds: search, read, write_note; after a note it may search or finish; after a refused read it may read another result or search again.
+- **Tools refuse repeats.** A repeated query, a second read of the same passage and an existing note key return `{"error": ...}` and change nothing. This replaces the search part of D-005. Effect on the gate: a note key can no longer be written twice in a clean run.
+- **Search returns 5 results** as `{handle, title, snippet}` (first 200 characters). D-002 listed top 5 as an option; it is now taken. Titles alone were not enough to choose a passage.
+- **Step cap 38** = six rounds of six steps plus think and finish. With 30, a 4-hop task with one wasted round was cut off one step before `finish`.
+- **Answer check of the gate:** equal after normalization, or one answer is a run of whole words inside the other; number words count as digits ("two" = "2"). MuSiQue gold answers are often long phrases ("usually in the summer or fall").
+- **Think turns** carry stop strings (`THINK_STOP` in `llm.py`) so that a think text cannot run on into the next action. Act turns carry the JSON schema. All other options are as in D-003.
+- **PROV ids** are `step:4`, `passage:<pid>`, `note:<key>@<step>`, `thought:<step>`, `answer:<step>`. The PROV rendering is PROV-N text, and the round trip reads that text back.
+- A four-reviewer code check (38 confirmed points) was applied: refused calls are never eligible for a fault, the event validator checks the exact copy of the call, the diff parser splits at line starts only, note keys with `/` or `~` work in PROV, a cut-off action ends the run instead of crashing the batch.
+
+## D-010 (2026-09-20) The agent gets MuSiQue's sub-questions as a plan (confirmed by Ahmad)
+
+- What: with each question the agent sees the dataset's own breakdown into sub-questions, without answers. Field `plan` in `data/tasks.jsonl`. Answers, aliases and supporting-passage labels stay in `data/gold.jsonl` and are never shown to a model.
+- Why: on the same first 40 tasks the agent passed the gate 5 times without the plan (12 percent) and 12 times with it (30 percent). Without the plan, 4 of the 5 passing runs had fewer search rounds than the question has hops. The paper tests auditors, not question answering, and it needs regular runs.
+- Honest note on the comparison: the two trial folders also differed in the think-turn stop strings, so the 12 against 30 percent is not a perfectly clean comparison. The gap is large, and the first trials without the plan (0 to 2 of 12) point the same way.
+- To say in the paper (limitations): the agent is given the question decomposition; only tasks it solves cleanly enter the study.
+
+## D-011 (2026-09-20) 250 candidate tasks instead of 120 (proposed by me; waiting for Ahmad's OK on the number)
+
+- What: the first 120 tasks stay exactly as they were (D-002). 130 more are drawn with seed 0 from the remaining 3- and 4-hop tasks. The passage pool now covers all 250 tasks (2,795 unique passages).
+- Why: at about 30 percent pass rate, 120 candidates give about 36 passing tasks; 55 are needed (5 development, 50 sweep). The cap of 120 came from the time when each run cost money. A run now costs about 55 seconds.
+- BM25 recall on the larger pool (gold-style queries): 0.833 at top 3, 0.898 at top 5 (the agent gets 5), 0.939 at top 10.
+- The pass rate over all candidates that were run is reported in the paper.

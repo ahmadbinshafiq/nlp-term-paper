@@ -11,11 +11,12 @@ def eligible_steps(events: list, fault_type: str) -> list[int]:
     steps = []
     queries, read_pids, note_keys = [], [], []      # what happened before the current step
     last_results = []                               # handles returned by the latest search
-    prev_kind = None
+    prev_think = ""                                 # text of the think step just before, "" if there was none
     for event in events:
-        name = event.tool_call.name if event.tool_call else None
-        args = event.tool_call.args if event.tool_call else {}
-        after_think = prev_kind == "think"
+        ran = event.tool_call and "error" not in event.tool_return      # a refused call changed nothing (same rule as the gate)
+        name = event.tool_call.name if ran else None
+        args = event.tool_call.args if ran else {}
+        after_think = bool(prev_think.strip())      # row 1: the think text is the only trace of a wrong argument
 
         if name == "search":
             stale_query_exists = any(q != args.get("query") for q in queries)
@@ -42,5 +43,5 @@ def eligible_steps(events: list, fault_type: str) -> list[int]:
             read_pids.append(event.tool_return["pid"])
         elif name == "write_note":
             note_keys.append(args.get("key"))
-        prev_kind = event.node_kind
+        prev_think = event.state_patch[0]["value"] if event.node_kind == "think" else ""
     return steps

@@ -1,11 +1,12 @@
 """Run clean (fault-free) agent runs in seed order until enough tasks pass the gate.
 
-Each run is saved to results/clean/<order>_<task_id>/ as
+Each run is saved to results/<out>/<order>_<task_id>/ as
   events.jsonl  the canonical event stream (the record)
   run.json      how the run ended, the gate result, tokens and seconds
 A task that already has a run.json is not run again, so the script can be stopped and restarted.
+After a change to gate.py or eligible.py, delete results/<out> and run again: the cache replays every run without a model call.
 
-Run:  uv run python code/scripts/run_clean.py --passers 5
+Run:  uv run python code/scripts/run_clean.py --passers 55
 """
 
 import argparse
@@ -14,7 +15,7 @@ from pathlib import Path
 
 from auditarch.agent import STEP_CAP, build_agent, run_task
 from auditarch.gate import check_clean_run
-from auditarch.llm import AGENT_MODEL, make_llm
+from auditarch.llm import AGENT_MODEL, OPTIONS, THINK_STOP, make_llm
 from auditarch.retrieval import Bm25Index, build_corpus, load_tasks
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -22,33 +23,27 @@ ROOT = Path(__file__).resolve().parents[2]
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument("--passers", type=int, default=5, help="stop when this many tasks have passed the gate")
-    parser.add_argument("--max-runs", type=int, default=120)
-    parser.add_argument("--model", default=AGENT_MODEL)
+    parser.add_argument("--passers", type=int, default=55, help="stop when this many tasks have passed the gate")
+    parser.add_argument("--max-runs", type=int, default=10_000)
     parser.add_argument("--think", action="store_true", help="thinking on in THINK turns (rule D-003b)")
     parser.add_argument("--out", default="clean", help="folder under results/")
-    parser.add_argument("--guided", action="store_true", help="TRIAL: show the agent MuSiQue's sub-questions (no answers)")
     args = parser.parse_args()
 
     tasks = load_tasks()
     with open(ROOT / "data" / "gold.jsonl", encoding="utf-8") as f:
         gold = {g["id"]: g for g in map(json.loads, f)}
-    actor = make_llm(args.model)                                           # ACT turns: thinking off, JSON action
-    stop = ["\nACT turn", "\n{\"tool\""]                                  # a THINK turn must not run on into the next act
-    thinker = make_llm(args.model, think=args.think, stop=stop, **({"num_predict": 8192} if args.think else {}))
-    pins = thinker[1]
+
+    actor = make_llm(AGENT_MODEL)                                          # ACT turns: thinking off, one JSON action
+    tokens = 8192 if args.think else OPTIONS["num_predict"]                # thinking needs room for the hidden reasoning
+    thinker = make_llm(AGENT_MODEL, think=args.think, stop=THINK_STOP, num_predict=tokens)
+    _, pins = thinker                                                      # goes into run.json
     agent = build_agent(thinker, actor, Bm25Index(build_corpus(tasks)))
-    out = ROOT / "results" / args.out
 
     passed = 0
     for task in tasks[: args.max_runs]:
-        run_dir = out / f"{task['order']:03d}_{task['id']}"
+        run_dir = ROOT / "results" / args.out / f"{task['order']:03d}_{task['id']}"
         if not (run_dir / "run.json").exists():
-            question = task["question"]
-            if args.guided:
-                steps = [f"{i}. {s['question']}" for i, s in enumerate(gold[task["id"]]["decomposition"], start=1)]
-                question += "\nPlan, one round per line (#1 means the answer of line 1):\n" + "\n".join(steps)
-            final = run_task(agent, question)
+            final = run_task(agent, task)
             gate = check_clean_run(final["events"], final["app"], final["ended"], gold[task["id"]])
             live = [u for u in final["usage"] if not u["cached"]]
             summary = {

@@ -96,7 +96,7 @@ def test_cache_key_changes_with_the_options(tmp_path, monkeypatch):
 
 # ---------- a small hand-made clean run: two rounds and a finish ----------
 
-def make_run():
+def make_run(second_key="born", source_of_second_note="p2"):
     index, state, events = FakeIndex(), empty_state(), []
 
     def step(kind, name=None, args=None):
@@ -113,8 +113,8 @@ def make_run():
     for name, args in [("search", {"query": "titanic director"}), ("read", {"handle": "p1"}),
                        ("write_note", {"key": "director", "text": "James Cameron", "source_pid": "p1"}),
                        ("search", {"query": "james cameron born"}), ("read", {"handle": "p2"}),
-                       ("write_note", {"key": "born", "text": "Kapuskasing", "source_pid": "p2"}),
-                       ("finish", {"answer": "Kapuskasing", "note_key": "born"})]:
+                       ("write_note", {"key": second_key, "text": "Kapuskasing", "source_pid": source_of_second_note}),
+                       ("finish", {"answer": "Kapuskasing", "note_key": second_key})]:
         step("think")
         step("act", name, args)
     return events, fold(events)[-1]
@@ -130,6 +130,16 @@ def test_every_fault_can_be_built_in_the_clean_run():
     assert eligible_steps(events, "wrong_source") == [12]          # needs another passage read before it
     assert eligible_steps(events, "wrong_argument") == [4, 8, 10]  # read at 4 and 10, second search at 8
     assert all(eligible_steps(events, fault) for fault in FAULT_TYPES)
+
+
+def test_a_refused_call_is_never_a_place_for_a_fault():
+    events, _ = make_run()
+    refused = events[11].model_dump()                     # pretend the second write_note was refused by the tool
+    refused["tool_return"] = {"error": "this key already exists; use a new key"}
+    refused["state_patch"] = [{"op": "add", "path": "/calls/12", "value": {"tool_call": refused["tool_call"], "tool_return": refused["tool_return"]}}]
+    events = events[:11] + [Event(**refused)] + events[12:]
+    assert eligible_steps(events, "dropped_note") == [6]
+    assert eligible_steps(events, "no_source") == [6]
 
 
 def test_gate_passes_the_clean_run_and_names_what_is_wrong_otherwise():

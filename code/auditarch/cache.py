@@ -42,7 +42,7 @@ def cached_invoke(llm, pins: dict, messages, schema=None, strict: bool = False):
     usage = {"tokens_in": meta.get("prompt_eval_count", 0), "tokens_out": meta.get("eval_count", 0),
              "seconds": round(time.time() - start, 2)}
     stored = {"content": reply.content, "usage": usage,
-              "ollama_version": pins["ollama_version"], "model_tag": pins["model_tag"]}
+              "ollama_version": pins["ollama_version"], "model_tag": pins["model_tag"], "model_digest": pins["model_digest"]}
     CACHE_DIR.mkdir(exist_ok=True)
     path.write_text(json.dumps(stored, ensure_ascii=False, indent=1), encoding="utf-8")
     return reply.content, {**usage, "cached": False}

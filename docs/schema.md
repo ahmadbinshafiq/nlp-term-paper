@@ -24,7 +24,9 @@ Ground truth about a planted fault lives in `truth.json`, outside the stream. No
   of the tools that are allowed at that point, so an action always parses and never names a tool that is not allowed.
 
 The agent works in rounds: search, read, write_note. After a note it may search again or finish (`NEXT_TOOLS` in `code/auditarch/agent.py`).
-A think step comes before every act step.
+A think step comes before every act step. With the question the agent gets MuSiQue's sub-questions as a plan, without answers (D-010).
+A run has at most `STEP_CAP` steps (`agent.py`). If the last allowed step is not `finish`, the run stops there; no extra event is written, and `run.json` stores `ended: step_cap`.
+After a refused read the agent may read another result or search again.
 
 Notes and answers are effects of tools. They are not extra kinds of step.
 
@@ -40,7 +42,7 @@ Notes and answers are effects of tools. They are not extra kinds of step.
 `cited_pid` is copied by the tool from the note's `source_pid`. The model never chooses it.
 So a wrong source on a note travels to the final claim by itself, and no fault hook is needed on `finish`.
 The tools never raise. A call that makes no sense is refused with `{"error": ...}` and changes nothing: an unknown handle, a query that was already sent, a passage that was already read, a note key that already exists. So a clean run never reads a passage twice and never overwrites a note.
-The tools never raise. `finish` is always the last step. If `notes[note_key]` does not exist, `finish` still returns `ok` and writes `decision = {note_key, cited_pid: null}` (decision D-005).
+`finish` is always the last step. If `notes[note_key]` does not exist, `finish` still returns `ok` and writes `decision = {note_key, cited_pid: null}` (decision D-005).
 
 ## The application state
 
@@ -71,6 +73,8 @@ This is what makes the diff format lossless.
 
 - A `read` step: `used(step:k, passage:<pid>)`; the passage entity carries the title and the text that the read returned.
 - A `write_note` step: `wasGeneratedBy(note:<key>@k, step:k)` plus `wasDerivedFrom(note, passage:<source_pid>)`. No `used` edge, and no `wasDerivedFrom` edge if `source_pid` is null.
+- A think step: `wasGeneratedBy(thought:k, step:k)`.
+- A `finish` step: `wasGeneratedBy(answer:k, step:k)` plus `wasDerivedFrom(answer:k, note:<note_key>@j)`, where j is the last step that wrote that note. No such edge if the note does not exist. This edge is `note_key` drawn as an edge, so it is not an inferred edge.
 - Every edge comes from a field of the event stream. An edge that is guessed afterwards is an inferred edge and belongs to the fourth arm only.
 
 ## Where faults are planted
