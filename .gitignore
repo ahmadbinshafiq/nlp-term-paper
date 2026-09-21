@@ -10,3 +10,6 @@ __pycache__/
 # Large or re-creatable files (back these up by zip, see research/next-steps.md week 6)
 cache/
 data/raw/
+
+# Simulated data sets for the power study: large and re-creatable (uv run python analysis/simulate.py)
+analysis/sim/power_*.csv
