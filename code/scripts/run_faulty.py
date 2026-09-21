@@ -22,12 +22,13 @@ from auditarch.schema import Event
 
 ROOT = Path(__file__).resolve().parents[2]
 N_DEVELOPMENT = 5          # the first passing tasks are development tasks, the rest is the sweep pool
+N_SHAM = 20                # in the sweep pool only the last 20 tasks get a sham run (pre-registration, section 3)
 
 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--pool", choices=["dev", "sweep"], default="dev")
-    parser.add_argument("--faults", nargs="+", default=FAULT_TYPES, choices=FAULT_TYPES + ["sham"])
+    parser.add_argument("--faults", nargs="+", default=FAULT_TYPES + ["sham"], choices=FAULT_TYPES + ["sham"])
     args = parser.parse_args()
 
     tasks = {t["id"]: t for t in load_tasks()}
@@ -46,6 +47,8 @@ def main():
         for fault_type in args.faults:
             out = ROOT / "results" / "faulty" / clean_dir.name / fault_type
             if (out / "truth.json").exists():
+                continue
+            if fault_type == "sham" and args.pool == "sweep" and position < len(pool) - N_SHAM:
                 continue
             choice = choose_k(clean, fault_type, position)
             k = choice["k"]

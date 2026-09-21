@@ -13,8 +13,8 @@ OLLAMA_URL = "http://localhost:11434"
 PINNED_OLLAMA_VERSION = "0.33.2"
 
 AGENT_MODEL = "glm-4.7-flash:q8_0"
-AUDITOR_MODEL = "glm-4.7-flash:q8_0"
-SECOND_AUDITOR_MODEL = "qwen3.8:27b"
+AUDITOR_MODEL = "qwen3.8:27b"                    # primary auditor (decision D-012)
+SECOND_AUDITOR_MODEL = "glm-4.7-flash:q8_0"      # second auditor: fast, audits all runs as well
 
 # model tag -> full sha256 digest. A tag can be re-uploaded; a digest cannot change.
 PINNED_DIGESTS = {

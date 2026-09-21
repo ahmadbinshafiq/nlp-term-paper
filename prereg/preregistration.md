@@ -1,6 +1,6 @@
 # Pre-registration: Record Format x Fault Type
 
-Version: **v0.2 (draft), 2026-09-20.** It becomes binding when the git tag `prereg-v1` is set at the end of week 4, before any sweep run is generated.
+Version: **v1.0, frozen on 2026-09-21 with the git tag `prereg-v1`**, before any sweep run was generated.
 
 Everything done before that tag (probe, pilot, validation runs) is **exploratory**, uses development tasks only, and is reported apart from the main results. Every change before the tag goes into the changes log with its reason. Allowed reasons: answers that cannot be parsed; floor or ceiling (section 9); a leak found by a control; a rule that turned out to be unclear. Not allowed: a change made because one format did better or worse than another on development runs.
 
@@ -26,7 +26,8 @@ Honest note: each fault class was chosen to match the natural unit of one format
 - **Agent:** one LangGraph agent with four tools (search, read, write_note, finish) on MuSiQue questions with 3 or 4 hops, over a fixed passage pool (`DECISIONS.md`, D-002). With the question the agent gets MuSiQue's sub-questions as a plan, without answers (D-010). It works in rounds (search, read, write note); each act is one JSON action that must fit a schema of the allowed tools. Step cap: 38 = six rounds of six steps plus think and finish (D-009); every candidate is judged with that one cap.
 - **Faults:** a correct run is replayed to step k and one fault is planted there by a tool wrapper. Six fault types in three classes, plus a sham control (`prereg/fault_catalogue.md`). `fault_class` is one of `tool`, `state`, `evidence`, `none`. `fault_type` is one of `wrong_argument`, `corrupted_output`, `dropped_note`, `overwritten_note`, `wrong_source`, `no_source`, or `sham` / `clean` for the controls.
 - **Formats:** each run is written in three formats made from one event stream (`docs/schema.md`): `log`, `diff`, `prov`. Each format can be turned back into the identical event stream (round-trip test). So the three formats hold the same information. The renderers are chosen by the round-trip test only, never by how well the auditor does on a format.
-- **Auditor:** `glm-4.7-flash:q8_0` on Ollama 0.33.2, temperature 0, seed 0, thinking off, 1,024 output tokens, one fixed context size. One answer per record, as JSON: `{step_id or null, fault_class, fault_type, pointer}`.
+- **Primary auditor:** `qwen3.8:27b` on Ollama 0.33.2, temperature 0, seed 0, thinking off, 1,024 output tokens, context size 16,384 (D-012). It did not produce the runs. One answer per record, as JSON: `{analysis, step_id or null, fault_class, fault_type, pointer}`; the short `analysis` text is written first, so that the model looks before it decides.
+- **Second auditor:** `glm-4.7-flash:q8_0`, same options and prompt. It is fast, so it audits all sweep runs. Reported as description only.
 - **Prompt:** one shared prompt for all formats. It lists the six fault types and says: "Name the first step where something went wrong, not the step where it was noticed." Each format also gets one short reading note. A reading note explains only the syntax of its format (what a line, an operation, a node and an edge are). It names no fault type, no check and no "normal" pattern. The notes differ in length by at most 20 percent. At `prereg-v1` the full text of the prompt and the notes is printed in an appendix here, not only the hashes, so any reader can check this rule.
 
 ## 3. Sample
@@ -100,7 +101,7 @@ The 90 percent interval in step 3a is the usual equivalence test (two one-sided 
 
 ## 7. Controls (fixed in advance)
 
-**Reference numbers.** Uniform chance = the mean over faulty runs of 1 / (number of act steps in the record). Tool-prior baseline = the expected score of picking a random `write_note` step. Both numbers are written here at `prereg-v1`, from the development runs.
+**Reference numbers.** Uniform chance = the mean over faulty runs of 1 / (number of act steps in the record). Tool-prior baseline = the expected score of picking a random `write_note` step. On the 30 faulty development runs: uniform chance = 0.089, tool-prior baseline = 0.223. The pass rules below use the same two quantities computed on the sweep runs.
 
 Controls 1 to 4 decide step 0 of the tree:
 1. **Sham check.** For every sham run, the hash of each rendering equals the hash of the same rendering of its clean run (mechanical). The false-alarm rate is reported per format over all distinct no-fault tasks (45 at N = 50), with a Wilson 95 percent interval, next to the miss rate (null answers on faulty runs) per format. A format in which the auditor flags more freely gains hits and false alarms together, so both are shown.
@@ -120,26 +121,76 @@ No guesser and no rule auditor may use the fact that a passage id is a hash of i
 - **Record length:** `log(tokens_in)` as a covariate, and a plot of accuracy against record length per format. This shows whether accuracy falls with length inside each format. Format and length are tied together across formats. If the token ranges of two formats overlap little, this analysis cannot separate them, and the paper says so. The token range per format is reported.
 - **Position:** `rel_pos` (k divided by the number of steps) and `k_bin` as covariates; the distribution of k per fault type; results split by `hook_tool` for the tool faults.
 - **Looser scoring:** within 3 steps of k (`within3`); fault-class naming (F1 per class); the share of wrong answers with `pred_step` after k (the auditor found the symptom, not the cause), per format.
-- **Fourth arm:** event log plus inferred edges, against `prov`, on evidence faults only. This asks whether recorded edges beat guessed edges.
-- **Second auditor, description only:** `qwen3.8:27b` on the 60-run subsample = the 6 faulty runs of the first 10 sweep tasks in seed order. Reported: the three margins with intervals, and whether their signs match the primary auditor. No test and no claim of replication. The same 60 runs are used for the 3-repeat rule and the thinking-on re-audit, if these happen.
+- **Fourth arm (log plus inferred edges): cut before the freeze.** Its one contrast is on evidence faults, and both auditors found those in 5 of 5 development runs in every format, so the contrast could not show anything. This is cut-list item 5 of the plan, taken in full.
+- **Second auditor, description only:** `glm-4.7-flash:q8_0` on all sweep runs. Reported: the same tables as for the primary auditor, the three margins with intervals, and whether their signs match. No test and no claim of replication. The 60-run subsample (the 6 faulty runs of the first 10 sweep tasks) is used only if the 3-repeat rule is triggered.
 - **Native recorders** (callback log, SqliteSaver, inline PROV): a 7 x 3 table of "is the evidence for this fault present in this record?", filled by scripts, not by an auditor.
 - **Cost:** tokens per audit, bytes per record, seconds per audit.
-- Items that may be dropped if time runs out, in this order (plan, section 5): LLM audits of native records, extra rule auditors, second auditor, rebuild-timing extras, fourth arm on all runs.
+- Items that may be dropped if time runs out, in this order: LLM audits of native records, second auditor, rebuild-timing extras.
 
 ## 9. What is frozen at `prereg-v1`
 
-The shared prompt and the reading notes (four hashes, one per format `log`, `diff`, `prov`, `log_inferred`; each is sha256 of the shared prompt plus that format's note and equals the `prompt_hash` column), the JSON answer schema, sha256 of the three renderers, the Ollama version, both model digests, all model options including the context size, the fault catalogue, the gate, the step cap, the task order, the bound B, the two guessers, the analysis script `analysis/primary.R` (run before on simulated data), and `prereg/power.md`.
+Everything in this file, `prereg/fault_catalogue.md` (v0.2, no fault operation was changed), `docs/schema.md`, and the code at the tagged commit.
 
-| Item | Value at v0.1 |
+| Item | Value |
 |---|---|
 | Ollama | 0.33.2 |
-| Agent and primary auditor | `glm-4.7-flash:q8_0`, digest `a035bf4bc812e1408631c2d2b14581b99dfe39f71d895aceb269b4a886080196` |
-| Second auditor | `qwen3.8:27b`, digest `22130167c4c20e20c7b71454612966ca8e8171e9b3cc8ab6ce8aa6cbfec79643` |
-| Options | temperature 0, seed 0, thinking off, `num_predict` 1024, `num_ctx` 16384 (final value set in week 3) |
-| Prompt hashes, renderer hashes, B, chance numbers | to be added in week 4 |
+| Agent | `glm-4.7-flash:q8_0`, digest `a035bf4bc812e1408631c2d2b14581b99dfe39f71d895aceb269b4a886080196` |
+| Primary auditor | `qwen3.8:27b`, digest `22130167c4c20e20c7b71454612966ca8e8171e9b3cc8ab6ce8aa6cbfec79643` |
+| Second auditor | `glm-4.7-flash:q8_0` (same digest as the agent) |
+| Options | temperature 0, seed 0, thinking off, `num_predict` 1024, `num_ctx` 16384. The longest development record is 7,692 tokens, so 16,384 leaves room; the too-long rule of section 3 is the backstop. |
+| Prompt hash `log` | `ba8b77f02b64574ea7e93ea62fa1fc123ccb9b7577129cf415e005a243f5b0a5` |
+| Prompt hash `diff` | `580493953bfd9de6d0b2d1d8a4f1e43ab9de066daab1e45d308f79bb0263f1ee` |
+| Prompt hash `prov` | `168bfa490b87987c32e9abf27aba2b17c5b1e85904f1f25d9f267c0979b5b569` |
+| `render/log.py` | sha256 `3bf39cc6902046c07e20014b0385a37e20c324eb6cd8e2fb5eeeab549cc4c6fd` |
+| `render/diff.py` | sha256 `f75c7cf40ddab99b0e6c561e6fa34ddfd5005df802cd8f30fdd4bf2deb2b6fb7` |
+| `render/prov.py` | sha256 `b22473cf434a5f61fefbcf0879a7fb41ed9130c1ed6aa7bce93ac0a7d0fa6104` |
+| `faults.py` | sha256 `64a50dadd63bad970fd6eeec0a8dea046c44d394bfd4b9db98d134bfe279c83e` |
+| `analysis/primary.R` | sha256 `71ce38ec882dc9a812cea03de49c807e606613b65df1980d19624e814ea03bf6` (run before on simulated data: p = 0.16 without an effect, p < 0.001 with a planted 20-point effect) |
+| `analysis/margins.py` | sha256 `ee5e3d6c7a99465873aece2ec3cc8d11e15af3a0286ae0664abaf3d884b8df34` |
+| Tasks | 5 development tasks (seed-order numbers 0, 1, 2, 11, 13) and N = 50 sweep tasks, fixed in `DECISIONS.md` |
+| Bound B | Fixed by the rule of section 5 from `prereg/power.md`. The simulation uses no real data. `power.md` is committed before the first audit call of the sweep, and its commit is named in `DECISIONS.md`. |
+| Guessers and rule auditor | `code/auditarch/score.py` at the tagged commit |
 
-**Auditor checks before the tag (exploratory, development tasks only).**
-Parse gate: at least 90 percent of pilot answers are valid JSON; if not, one prompt or schema fix, then `qwen3.8:27b` as primary auditor. Floor/ceiling: on the 18 faulty validation runs, if `exact` is below 10 percent or above 90 percent in all three formats, switch the auditor to thinking on (`num_predict` 8192), else to `qwen3.8:27b`. A single fault operation may be made harder or easier only if `exact` for that fault type is 0 or 100 percent in all three formats on its development runs, and the change is logged before any per-format comparison is looked at.
+**Auditor checks before the tag (exploratory, development tasks only; numbers in `results/PILOT-NOTES.md`).**
+- Parse gate (at least 90 percent valid JSON): GLM 96 percent, Qwen 98 percent. Passed.
+- "Says no fault on most clean runs": GLM flagged 11 of 15 clean audits even after the one allowed prompt fix; GLM with thinking on did not finish one answer in three. This is why Qwen is the primary auditor (D-012). Qwen flagged 7 of 15; six of these seven are two steps that are real flaws of the agent (a plan that does not match the act; a note that the passage does not support). So the false-alarm rate is reported as "the auditor flags something" and not as pure auditor error.
+- Floor/ceiling rule (below 10 or above 90 percent in all three formats): not met for Qwen over all faults (0.87 / 0.83 / 0.83). Per fault type, `wrong_argument`, `overwritten_note`, `wrong_source` and `no_source` were found in 5 of 5 development runs in every format.
+- **No fault operation was changed.** The rule would allow it for those four, but the ceiling does not come from a detail of an operation. It comes from short, regular runs: a note's true source is always the passage read two steps before, and a plan always stands right before its act. Any variant of the operation keeps that. The paper states this limit, reports results per fault type, and shows the rule-auditor baseline next to the model.
+- Determinism probe (6 records x 3 repeats, no cache, model unloaded between rounds): see `results/probe-*.json`; the agreement rate is reported as the noise floor.
+
+**Appendix A: the shared prompt (identical for every format)**
+
+```
+You are an auditor. Below is the record of one run of a question-answering agent.
+
+The agent works in steps. A think step writes a short plan. An act step calls one tool:
+- search(query) returns 5 passages (handle, title, first words of the text).
+- read(handle) returns one passage (pid, title, text) and stores it as evidence.
+- write_note(key, text, source_pid) stores a note. source_pid names the passage the fact came from.
+- finish(answer, note_key) gives the final answer and cites the source of that note.
+A tool may refuse a call with an error, for example a repeated query. A refusal is normal. It is not a fault.
+
+At most one fault was planted in this run, at exactly one act step. The six possible faults:
+- wrong_argument (class tool): the tool was called with another argument than the plan just before it said.
+- corrupted_output (class tool): the tool returned something that does not fit the call.
+- dropped_note (class state): a write_note step returned ok, but no note was stored.
+- overwritten_note (class state): a write_note step stored its text under another key that already existed.
+- wrong_source (class evidence): a note names a source passage that its text did not come from.
+- no_source (class evidence): a note has no source passage.
+Many runs are clean, with no fault at all. Report a fault only if the record clearly shows it.
+If nothing is clearly wrong, the right answer is: step_id null, fault_class none, fault_type none.
+
+Name the first step where something went wrong, not the step where it was noticed.
+Answer with JSON: analysis (two or three sentences: what you checked and what you found), step_id (the number
+of the faulty step, or null if the run is clean), fault_class (tool, state, evidence, or none), fault_type
+(one of the six names, or none), pointer (a short piece copied from the record that shows the fault; empty if clean).
+```
+
+**Appendix B: the reading notes (one per format; they explain the syntax only)**
+
+- `log`: The record is an event log. Each block starts with `step N | think` or `step N | act | tool`. A think block has one `text:` line. An act block has a `call:` line with the arguments, a `return:` line with what the tool gave back, and one `effect:` line for every change the step made to the stored state, written as [operation, path] or [operation, path, value]. The value is left out when the call or the return already shows it.
+- `diff`: The record is a list of state changes. Each block starts with `## step N (think)` or `## step N (act)`. Every line below it is one JSON Patch operation with `op` (add or replace), `path` (the place in the stored state) and `value`. The stored state has the sections scratch (think texts), calls (each tool call together with its return), evidence (passages that were read), notes, answer and decision.
+- `prov`: The record is a W3C PROV graph in PROV-N notation. `activity(step:N, ...)` is a step; its kind, tool, arguments and return are attributes. `entity(...)` is a data item: thought:N, passage:<pid>, note:<key>@N or answer:N. `used(step, passage)` means the step read that passage. `wasGeneratedBy(item, step)` means the step produced the item. `wasDerivedFrom(a, b)` means that item a names item b as its source.
 
 ## 10. Deviations
 
@@ -175,5 +226,6 @@ Any change after `prereg-v1` is written into `results/deviations.md` with date, 
 | Date | Version | Change |
 |---|---|---|
 | 2026-09-20 | v0 | First draft. Local models (D-003, D-003d). |
+| 2026-09-21 | v1.0 | Frozen. Primary auditor Qwen3.8 27B, second auditor GLM on all runs (D-012). Fourth arm cut. No fault operation changed; reasons in section 9. Answer JSON gets an `analysis` field first. `too_long` flag instead of stopping the sweep. Hashes, chance numbers and the full prompt text added. |
 | 2026-09-20 | v0.2 | Week-2 build: agent gets the sub-questions as a plan (D-010); 250 candidates (D-011); step cap 38, answer-match rule, JSON actions, tools that refuse repeats, 5 search results (D-009). Gate check 4 shortened because the tools now make two of its parts impossible. |
 | 2026-09-20 | v0.1 | After a four-reviewer check (39 confirmed points). Decision tree with seven labels in fixed order replaces the five overlapping outcomes (D-007). Margin rule now also needs "predicted format is best in its class". Equivalence bound B set by a power rule, 90 percent intervals for the Null label; first simulation says margins near 20 points are what this study can detect (D-007). Fit-failure ladder made exact. Gate extended by mechanical checks and "all six faults buildable" (D-006). Controls given numbers and fixed algorithms; the sham check is now a hash check; the structure-only guesser is a baseline, not a pass/fail control, for faults whose cue is structural. Rules for kept runs, too-long records, the subsample, clean and sham selection. Second auditor is description only. Limits rewritten. Glossary added. The outcome column is named `exact` (the plan's formula wrote `correct`). |
