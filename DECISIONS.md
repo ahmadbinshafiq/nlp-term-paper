@@ -181,3 +181,11 @@ From `prereg/power.md` (commit 8aa6865), made by simulation only, before any swe
 - It finds planted margins of 10 points in 94 percent of the simulated data sets, because such a pattern moves all three classes at once.
 - One margin has a 95 percent interval of about +/- 8 points. "All three margins meet the rule" happens in 5 percent of data sets at true margins of 10 points, 37 percent at 15, 69 percent at 20. So "confirmed" needs large effects; "partly confirmed" is the likely label for medium ones.
 - Rule of section 5: the smallest bound with at least 0.80 chance of "null" when nothing is there. B = 10 gives 0.10, B = 15 gives 0.71, **B = 20 gives 0.93**. So B = 20, and the paper must say that effects below 20 points cannot be ruled out by a null result.
+
+## D-014 (2026-09-21) Freeze: tag `prereg-v1`
+
+- `prereg/preregistration.md` v1.0 and `prereg/fault_catalogue.md` v0.2 are frozen with the git tag `prereg-v1`, before any sweep run was generated.
+- A last independent review before the tag found that two control rules could not work: the runs are short and regular, so the fault sits on few steps (step 12 in about a quarter of the runs), and both "a position guesser near chance" and "shuffled labels near chance" would fail whatever the auditor does. Changed before any sweep data existed: the position-only guesser is a reported baseline; the shuffled-label control is a permutation test. Reasons are in section 7.
+- Determinism probe: both auditors gave byte-identical answers in 6 of 6 records over 3 repeats with model reloads. The 3-repeat rule is not triggered.
+- Cut before the freeze: the fourth arm (log plus inferred edges). Kept as they are: all six fault operations.
+- The run that follows the tag: 300 faulty and 20 sham runs (agent GLM), the leak test and the round trip as gates, then GLM audits all runs (second auditor), then Qwen audits all runs (primary auditor), then `analysis/analyze.py`.
