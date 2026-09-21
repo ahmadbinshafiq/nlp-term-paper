@@ -173,3 +173,11 @@ To say in the paper: only 9 of the 55 tasks have 4 hops, because 4-hop tasks pas
 - **Second auditor: `glm-4.7-flash:q8_0`**, thinking off. Because it is fast (about 15 s per audit), it audits ALL sweep runs, not only a 60-run subsample. Reported as description: the same tables as for the primary auditor, no test.
 - The agent stays GLM. Nothing that was generated has to be made again.
 - Ahmad left the laptop to me for the day with the instruction to run the experiments and to fix and rerun where needed.
+
+## D-013 (2026-09-21) Equivalence bound B = 20 points
+
+From `prereg/power.md` (commit 8aa6865), made by simulation only, before any sweep run existed.
+- The interaction test is well calibrated: 5 percent false positives without an effect, 4 percent when tasks differ in which format suits them.
+- It finds planted margins of 10 points in 94 percent of the simulated data sets, because such a pattern moves all three classes at once.
+- One margin has a 95 percent interval of about +/- 8 points. "All three margins meet the rule" happens in 5 percent of data sets at true margins of 10 points, 37 percent at 15, 69 percent at 20. So "confirmed" needs large effects; "partly confirmed" is the likely label for medium ones.
+- Rule of section 5: the smallest bound with at least 0.80 chance of "null" when nothing is there. B = 10 gives 0.10, B = 15 gives 0.71, **B = 20 gives 0.93**. So B = 20, and the paper must say that effects below 20 points cannot be ruled out by a null result.
