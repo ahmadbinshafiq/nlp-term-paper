@@ -29,13 +29,13 @@ COLUMNS = ["run_id", "task_id", "fault_type", "fault_class", "hook_tool", "k", "
 
 def runs_of(pool: str):
     """Yields (folder with events.jsonl, truth or None) for the clean controls and the faulty runs of the pool."""
-    passed = [d for d in sorted((ROOT / "results" / "clean").iterdir()) if not json.loads((d / "run.json").read_text())["gate_failed"]]
+    passed = [d for d in sorted((ROOT / "results" / "clean").iterdir()) if d.is_dir() and not json.loads((d / "run.json").read_text())["gate_failed"]]
     tasks = passed[:N_DEVELOPMENT] if pool == "dev" else passed[N_DEVELOPMENT:]
     for clean_dir in tasks[:N_CLEAN_CONTROLS]:
         yield clean_dir, None
     for clean_dir in tasks:
-        for fault_dir in sorted((ROOT / "results" / "faulty" / clean_dir.name).glob("*")):
-            yield fault_dir, json.loads((fault_dir / "truth.json").read_text())
+        for truth_file in sorted((ROOT / "results" / "faulty" / clean_dir.name).glob("*/truth.json")):
+            yield truth_file.parent, json.loads(truth_file.read_text())
 
 
 def main():
@@ -57,7 +57,7 @@ def main():
 
     with open(path, "a", newline="", encoding="utf-8") as f:
         writer = csv.DictWriter(f, fieldnames=COLUMNS)
-        if not done:
+        if f.tell() == 0:                                # a new or empty file
             writer.writeheader()
         for folder, truth in runs_of(args.pool):
             with open(folder / "events.jsonl", encoding="utf-8") as lines:

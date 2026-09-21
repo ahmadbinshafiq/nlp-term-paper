@@ -40,7 +40,7 @@ def test_scoring_a_control_run():
 
 
 def test_position_only_guesser_uses_the_other_tasks():
-    assert position_only_guess(20, [(12, 20), (12, 20), (4, 20)]) == 13                      # most k sit at 60 percent of the run
+    assert position_only_guess(20, [(12, 20), (12, 20), (4, 20)]) == 12                      # most k sit at 60 percent of the run; act steps are even
     assert 1 <= position_only_guess(26, [(18, 32)]) <= 26
 
 

@@ -56,4 +56,4 @@ def make_llm(model: str = AGENT_MODEL, think: bool = False, **overrides):
     pins = check_pins(model)
     options = {**OPTIONS, **overrides}
     pins["options"] = {**options, "think": think}
-    return ChatOllama(model=model, reasoning=think, keep_alive="30m", **options), pins
+    return ChatOllama(model=model, reasoning=think, keep_alive="30m", client_kwargs={"timeout": 1800}, **options), pins

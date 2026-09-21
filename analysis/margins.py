@@ -45,7 +45,7 @@ def decide(df: pd.DataFrame, p_interaction: float, controls_ok: bool, bound: flo
     boot = bootstrap(df, margins, n_resamples)
     ci95 = {c: interval(boot[c], 0.95) for c in PREDICTED}
     ci90 = {c: interval(boot[c], 0.90) for c in PREDICTED}
-    meets = {c: point[c] >= 0.10 and ci95[c][0] > 0 and acc.loc[c, PREDICTED[c]] > acc.loc[c].drop(PREDICTED[c]).max()
+    meets = {c: round(point[c], 9) >= 0.10 and ci95[c][0] > 0 and acc.loc[c, PREDICTED[c]] > acc.loc[c].drop(PREDICTED[c]).max()
              for c in PREDICTED}
 
     top = acc.idxmax(axis=1)                                          # best format per class

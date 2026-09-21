@@ -1,7 +1,7 @@
 # Fault catalogue (v0.2, 2026-09-20)
 
 Seven rows: six faults in three classes, plus the sham control. Rows 1 and 2 have two variants (a: `search`, b: `read`).
-Read `docs/schema.md` first. Status: draft, to be tested in week 3 (2 faults plus sham) and week 4 (all rows).
+Read `docs/schema.md` first. Status: frozen with the tag `prereg-v1`. All rows were tested on the five development tasks (results/PILOT-NOTES.md).
 
 ## Rules that hold for every row
 
@@ -19,7 +19,7 @@ Read `docs/schema.md` first. Status: draft, to be tested in week 3 (2 faults plu
    - Validation runs: all six faults are planted into all five development tasks (30 runs), with k from the same formula, plus one sham per task. This is simpler than a special rule for validation and gives 5 runs per fault.
    - Sham (row 7): k = the middle eligible `write_note` step, e[floor(m / 2)].
 6. **Proof that only the fault differs.** The record of a faulty run is byte-identical to the clean run on every line before step k. For the sham row, `events.jsonl` and every rendering are byte-identical to the clean run on every line; only `truth.json` differs. Both are checked on every run.
-7. **`truth.json`** holds: `fault_type`, `fault_class`, k, `k_bin`, `hook_tool`, original value, changed value, and these flags, which are reported and never used to drop runs: `answer_changed`, `ended` (`finish`, `step_cap`, or `failed_step` if an action was cut off before it was complete), `finish_note_missing`, `requeried_after_k`, `reread_after_k`, `natural_signature` (same query twice, or a read of a handle no search returned, anywhere in the run).
+7. **`truth.json`** holds: `fault_type`, `fault_class`, k, `k_bin`, `hook_tool`, original value, changed value, and these flags, which are reported and never used to drop runs: `answer_changed`, `ended` (`finish`, `step_cap`, or `failed_step` if an action was cut off before it was complete), `finish_note_missing`, `requeried_after_k` and `reread_after_k` (a search or a read after k was refused by the tool as a repeat). The natural patterns of a run (the same query tried twice, a read of a handle no search returned, a plan that does not match the act) are computed from `events.jsonl` at analysis time.
 8. **The plain tools never raise.** `finish` is always the last step. If `notes[note_key]` does not exist, `finish` still returns `ok` and writes `decision = {note_key, cited_pid: null}`. This is the plain tool's behaviour in clean runs too, so the wrapper changes step k only. `search` returns the 5 best passages as `{handle, title, snippet}`, so the agent (and the auditor) can see what a search found. The plain tools refuse a repeated query, a second read of the same passage and an existing note key: they return `{"error": ...}` and change nothing. The fault wrapper goes around these refusals where a row needs it (rows 1a and 4): it builds the return and the state effect itself. (Decisions D-005 and D-009.)
 
 ## The rows
@@ -71,7 +71,7 @@ The sham is a pipeline check: the hash of each sham rendering equals the hash of
 
 ## Open points (decide before `prereg-v1`, log each in `DECISIONS.md`)
 
-1. **Rank 51** (rows 2a, 2b) makes the wrong content clearly unrelated. It may be changed to a nearer rank (4-6) only under the rule in the pre-registration, section 9: `exact` for that fault type is 0 or 100 percent in all three formats on its development runs.
+None. Rank 51 (rows 2a, 2b) stays: `corrupted_output` was neither at 0 nor at 100 percent on the development runs.
 
 Closed in v0.1: hidden faults in clean runs (now gate check 4, D-006); message history (rule 2); how the log shows effects (rule above).
 Closed in v0.2: the agent thinks before every act step (built that way in week 2); rule 2 rewritten for JSON actions; rows 1a, 2a and 4 adapted to tools that refuse repeats and to 5 search results.

@@ -41,7 +41,7 @@ Honest note: each fault class was chosen to match the natural unit of one format
 
 Two more natural patterns (the agent tried to send the same query twice, which the tool refuses; a read of a handle that no search returned) do not fail the gate. They are stored as flags and their counts are reported.
 
-**If too few tasks pass.** If the 250 candidates give fewer than 45 passing tasks: first drop checks 1 and 3 from the gate ("reaches finish with a cited answer") and keep both as covariates in a secondary model; the primary formula does not change. If still below 45, use rule D-003b (agent with thinking on, then `qwen3.8:27b` as agent).
+**If too few tasks pass (not needed: 55 of the 155 candidates that were run passed).** If the 250 candidates give fewer than 45 passing tasks: first drop checks 1 and 3 from the gate ("reaches finish with a cited answer") and keep both as covariates in a secondary model; the primary formula does not change. If still below 45, use rule D-003b (agent with thinking on, then `qwen3.8:27b` as agent).
 
 **Candidates.** 250 questions with 3 or 4 hops in seed order: the first 120 (D-002) plus 130 more, added when the measured pass rate (about 30 percent) showed that 120 cannot give 55 passing tasks (D-011). The pass rate is reported in the paper.
 
@@ -70,7 +70,7 @@ reduced <- glmer(exact ~ format + fault_class + (1 | task_id) + (1 | run_id), fa
 anova(reduced, full)   # likelihood-ratio test of the interaction, 4 degrees of freedom, alpha = 0.05
 ```
 
-**If the fit fails.** Failure means a convergence warning from either model. A singular fit (a variance estimated as 0) is not a failure. The steps below are always applied to both models together, so full and reduced always have the same random part: (1) drop `(1 | run_id)`; (2) `glmmTMB` with both random intercepts; (3) `glmmTMB` without `(1 | run_id)`. The step used is reported. Every step is tried on the simulated files before the tag. If a format x class cell is at 0 or 100 percent, this is reported, the likelihood-ratio test is still the test, and no odds ratio is reported for that cell.
+**If the fit fails.** Failure means a convergence warning from either model. A singular fit (a variance estimated as 0) is not a failure. Then both models are fitted again without `(1 | run_id)`, so full and reduced always have the same random part. If a warning still remains, that p-value is still used, the warning is printed next to it, and a confirming label is reported as provisional. If a whole class is at 0 or 100 percent in every format, no package can fit that part; this is reported, the likelihood-ratio test is still the test, and no odds ratio is given for that class. On 1,000 simulated data sets the first fit warned in 5, and the refit removed the warning in 3 of them.
 
 **What the test assumes.** The likelihood-ratio test assumes that the format x class pattern is the same in every task. The margins below use a bootstrap over tasks, which does not need this. A confirming label needs both. `prereg/power.md` reports the false-positive rate of the test on simulated data in which the pattern differs between tasks; if it is above 0.075, the paper says so next to the p-value.
 
@@ -78,8 +78,8 @@ anova(reduced, full)   # likelihood-ratio test of the interaction, 4 degrees of 
 
 **A margin "meets the rule"** if (i) it is at least 10 points and its 95 percent interval lies above zero, and (ii) the predicted format has strictly the highest accuracy in that class. The three predictions are checked one by one with no correction for multiple tests; the paper says this.
 
-**Smallest effect of interest:** 10 points. **Equivalence bound B:** fixed at `prereg-v1` by this rule. `prereg/power.md` simulates the whole decision tree of section 6 (at least 500 data sets per setting; N = 40 and 50; true margins 0, 10, 15, 20 points; accuracy level as seen on the 18 faulty validation runs) and reports the chance of each outcome and the expected interval width. B is the smallest of 10, 15, 20 points for which the chance of "Null" is at least 0.80 when the true margins are 0. If none reaches 0.80, B = 20, the chance is printed, and the paper says that a Null result was unlikely to be reachable. If B is above 10, the paper says that effects between 10 points and B cannot be ruled out.
-A first rough simulation (2026-09-20) suggests that one margin has a standard error of about 5.5 points at N = 50. So this study can detect margins of about 20 points, not 10, and B = 10 cannot work. This is known before any data and is part of the design, not an excuse made afterwards.
+**Smallest effect of interest:** 10 points. **Equivalence bound B = 20 points** (`prereg/power.md`, decision D-013). Rule: B is the smallest of 10, 15, 20 points for which the chance of the label "null" is at least 0.80 when the true margins are 0. The simulation: 200 data sets per setting, N = 50 tasks, accuracy per class as on the 30 faulty validation runs with Qwen (tool 0.70, state 0.85, evidence 0.95), task SD 0.5 and run SD 1.0 on the logit scale (assumed). Chance of "null" at true margins of 0: 0.10 for B = 10, 0.71 for B = 15, 0.93 for B = 20. Because B is above 10, a null result can only say that no difference larger than 20 points was found.
+The same simulation shows: the interaction test has 5 percent false positives and finds planted margins of 10 points in 94 percent of the data sets; one margin has a 95 percent interval of about +/- 8 points; all three margins meet the rule in 5, 37 and 69 percent of the data sets at true margins of 10, 15 and 20 points. This is known before any data and is part of the design.
 
 **Also reported, as description only:** all nine pairwise format differences inside the classes, with intervals; the margins per fault type (6); for each prediction, the margin of the predicted format in its own class minus its mean margin in the other two classes.
 
@@ -97,21 +97,23 @@ Walk the steps in this order. The first step that applies gives the label.
 | 3a | **Null** | The interaction is not significant, and all three margins have 90 percent intervals fully inside -B to +B. Wording: "no predicted advantage as large as B was found". |
 | 3b | **Underpowered** | The interaction is not significant, but at least one interval reaches beyond -B or +B. Reported as "cannot tell", with the power file. |
 
+If every format is at 95 percent or more in a class, the prediction for that class is marked "not testable (ceiling)" next to the label.
+
 The 90 percent interval in step 3a is the usual equivalence test (two one-sided tests at alpha 0.05 each). All three must pass, so no correction is needed.
 
 ## 7. Controls (fixed in advance)
 
 **Reference numbers.** Uniform chance = the mean over faulty runs of 1 / (number of act steps in the record). Tool-prior baseline = the expected score of picking a random `write_note` step. On the 30 faulty development runs: uniform chance = 0.089, tool-prior baseline = 0.223. The pass rules below use the same two quantities computed on the sweep runs.
 
-Controls 1 to 4 decide step 0 of the tree:
-1. **Sham check.** For every sham run, the hash of each rendering equals the hash of the same rendering of its clean run (mechanical). The false-alarm rate is reported per format over all distinct no-fault tasks (45 at N = 50), with a Wilson 95 percent interval, next to the miss rate (null answers on faulty runs) per format. A format in which the auditor flags more freely gains hits and false alarms together, so both are shown.
-2. **Position-only guesser.** It names the step at the most frequent relative position of k, learned with the tested task left out. It sees no record. Pass: the upper end of its 95 percent interval is below uniform chance + 10 points.
-3. **Structure-only guesser.** Every free text (think text, queries, titles, passage and note text, answer) becomes a placeholder; tool names, keys, ids, operation names, paths and null stay. Each step gets a signature (node kind, tool name, list of operations and top-level paths of its patch, which arguments are null). The guesser names the step whose signature is rarest among the steps of the same tool in the run; ties go to the earliest step. Reported per fault type. Pass rule for `wrong_argument` and `corrupted_output` only: upper end of the interval below the tool-prior baseline + 10 points. For `dropped_note`, `overwritten_note`, `no_source` (and `wrong_source`, if the rule "the source must be the latest read" finds it) the structure is the fault itself. There the guesser and one simple rule auditor on the event stream are reported as baselines next to the LLM auditor, and it is said openly when a class margin comes from a fault that a one-line rule finds.
-4. **Shuffled labels.** Scoring the auditor's answers against true steps shuffled within fault type: upper end of the interval below uniform chance + 10 points.
+Controls 1, 3 and 4 decide step 0 of the tree. Control 2 is a reported baseline.
+1. **Sham check.** Every sham record is byte-identical to the clean record of its task (mechanical), so every rendering is identical too. The false-alarm rate is reported per format over all distinct no-fault tasks (45 at N = 50), with a Wilson 95 percent interval, next to the miss rate (null answers on faulty runs) per format. A format in which the auditor flags more freely gains hits and false alarms together, so both are shown.
+2. **Position-only guesser (reported, not a gate).** It names the act step at the most frequent relative position of k, learned with the tested task left out. It sees no record. Because the runs are short and regular, k sits on few steps (step 12 in about a quarter of the runs), so a guesser without any record scores far above uniform chance; "always the most frequent step" is reported as well. These numbers are the honest floor for the auditor's accuracy.
+3. **Structure-only guesser.** Every free text (think text, queries, titles, passage and note text, answer) is ignored; tool names, operation names, the touched state sections and null arguments stay. Each step gets a signature; the guesser names the step whose signature is rarest among the steps of the same tool in the run; ties go to the earliest step. Reported per fault type. Pass rule for `wrong_argument` and `corrupted_output` only: the upper end of the Wilson 95 percent interval of its hit rate is below the tool-prior baseline + 10 points. For `dropped_note`, `overwritten_note` and `no_source` the structure is the fault itself. There the guesser and one simple rule auditor on the event stream are reported as baselines next to the LLM auditor, and it is said openly when a class margin comes from a fault that a one-line rule finds.
+4. **Shuffled labels.** Pass: the auditor's real exact score is above the 97.5 percent point of its scores against true steps shuffled within fault type (2,000 shuffles of runs, seed 0). The real score, the shuffled mean and the 97.5 percent point are reported. (A rule "near uniform chance" cannot work here, because runs of one fault type often share the same k.)
 
 Controls 5 to 7 are gates that must be green before any audit call. They cannot be an "outcome":
-5. **Leak test:** `tests/test_no_leak.py` is green on every run and every rendering.
-6. **Round trip:** every rendering of every run converts back to the identical event stream.
+5. **Leak test:** `tests/test_no_leak.py` is green. It reads `data/tasks.jsonl` and every `events.jsonl`; renderings are made in memory from these events and are not saved.
+6. **Round trip:** every rendering of every run converts back to the identical event stream (`code/scripts/roundtrip.py`, which stops the chain on a failure).
 7. **Only the fault differs:** each faulty record is byte-identical to its clean run before step k; each sham record is byte-identical to its clean run everywhere.
 
 No guesser and no rule auditor may use the fact that a passage id is a hash of its text.
@@ -123,13 +125,14 @@ No guesser and no rule auditor may use the fact that a passage id is a hash of i
 - **Looser scoring:** within 3 steps of k (`within3`); fault-class naming (F1 per class); the share of wrong answers with `pred_step` after k (the auditor found the symptom, not the cause), per format.
 - **Fourth arm (log plus inferred edges): cut before the freeze.** Its one contrast is on evidence faults, and both auditors found those in 5 of 5 development runs in every format, so the contrast could not show anything. This is cut-list item 5 of the plan, taken in full.
 - **Second auditor, description only:** `glm-4.7-flash:q8_0` on all sweep runs. Reported: the same tables as for the primary auditor, the three margins with intervals, and whether their signs match. No test and no claim of replication. The 60-run subsample (the 6 faulty runs of the first 10 sweep tasks) is used only if the 3-repeat rule is triggered.
+- **Natural plan/act mismatch.** A `write_note` step whose think text just before contains "search" and not "note" (12 of the 55 clean runs have one). Reported: the number of such runs, accuracy per format with and without runs that have such a step before k, and the share of wrong answers that name such a step. The primary test keeps all runs.
 - **Native recorders** (callback log, SqliteSaver, inline PROV): a 7 x 3 table of "is the evidence for this fault present in this record?", filled by scripts, not by an auditor.
 - **Cost:** tokens per audit, bytes per record, seconds per audit.
-- Items that may be dropped if time runs out, in this order: LLM audits of native records, second auditor, rebuild-timing extras.
+- Items that may be dropped if time runs out: LLM audits of native records, rebuild-timing extras.
 
 ## 9. What is frozen at `prereg-v1`
 
-Everything in this file, `prereg/fault_catalogue.md` (v0.2, no fault operation was changed), `docs/schema.md`, and the code at the tagged commit.
+Everything in this file, `prereg/fault_catalogue.md` (v0.2, no fault operation was changed), `docs/schema.md`, and the code at the tagged commit. After the tag, `analysis/primary.R`, `analysis/margins.py`, `code/auditarch/score.py`, the renderers, `faults.py`, the prompt and the rules of sections 3 to 7 may not change. Descriptive tables, file names and completeness checks may still be added to `analysis/analyze.py`.
 
 | Item | Value |
 |---|---|
@@ -146,16 +149,16 @@ Everything in this file, `prereg/fault_catalogue.md` (v0.2, no fault operation w
 | `render/prov.py` | sha256 `b22473cf434a5f61fefbcf0879a7fb41ed9130c1ed6aa7bce93ac0a7d0fa6104` |
 | `faults.py` | sha256 `64a50dadd63bad970fd6eeec0a8dea046c44d394bfd4b9db98d134bfe279c83e` |
 | `analysis/primary.R` | sha256 `71ce38ec882dc9a812cea03de49c807e606613b65df1980d19624e814ea03bf6` (run before on simulated data: p = 0.16 without an effect, p < 0.001 with a planted 20-point effect) |
-| `analysis/margins.py` | sha256 `ee5e3d6c7a99465873aece2ec3cc8d11e15af3a0286ae0664abaf3d884b8df34` |
+| `analysis/margins.py` | sha256 `15a06c3a0e0b9272f0d4d48f4a69cb237fe164ae5a0830b3f88bc4ca5505b606` |
 | Tasks | 5 development tasks (seed-order numbers 0, 1, 2, 11, 13) and N = 50 sweep tasks, fixed in `DECISIONS.md` |
-| Bound B | Fixed by the rule of section 5 from `prereg/power.md`. The simulation uses no real data. `power.md` is committed before the first audit call of the sweep, and its commit is named in `DECISIONS.md`. |
-| Guessers and rule auditor | `code/auditarch/score.py` at the tagged commit |
+| Bound B | 20 points (`prereg/power.md`, D-013). The simulation uses no real data. |
+| Guessers and rule auditor | `code/auditarch/score.py`, sha256 `affd42699e91efe747f90345d831a1636efde5fee799a25fbf20a3aad0e51e1c` |
 
 **Auditor checks before the tag (exploratory, development tasks only; numbers in `results/PILOT-NOTES.md`).**
 - Parse gate (at least 90 percent valid JSON): GLM 96 percent, Qwen 98 percent. Passed.
 - "Says no fault on most clean runs": GLM flagged 11 of 15 clean audits even after the one allowed prompt fix; GLM with thinking on did not finish one answer in three. This is why Qwen is the primary auditor (D-012). Qwen flagged 7 of 15; six of these seven are two steps that are real flaws of the agent (a plan that does not match the act; a note that the passage does not support). So the false-alarm rate is reported as "the auditor flags something" and not as pure auditor error.
-- Floor/ceiling rule (below 10 or above 90 percent in all three formats): not met for Qwen over all faults (0.87 / 0.83 / 0.83). Per fault type, `wrong_argument`, `overwritten_note`, `wrong_source` and `no_source` were found in 5 of 5 development runs in every format.
-- **No fault operation was changed.** The rule would allow it for those four, but the ceiling does not come from a detail of an operation. It comes from short, regular runs: a note's true source is always the passage read two steps before, and a plan always stands right before its act. Any variant of the operation keeps that. The paper states this limit, reports results per fault type, and shows the rule-auditor baseline next to the model.
+- Floor/ceiling rule (below 10 or above 90 percent in all three formats): not met for Qwen over all faults (log 0.83, diff 0.87, prov 0.83). Per fault type, `wrong_argument`, `overwritten_note`, `wrong_source` and `no_source` were found in 5 of 5 development runs in every format.
+- **No fault operation was changed.** The rule would allow it for those four, but the ceiling does not come from a detail of an operation. It comes from short, regular runs: a note's true source is always the passage read two steps before, and a plan always stands right before its act. Any variant of the operation keeps that. `overwritten_note` and `no_source` are at the ceiling for another reason: the fault is a structure anomaly that a one-line rule finds; that other variants would stay at the ceiling is expected, not tested. The per-format counts of both auditors on the development runs were seen before this choice. The paper states this limit, reports results per fault type, and shows the rule-auditor baseline next to the model.
 - Determinism probe (6 records x 3 repeats, no cache, model unloaded between rounds): see `results/probe-*.json`; the agreement rate is reported as the noise floor.
 
 **Appendix A: the shared prompt (identical for every format)**
@@ -200,8 +203,8 @@ Any change after `prereg-v1` is written into `results/deviations.md` with date, 
 
 - The three formats are three ways to show one recorded run, not three recording systems. Real recorders also differ in what they record. This study removes that difference on purpose. So a result here says how a record should be shown to an LLM auditor once the information is there. It does not say that logging, checkpointing or provenance capture is the better architecture. The native-recorder table is a separate coverage check, filled by scripts. The state-diff format is computed by us; what LangGraph's SqliteSaver really stores is checked in week 5.
 - One agent design. One dataset. Six synthetic faults, two per class.
-- The agent is given MuSiQue's question decomposition as a plan, because this study tests auditors, not question answering. Only tasks that the agent solves cleanly enter the study (about 30 percent of the candidates), so the runs are the easier ones.
-- One small open-weights model as auditor, which also produced the runs. The second auditor is a partial answer and may be dropped under the cut order; if so, the paper says that the shared-model concern has no answer.
+- The agent is given MuSiQue's question decomposition as a plan, because this study tests auditors, not question answering. Only tasks that the agent solves cleanly enter the study (35 percent: 55 of the 155 candidates that were run; 9 of the 55 have 4 hops), so the runs are the easier ones.
+- One small open-weights model as primary auditor (Qwen3.8 27B); it did not produce the runs. The second auditor (GLM) did, so its results carry the shared-model concern.
 - The study can detect large differences only (section 5).
 
 ## Glossary

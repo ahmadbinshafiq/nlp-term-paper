@@ -36,7 +36,7 @@ def main():
     actor = make_llm(AGENT_MODEL)
     thinker = make_llm(AGENT_MODEL, stop=THINK_STOP)
 
-    passed = [d for d in sorted((ROOT / "results" / "clean").iterdir()) if not json.loads((d / "run.json").read_text())["gate_failed"]]
+    passed = [d for d in sorted((ROOT / "results" / "clean").iterdir()) if d.is_dir() and not json.loads((d / "run.json").read_text())["gate_failed"]]
     pool = passed[:N_DEVELOPMENT] if args.pool == "dev" else passed[N_DEVELOPMENT:]
 
     for position, clean_dir in enumerate(pool):

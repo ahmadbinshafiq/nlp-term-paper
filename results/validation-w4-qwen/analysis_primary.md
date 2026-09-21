@@ -2,13 +2,18 @@
 
 EXPLORATORY: development tasks.
 
+
 Faulty runs: 30 (removed as too long: 0). Answers parsed: 0.98.
 
 ## 1. Outcome label
 
 **null**
 
-Interaction test: p = 0.9598 (glmer, task and run intercepts). Equivalence bound B = 0.20.
+Interaction test: p = 0.9598 (glmer, task and run intercepts; fit warning left: False). Equivalence bound B = 0.20.
+
+Predictions that cannot be tested because every format is at 95 percent or more in that class (ceiling): evidence.
+
+Control 1 (sham records equal clean records): pass. Control 3 (structure-only guesser on the two tool faults: 0/10 = 0.00 [0.00, 0.28], against tool prior 0.223 + 0.10): pass. Control 4 (real exact score 0.844 against labels shuffled within fault type: mean 0.316, 97.5 percent point 0.489): pass.
 
 | Class | Predicted format | Margin | 95% interval | 90% interval | Meets the rule |
 |---|---|---|---|---|---|
@@ -37,14 +42,16 @@ Interaction test: p = 0.9598 (glmer, task and run intercepts). Equivalence bound
 
 ## 4. Baselines without a model (share of runs where the faulty step was named)
 
-| fault_type       |   uniform chance |   position-only |   structure-only |   rule auditor |
-|:-----------------|-----------------:|----------------:|-----------------:|---------------:|
-| wrong_argument   |             0.08 |            0.00 |             0.00 |           0.00 |
-| corrupted_output |             0.06 |            0.00 |             0.00 |           0.00 |
-| dropped_note     |             0.09 |            0.00 |             1.00 |           1.00 |
-| overwritten_note |             0.09 |            0.00 |             1.00 |           1.00 |
-| wrong_source     |             0.09 |            0.00 |             0.00 |           0.00 |
-| no_source        |             0.12 |            0.00 |             0.60 |           1.00 |
+| fault_type       |   uniform chance |   tool prior |   most frequent step |   position-only |   structure-only |   rule auditor |
+|:-----------------|-----------------:|-------------:|---------------------:|----------------:|-----------------:|---------------:|
+| wrong_argument   |             0.08 |         0.00 |                 0.00 |            0.00 |             0.00 |           0.00 |
+| corrupted_output |             0.06 |         0.00 |                 0.00 |            0.20 |             0.00 |           0.00 |
+| dropped_note     |             0.09 |         0.31 |                 0.40 |            0.00 |             1.00 |           1.00 |
+| overwritten_note |             0.09 |         0.31 |                 0.20 |            0.60 |             1.00 |           1.00 |
+| wrong_source     |             0.09 |         0.29 |                 0.40 |            0.00 |             0.00 |           0.00 |
+| no_source        |             0.12 |         0.43 |                 0.40 |            0.00 |             0.60 |           1.00 |
+
+All faults together: uniform chance 0.089, tool prior 0.223, most frequent step 0.233, position-only 0.133, structure-only 0.433, rule auditor 0.500.
 
 ## 5. Controls: clean and sham runs
 

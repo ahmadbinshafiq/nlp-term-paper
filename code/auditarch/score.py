@@ -26,7 +26,8 @@ def position_only_guess(n_steps: int, other_runs: list) -> int:
     """
     tenths = [min(9, 10 * k // n) for k, n in other_runs]            # relative position of k, in tenths of the run
     most_common = max(set(tenths), key=lambda t: (tenths.count(t), -t))
-    return max(1, round((most_common + 0.5) / 10 * n_steps))
+    guess = round((most_common + 0.5) / 10 * n_steps)
+    return max(2, guess - guess % 2)                                 # faults sit on act steps, and act steps have even numbers
 
 
 def signature(event) -> tuple:

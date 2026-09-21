@@ -17,7 +17,7 @@ ROOT = Path(__file__).resolve().parents[2]
 def main():
     modules = {"log": log, "diff": diff, "prov": prov}
     rows = []
-    for path in sorted((ROOT / "results").glob("*/*/events.jsonl")):
+    for path in sorted((ROOT / "results").rglob("events.jsonl")):
         with open(path, encoding="utf-8") as f:
             events = [Event(**json.loads(line)) for line in f]
         if not events:
@@ -38,6 +38,7 @@ def main():
         writer.writerows(rows)
     failures = [r["run"] for r in rows if any(str(v).startswith("FAIL") for v in r.values())]
     print(f"runs: {len(rows)} | round-trip failures: {len(failures)} {failures[:5]}")
+    assert not failures, failures[:5]                  # a gate: the audits must not start after a failure
     for name in modules:
         print(f"mean bytes {name}: {round(sum(r[name + '_bytes'] for r in rows) / len(rows))}")
 
