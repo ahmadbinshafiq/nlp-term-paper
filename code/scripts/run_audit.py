@@ -23,7 +23,7 @@ FORMATS = {"log": log, "diff": diff, "prov": prov}
 N_DEVELOPMENT, N_CLEAN_CONTROLS = 5, 25
 COLUMNS = ["run_id", "task_id", "fault_type", "fault_class", "hook_tool", "k", "k_bin", "n_steps", "rel_pos", "format", "arm",
            "auditor_role", "sample_id", "is_control", "is_development", "pred_step", "true_step", "exact", "within3", "pred_cat",
-           "true_cat", "false_alarm", "pointer_ok", "parse_ok", "tokens_in", "tokens_out", "bytes_record", "prompt_hash",
+           "true_cat", "false_alarm", "pointer_ok", "parse_ok", "too_long", "tokens_in", "tokens_out", "bytes_record", "prompt_hash",
            "render_hash", "model_tag", "model_digest", "ollama_version", "think", "num_ctx", "seconds"]
 
 
@@ -79,7 +79,7 @@ def main():
                     "n_steps": len(events), "rel_pos": round(k / len(events), 3) if truth else "",
                     "format": fmt, "arm": "lossless", "auditor_role": args.role, "sample_id": 0,
                     "is_development": int(args.pool == "dev"),
-                    "tokens_in": result["tokens_in"], "tokens_out": result["tokens_out"], "seconds": result["seconds"],
+                    "too_long": int(result["too_long"]), "tokens_in": result["tokens_in"], "tokens_out": result["tokens_out"], "seconds": result["seconds"],
                     "bytes_record": len(record.encode("utf-8")), "prompt_hash": prompt_hash(fmt),
                     "render_hash": hashlib.sha256(record.encode("utf-8")).hexdigest(),
                     "model_tag": pins["model_tag"], "model_digest": pins["model_digest"], "ollama_version": pins["ollama_version"],

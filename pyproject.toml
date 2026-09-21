@@ -14,6 +14,9 @@ dependencies = [
     "rank-bm25",
     "pydantic",
     "pandas",
+    "numpy>=2.5.3",
+    "scipy>=1.18.1",
+    "tabulate>=0.10.0",
 ]
 
 [dependency-groups]

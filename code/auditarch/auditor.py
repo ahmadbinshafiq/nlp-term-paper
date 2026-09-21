@@ -75,12 +75,13 @@ def prompt_hash(fmt: str) -> str:
 
 
 def audit(llm, pins: dict, fmt: str, record: str) -> dict:
-    """One audit call. Returns the parsed answer (or None) plus token counts and seconds."""
+    """One audit call. Returns the parsed answer (or None), token counts, seconds and the flag `too_long`."""
     text, usage = cached_invoke(llm, pins, [HumanMessage(prompt_for(fmt, record))], schema=ANSWER_SCHEMA)
-    # Ollama shortens a prompt that does not fit, without an error. That must never happen silently.
-    assert usage["tokens_in"] + pins["options"]["num_predict"] < pins["options"]["num_ctx"], "record too long for num_ctx"
+    # Ollama shortens a prompt that does not fit, without an error. That must never happen silently:
+    # such a run is flagged and leaves the primary test in all three formats (pre-registration, section 3).
+    too_long = usage["tokens_in"] + pins["options"]["num_predict"] >= pins["options"]["num_ctx"]
     try:
         answer = json.loads(text)
     except json.JSONDecodeError:
         answer = None
-    return {"answer": answer, **usage}
+    return {"answer": answer, "too_long": too_long, **usage}

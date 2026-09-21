@@ -166,3 +166,10 @@ Command: `uv run python code/scripts/run_clean.py --passers 55` (agent as in D-0
 Pools (fixed from now on): **development tasks** = the first 5 passing tasks in seed order (orders 0, 1, 2, 11, 13). **Sweep pool** = the other 50 passing tasks, so **N = 50**.
 Step cap stays 38. The loosening rules (drop the answer check, D-003b) were not needed.
 To say in the paper: only 9 of the 55 tasks have 4 hops, because 4-hop tasks pass less often (18 percent against 43 percent).
+
+## D-012 (2026-09-21) Auditor roles (decided by Ahmad after the validation pilots)
+
+- **Primary auditor: `qwen3.8:27b`**, thinking off, same options as D-003. Reasons from the development-task pilots (results/PILOT-NOTES.md): 98 percent of answers parse, 89 percent name the right fault class, 84 percent find the exact step. GLM as auditor names the right class only half the time and flags 11 of 15 clean audits, so much of what it says is noise. Qwen also did not produce the runs, which removes the "auditor judges its own model" concern for the primary analysis.
+- **Second auditor: `glm-4.7-flash:q8_0`**, thinking off. Because it is fast (about 15 s per audit), it audits ALL sweep runs, not only a 60-run subsample. Reported as description: the same tables as for the primary auditor, no test.
+- The agent stays GLM. Nothing that was generated has to be made again.
+- Ahmad left the laptop to me for the day with the instruction to run the experiments and to fix and rerun where needed.

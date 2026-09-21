@@ -42,3 +42,15 @@ def test_scoring_a_control_run():
 def test_position_only_guesser_uses_the_other_tasks():
     assert position_only_guess(20, [(12, 20), (12, 20), (4, 20)]) == 13                      # most k sit at 60 percent of the run
     assert 1 <= position_only_guess(26, [(18, 32)]) <= 26
+
+
+def test_structure_only_guesser_and_rule_auditor_find_the_structural_faults():
+    import sys; sys.path.insert(0, "tests")
+    from test_render import RUNS
+    from auditarch.score import rule_audit, structure_only_guess
+    assert rule_audit(RUNS["clean"]) is None
+    for fault in ("dropped_note", "overwritten_note", "no_source"):          # their cue is pure structure
+        assert rule_audit(RUNS[fault]) == 12
+        # the hand-made run has only two notes, so "rarest among the notes" is a tie and the earliest wins
+        assert structure_only_guess(RUNS[fault]) in (6, 12)
+    assert rule_audit(RUNS["wrong_source"]) is None                           # needs the text: a rule cannot see it

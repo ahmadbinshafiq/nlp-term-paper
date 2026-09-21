@@ -30,6 +30,7 @@ Codes for `fault_type`, `fault_class` and `format` are the same as in `prereg/fa
 | `false_alarm` | 0/1 or empty | Control rows only: 1 unless the answer parsed and had `step_id` null and `fault_class` `none`. An answer that did not parse counts as 1. Empty on faulty runs. |
 | `pointer_ok` | 0/1 | 1 if the auditor's pointer names an item that exists in the record it saw. |
 | `parse_ok` | 0/1 | 1 if the answer was valid JSON that fits the schema. |
+| `too_long` | 0/1 | 1 if the prompt plus the output room did not fit into `num_ctx`. Such a run leaves the primary test in all three formats. |
 | `tokens_in` | int | `prompt_eval_count` from Ollama. |
 | `tokens_out` | int | `eval_count` from Ollama. |
 | `bytes_record` | int | Size of the rendered record in bytes (UTF-8). |
