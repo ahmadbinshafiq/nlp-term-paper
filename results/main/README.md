@@ -21,4 +21,4 @@ Headline (Qwen, exact step found, 50 runs per cell):
 | no_source | 0.94 | 0.90 | 0.94 |
 
 The interaction is significant (p < 0.0001), but it comes from one cell: a dropped note is found far less often in the event log.
-In 18 of the 26 misses in the log, the auditor said "no fault". The other two classes show no format difference; the evidence class is at the ceiling.
+In 17 of the 26 misses in the log the auditor said "no fault", in 8 it named another step, and in 1 its answer was cut off. The other two classes show no format difference; the evidence class is at the ceiling.
