@@ -8,13 +8,7 @@ Term paper, September 2026
 
 ## Abstract
 
-When an AI agent does a task by calling tools, the system keeps a record of what the agent did, so that someone can check the run later. Three kinds of record are common: an event log (one entry per step, in order), checkpoints (a snapshot of the agent's stored state after each step; the difference between two snapshots is a state diff), and a provenance graph (a graph of which step used which data and produced which result). The three families have been compared in words, but we found no study that tests them side by side on the same audit task with the same information.
-
-We built one agent that answers multi-step questions by searching passages, reading them and writing notes. We recorded every run once, and wrote each run in all three shapes with exactly the same information. We then took 50 correct runs and planted one fault into each of them, six times over, one fault type at a time, which gave 300 faulty runs. The six fault types fall into three classes: **tool faults** (the agent calls a tool with the wrong argument, or the tool returns wrong content), **state faults** (a note the agent writes is silently not stored, or is stored under another note's name), and **evidence faults** (a note names the wrong source passage, or no source at all). For each faulty run, a language model, the auditor, read each of the three records and had to name the step where the fault happened.
-
-Our hypothesis, fixed before the data existed, was that each fault class has a natural record shape: the log for tool faults, the diffs for state faults, the graph for evidence faults. The data refuted this. Five of the six fault types were found about equally well in all three shapes; no two shapes differed by more than 8 percentage points. The one exception was the dropped note, the fault where the agent asks for a note to be stored, the tool answers "ok", and nothing is stored. The auditor found it in 48% of the event logs but in 86% of the diffs and of the graphs. The reason is that a log lists things that happened; when something should have happened and did not, the log contains nothing about it, and the auditor overlooked that nothing.
-
-Two further findings matter in practice. A one-line rule with no language model found three of the six fault types perfectly. And the gap between a stronger and a weaker auditor model was far larger than any gap between record shapes. Code, data and the pre-registration are public.
+When an AI agent does a task by calling tools, the system keeps a record so that someone can check the run later. Three kinds of record are common: an event log (one entry per step), checkpoints (snapshots of the agent's state; the difference between two snapshots is a state diff), and a provenance graph (what used and produced what). The three families have been compared in words, but we found no study that tests them side by side on the same audit task with the same information. We built one agent, recorded every run once, and wrote each run in all three shapes with exactly the same information. We then took 50 correct runs, planted each of six faults into each of them (300 faulty runs), and asked a language model to find the faulty step from each record. Our pre-registered hypothesis was that each fault class has a natural shape: the log for tool faults, the diffs for state faults, the graph for evidence faults. The data refuted this. Five of the six faults were found about equally well in all three shapes (no two shapes differed by more than 8 points). The exception is a dropped note, an action whose effect silently did not happen: found in 48% of event logs and 86% of diffs and graphs. A log shows a missing effect as nothing, and the auditor overlooked the nothing. Two further findings matter in practice: a one-line rule with no language model found three of the six faults perfectly, and the gap between a stronger and a weaker auditor was far larger than any gap between shapes. Code, data and the pre-registration are public.
 
 ---
 
@@ -36,22 +30,14 @@ Each family has its advocates. Recent papers argue for logs (Nakajima, 2026), fo
 
 The difficulty is that real systems differ in two ways at once: in *what* they record and in the *shape* of the record. A log that keeps the full text of every tool result and a checkpoint system that keeps only the chat messages cannot be compared fairly, because one has information the other does not. We remove that difference. We record every run once, as a single stream of events, and then write the same stream in three shapes. Each shape can be turned back into the stream without loss. What is left to compare is the shape alone.
 
-**How we test it.** We use a small agent that answers questions which need several facts in a row. In each round it searches for a passage, reads one, and writes a note with the fact it found and the passage it came from; at the end it gives an answer that rests on one of its notes. We let it solve 50 questions correctly. Then, into each correct run, we plant one fault at one step, and we do this once for each of six fault types, so that every question gives six faulty runs (300 in all). The six fault types come in three classes of two:
-
-- **Tool faults.** The agent calls a tool with a *wrong argument* (for example, it searches with a stale query instead of the one it just planned), or the tool returns *corrupted output* (content that does not fit the call).
-- **State faults.** The agent asks to store a note, but the note is *dropped* (the tool says "ok" and stores nothing), or the note is *overwritten* onto another note's name instead of its own.
-- **Evidence faults.** A note names the *wrong source* passage, or *no source* at all.
-
-We chose these six because each class is the kind of thing one record family shows most directly: the log shows calls and returns side by side, the diffs show what changed in the stored state, and the graph shows where each note came from. After planting a fault, we write the faulty run in the three shapes and ask an auditor, a language model, to read each one and name the faulty step. Because we planted the fault ourselves, we know the right answer, and we can score the auditor exactly.
-
-Our question: **does the shape of the record change how well the auditor finds the fault, and does the best shape depend on the kind of fault?** Our hypothesis, locked before any run of the study was made, said yes: the log would be best for tool faults, the diffs for state faults, and the graph for evidence faults.
+Our question: **does the shape of the record change how well an auditor finds a planted fault, and does the best shape depend on the kind of fault?** Our hypothesis, locked before any run of the study was made, said yes: the log would be best for faults in tool calls, the diffs for faults in the agent's stored state, and the graph for faults in the sources the agent cites, because each family shows one of these things most directly.
 
 The data refuted the hypothesis. This paper contributes:
 
 1. A small harness, which anyone can run again, in which one recorded run is shown in three shapes that hold the same information; a lossless round trip (text back to events) is the proof of equality.
-2. A pre-registered experiment (plan and analysis fixed and time-stamped before the data existed) with 300 faulty runs, six fault types, two auditor models with public weights, and three baselines that use no model.
-3. The result that, for five of the six fault types, the shape of the record made little difference to the auditor, while for one, the dropped note, it made a large difference: in the event log, the missing note is nothing more than a missing line, and the auditor found it only about half the time, against six times in seven in the other two shapes.
-4. The observation that a simple one-line rule, with no language model at all, finds three of the six fault types every time, and that switching to a better auditor model helped far more than switching to a better record shape.
+2. A pre-registered experiment (plan and analysis fixed and time-stamped before the data existed) with 300 faulty runs, six fault types, two auditors with public model weights, and three baselines that use no model.
+3. The result that the shape matters little for five of six faults and much for one: a silently dropped action, which an event log shows as nothing.
+4. The observation that a one-line rule matches or beats every language-model auditor on three of the six faults, and that a better auditor bought far more than a better shape.
 
 All code, data, records, model answers and the pre-registration are in the project repository.
 
@@ -107,7 +93,7 @@ The three texts hold the same facts. They differ in where the eye has to go. The
 
 ## 3. Method
 
-Figure 2 shows the whole pipeline. Everything after the freeze of the plan ran unattended on one laptop.
+Figure 2 shows the whole pipeline. Before the first run of the study was made, we wrote down the whole plan, including the hypothesis, the faults, the auditor's instructions and the statistical test, and saved it with a time-stamped tag in the code repository. After that, nothing in the plan changed. This is called pre-registration, and we refer to that moment as the freeze. Everything after the freeze ran unattended on one laptop.
 
 ![Figure 2](figures/fig2_pipeline.png)
 
@@ -133,14 +119,16 @@ A **fault** is one wrong thing that happens at one step of an otherwise correct 
 
 *Table 1. The six planted faults.*
 
-| Class | Fault | What happens at step k |
-|---|---|---|
-| tool | wrong argument | the tool is called with a different argument than the plan just before it said (a stale query, or the wrong passage) |
-| tool | corrupted output | the tool is called correctly, but returns unrelated content (results from far down the ranking, or the text of another passage) |
-| state | dropped note | `write_note` returns "ok", but no note is stored |
-| state | overwritten note | `write_note` stores its text under an existing note's name instead of the new one |
-| evidence | wrong source | the note names the passage read before the right one as its source |
-| evidence | no source | the note has no source at all |
+
+| Class    | Fault            | What happens at step k                                                                                                          |
+| -------- | ---------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| tool     | wrong argument   | the tool is called with a different argument than the plan just before it said (a stale query, or the wrong passage)            |
+| tool     | corrupted output | the tool is called correctly, but returns unrelated content (results from far down the ranking, or the text of another passage) |
+| state    | dropped note     | `write_note` returns "ok", but no note is stored                                                                                |
+| state    | overwritten note | `write_note` stores its text under an existing note's name instead of the new one                                               |
+| evidence | wrong source     | the note names the passage read before the right one as its source                                                              |
+| evidence | no source        | the note has no source at all                                                                                                   |
+
 
 A seventh kind of run is the **sham**: the fault machinery is switched on but changes nothing, like a placebo. A sham record is byte-identical to the clean record. Sham runs and clean runs together are the **control runs**, on which the right answer is "there is no fault". The study has 45 of them: the clean runs of the first 25 study questions and sham runs of the last 20 (the pre-registration fixed this rule).
 
@@ -158,7 +146,7 @@ The primary measure is **exact**: did the auditor name exactly the faulty step. 
 
 Three baselines that use no language model put the numbers in perspective. The first exists because of the position leak that CatchBench describes (Zhao et al., 2026). A **position-only guesser** sees nothing but the length of the run and names the step where faults most often sit in the other questions. A **structure-only guesser** sees the record with every piece of text removed and names the step whose structure is rarest among steps of the same tool. A **rule auditor** is one line of logic: the first note step that did not add its own note with a source.
 
-The whole plan, including the analysis, was written down and frozen in a git tag before the first faulty run of the study was generated. The one pre-registered test asks whether the best shape depends on the fault class. It is a mixed-effects logistic regression of *exact* on the shape, the fault class and their interaction, with random intercepts for the question and the run, fitted with lme4 (Bates et al., 2015). In plain terms: the model allows some questions and some runs to be harder than others, and then asks whether the effect of the shape changes from one fault class to another. For each class we also report the **margin**: how many points better the predicted shape did than the mean of the other two. Its 95% interval comes from re-drawing the 50 questions many times, letting a question be drawn more than once, and recomputing the margin (a bootstrap). A prediction counts as met if its margin is at least 10 points, the interval excludes zero, and the predicted shape is strictly the best in its class. A simulation run before the study set the equivalence bound at 20 points: with 50 questions, a null result can only say that no difference larger than 20 points was found (Lakens, 2017). The same simulation showed that the test finds a true 10-point pattern in 94% of cases and raises a false alarm in 5%.
+The freeze (see the start of this section) fixed the one test we would run. That test asks whether the best shape depends on the fault class. It is a mixed-effects logistic regression of *exact* on the shape, the fault class and their interaction, with random intercepts for the question and the run, fitted with lme4 (Bates et al., 2015). In plain terms: the model allows some questions and some runs to be harder than others, and then asks whether the effect of the shape changes from one fault class to another. For each class we also report the **margin**: how many points better the predicted shape did than the mean of the other two. Its 95% interval comes from re-drawing the 50 questions many times, letting a question be drawn more than once, and recomputing the margin (a bootstrap). A prediction counts as met if its margin is at least 10 points, the interval excludes zero, and the predicted shape is strictly the best in its class. A simulation run before the study set the equivalence bound at 20 points: with 50 questions, a null result can only say that no difference larger than 20 points was found (Lakens, 2017). The same simulation showed that the test finds a true 10-point pattern in 94% of cases and raises a false alarm in 5%.
 
 Three controls were pre-registered as gates on the whole result. Every sham record must equal its clean record. The structure-only guesser must be near its baseline on the two tool faults. And the auditor's real score must beat the scores it would get if the fault positions were shuffled among the runs of the same fault type (a **shuffle test**: we shuffle 2,000 times and require the real score to be above 97.5% of the shuffled scores). All three passed.
 
@@ -182,15 +170,17 @@ Figure 3 and Table 2 show how often the primary auditor named the exact faulty s
 
 *Table 2. Exact step found by the primary auditor, 50 runs per cell.*
 
-| Fault | event log | state diffs | PROV graph |
-|---|---|---|---|
-| wrong argument | 0.88 | 0.84 | 0.92 |
-| corrupted output | 0.48 | 0.52 | 0.48 |
-| dropped note | **0.48** | **0.86** | **0.86** |
-| overwritten note | 1.00 | 1.00 | 1.00 |
-| wrong source | 1.00 | 1.00 | 1.00 |
-| no source | 0.94 | 0.90 | 0.94 |
-| all faults | 0.80 | 0.85 | 0.87 |
+
+| Fault            | event log | state diffs | PROV graph |
+| ---------------- | --------- | ----------- | ---------- |
+| wrong argument   | 0.88      | 0.84        | 0.92       |
+| corrupted output | 0.48      | 0.52        | 0.48       |
+| dropped note     | **0.48**  | **0.86**    | **0.86**   |
+| overwritten note | 1.00      | 1.00        | 1.00       |
+| wrong source     | 1.00      | 1.00        | 1.00       |
+| no source        | 0.94      | 0.90        | 0.94       |
+| all faults       | 0.80      | 0.85        | 0.87       |
+
 
 Over all faults the auditor found the exact step in 84% of the records, and 99% of its answers parsed. Five of the six faults were found about equally well in all three shapes; their differences are within a few points and inside the intervals. The exception is the dropped note. In the event log the auditor found it in 24 of 50 runs; in the diffs and in the graph in 43 of 50.
 
@@ -301,73 +291,73 @@ The practical advice is simple. Record effects, not only actions, and make the r
 
 Every entry was checked against its source page (arXiv, publisher or repository) on 2026-09-20 and again on 2026-09-22. "Preprint" means that the paper had not appeared in a peer-reviewed venue on that date.
 
-Bakish, Y., Dudai, A., Ganz, R., Nuriel, O., Ben Avraham, E., Shpigel Nacson, M., and Litman, R. (2026). Adaptive Influence Graphs for Failure Attribution in Multi-Agent Systems. arXiv:2608.24361 (preprint). https://arxiv.org/abs/2608.24361
+Bakish, Y., Dudai, A., Ganz, R., Nuriel, O., Ben Avraham, E., Shpigel Nacson, M., and Litman, R. (2026). Adaptive Influence Graphs for Failure Attribution in Multi-Agent Systems. arXiv:2608.24361 (preprint). [https://arxiv.org/abs/2608.24361](https://arxiv.org/abs/2608.24361)
 
-Banerjee, A., Nair, A., and Borogovac, T. (2025). Where Did It All Go Wrong? A Hierarchical Look into Multi-Agent Error Attribution. arXiv:2510.04886 (NeurIPS 2025 workshop "Evaluating the Evolving LLM Lifecycle"; non-archival). https://arxiv.org/abs/2510.04886
+Banerjee, A., Nair, A., and Borogovac, T. (2025). Where Did It All Go Wrong? A Hierarchical Look into Multi-Agent Error Attribution. arXiv:2510.04886 (NeurIPS 2025 workshop "Evaluating the Evolving LLM Lifecycle"; non-archival). [https://arxiv.org/abs/2510.04886](https://arxiv.org/abs/2510.04886)
 
-Bates, D., Mächler, M., Bolker, B., and Walker, S. (2015). Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1), 1–48. https://doi.org/10.18637/jss.v067.i01
+Bates, D., Mächler, M., Bolker, B., and Walker, S. (2015). Fitting Linear Mixed-Effects Models Using lme4. Journal of Statistical Software, 67(1), 1–48. [https://doi.org/10.18637/jss.v067.i01](https://doi.org/10.18637/jss.v067.i01)
 
-Bryan, P., and Nottingham, M. (eds.) (2013). JavaScript Object Notation (JSON) Patch. RFC 6902, Internet Engineering Task Force. https://www.rfc-editor.org/rfc/rfc6902
+Bryan, P., and Nottingham, M. (eds.) (2013). JavaScript Object Notation (JSON) Patch. RFC 6902, Internet Engineering Task Force. [https://www.rfc-editor.org/rfc/rfc6902](https://www.rfc-editor.org/rfc/rfc6902)
 
-Chen, M., Wang, J., Mu, F., Wang, Y., Liu, Z., Feng, H., and Wang, Q. (2026). Seeing the Whole Elephant: A Benchmark for Failure Attribution in LLM-based Multi-Agent Systems. Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), 19888–19905. https://doi.org/10.18653/v1/2026.acl-long.912
+Chen, M., Wang, J., Mu, F., Wang, Y., Liu, Z., Feng, H., and Wang, Q. (2026). Seeing the Whole Elephant: A Benchmark for Failure Attribution in LLM-based Multi-Agent Systems. Proceedings of the 64th Annual Meeting of the Association for Computational Linguistics (Volume 1: Long Papers), 19888–19905. [https://doi.org/10.18653/v1/2026.acl-long.912](https://doi.org/10.18653/v1/2026.acl-long.912)
 
-Deshpande, D., Gangal, V., Mehta, H., Krishnan, J., Kannappan, A., and Qian, R. (2025). TRAIL: Trace Reasoning and Agentic Issue Localization. arXiv:2505.08638 (preprint). https://arxiv.org/abs/2505.08638
+Deshpande, D., Gangal, V., Mehta, H., Krishnan, J., Kannappan, A., and Qian, R. (2025). TRAIL: Trace Reasoning and Agentic Issue Localization. arXiv:2505.08638 (preprint). [https://arxiv.org/abs/2505.08638](https://arxiv.org/abs/2505.08638)
 
-Elnozahy, E. N., Alvisi, L., Wang, Y. M., and Johnson, D. B. (2002). A survey of rollback-recovery protocols in message-passing systems. ACM Computing Surveys, 34(3), 375–408. https://doi.org/10.1145/568522.568525
+Elnozahy, E. N., Alvisi, L., Wang, Y. M., and Johnson, D. B. (2002). A survey of rollback-recovery protocols in message-passing systems. ACM Computing Surveys, 34(3), 375–408. [https://doi.org/10.1145/568522.568525](https://doi.org/10.1145/568522.568525)
 
-GLM-4.5 Team, Zeng, A., Lv, X., Zheng, Q., and others (2025). GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models. arXiv:2508.06471 (preprint). The GLM-4.7-Flash model card asks for this citation (https://huggingface.co/zai-org/GLM-4.7-Flash); the model used here is glm-4.7-flash:q8_0 on Ollama. https://arxiv.org/abs/2508.06471
+GLM-4.5 Team, Zeng, A., Lv, X., Zheng, Q., and others (2025). GLM-4.5: Agentic, Reasoning, and Coding (ARC) Foundation Models. arXiv:2508.06471 (preprint). The GLM-4.7-Flash model card asks for this citation ([https://huggingface.co/zai-org/GLM-4.7-Flash](https://huggingface.co/zai-org/GLM-4.7-Flash)); the model used here is glm-4.7-flash:q8_0 on Ollama. [https://arxiv.org/abs/2508.06471](https://arxiv.org/abs/2508.06471)
 
-Kim, D., Miao, H., and Liu, S. (2026). LEDGER: Claim-to-Evidence Trace Graphs for Auditing LLM Agents. arXiv:2608.18398 (preprint). https://arxiv.org/abs/2608.18398
+Kim, D., Miao, H., and Liu, S. (2026). LEDGER: Claim-to-Evidence Trace Graphs for Auditing LLM Agents. arXiv:2608.18398 (preprint). [https://arxiv.org/abs/2608.18398](https://arxiv.org/abs/2608.18398)
 
-Lakens, D. (2017). Equivalence Tests: A Practical Primer for t Tests, Correlations, and Meta-Analyses. Social Psychological and Personality Science, 8(4), 355–362. https://doi.org/10.1177/1948550617697177
+Lakens, D. (2017). Equivalence Tests: A Practical Primer for t Tests, Correlations, and Meta-Analyses. Social Psychological and Personality Science, 8(4), 355–362. [https://doi.org/10.1177/1948550617697177](https://doi.org/10.1177/1948550617697177)
 
-LangChain Inc (2026). LangGraph, version 1.2.11. Software. https://github.com/langchain-ai/langgraph
+LangChain Inc (2026). LangGraph, version 1.2.11. Software. [https://github.com/langchain-ai/langgraph](https://github.com/langchain-ai/langgraph)
 
-Liu, J., Xi, H., Zhang, S., Zeng, Y., Yue, T., Wang, C., Kang, J., Wu, Q., and Wang, H. (2026). Who&When Pro: Can LLMs Really Attribute Failures in AI Agents?. arXiv:2607.09996 (preprint). https://arxiv.org/abs/2607.09996
+Liu, J., Xi, H., Zhang, S., Zeng, Y., Yue, T., Wang, C., Kang, J., Wu, Q., and Wang, H. (2026). Who&When Pro: Can LLMs Really Attribute Failures in AI Agents?. arXiv:2607.09996 (preprint). [https://arxiv.org/abs/2607.09996](https://arxiv.org/abs/2607.09996)
 
-Moreau, L., and Missier, P. (eds.) (2013a). PROV-DM: The PROV Data Model. W3C Recommendation, World Wide Web Consortium (W3C). https://www.w3.org/TR/prov-dm/
+Moreau, L., and Missier, P. (eds.) (2013a). PROV-DM: The PROV Data Model. W3C Recommendation, World Wide Web Consortium (W3C). [https://www.w3.org/TR/prov-dm/](https://www.w3.org/TR/prov-dm/)
 
-Moreau, L., and Missier, P. (eds.) (2013b). PROV-N: The Provenance Notation. W3C Recommendation, World Wide Web Consortium (W3C). https://www.w3.org/TR/prov-n/
+Moreau, L., and Missier, P. (eds.) (2013b). PROV-N: The Provenance Notation. W3C Recommendation, World Wide Web Consortium (W3C). [https://www.w3.org/TR/prov-n/](https://www.w3.org/TR/prov-n/)
 
-Nakajima, Y. (2026). The Log is the Agent: Event-Sourced Reactive Graphs for Auditable, Forkable Agentic Systems. arXiv:2605.21997 (preprint). https://arxiv.org/abs/2605.21997
+Nakajima, Y. (2026). The Log is the Agent: Event-Sourced Reactive Graphs for Auditable, Forkable Agentic Systems. arXiv:2605.21997 (preprint). [https://arxiv.org/abs/2605.21997](https://arxiv.org/abs/2605.21997)
 
-Nian, Y., Yuan, A., Zhang, H., Li, J., Li, L., Hu, X., Wei, H., Xiao, X., Xiao, C., and Zhao, Y. (2026). Auditable Agents. arXiv:2604.05485 (preprint; the arXiv version is the 24-page extended version; the authors report a condensed version in the Proceedings of the ACM AI Leadership Summit 2026, not confirmed). https://arxiv.org/abs/2604.05485
+Nian, Y., Yuan, A., Zhang, H., Li, J., Li, L., Hu, X., Wei, H., Xiao, X., Xiao, C., and Zhao, Y. (2026). Auditable Agents. arXiv:2604.05485 (preprint; the arXiv version is the 24-page extended version; the authors report a condensed version in the Proceedings of the ACM AI Leadership Summit 2026, not confirmed). [https://arxiv.org/abs/2604.05485](https://arxiv.org/abs/2604.05485)
 
-Ollama (2026). Ollama, version 0.33.2. Software. https://github.com/ollama/ollama
+Ollama (2026). Ollama, version 0.33.2. Software. [https://github.com/ollama/ollama](https://github.com/ollama/ollama)
 
-Qi, Y., Yin, Z., Shi, X., Peng, H., Lu, S., Liu, Y., Xuan, R., Liu, Y., Hu, Z., Wang, X., Hou, L., Xu, B., and Li, J. (2026). TRAJDEBUG: Tracing Error Lifecycle to Identify Critical Failures in Long-Horizon Agent Trajectories. arXiv:2608.06346 (preprint; the authors report acceptance to Findings of EMNLP 2026, not yet confirmed in the ACL Anthology). https://arxiv.org/abs/2608.06346
+Qi, Y., Yin, Z., Shi, X., Peng, H., Lu, S., Liu, Y., Xuan, R., Liu, Y., Hu, Z., Wang, X., Hou, L., Xu, B., and Li, J. (2026). TRAJDEBUG: Tracing Error Lifecycle to Identify Critical Failures in Long-Horizon Agent Trajectories. arXiv:2608.06346 (preprint; the authors report acceptance to Findings of EMNLP 2026, not yet confirmed in the ACL Anthology). [https://arxiv.org/abs/2608.06346](https://arxiv.org/abs/2608.06346)
 
-Qwen Team (2026). Qwen3.8-Max: A New Bar for Coding and Cowork. Blog post; the model used here is Qwen3.8-27B (https://huggingface.co/Qwen/Qwen3.8-27B), tag qwen3.8:27b on Ollama. https://qwen.ai/blog?id=qwen3.8
+Qwen Team (2026). Qwen3.8-Max: A New Bar for Coding and Cowork. Blog post; the model used here is Qwen3.8-27B ([https://huggingface.co/Qwen/Qwen3.8-27B](https://huggingface.co/Qwen/Qwen3.8-27B)), tag qwen3.8:27b on Ollama. [https://qwen.ai/blog?id=qwen3.8](https://qwen.ai/blog?id=qwen3.8)
 
-Rasheed, R. A., Banerjee, S., Mukherjee, A., and Hazra, R. (2026). From Fluent to Verifiable: Claim-Level Auditability for Deep Research Agents. arXiv:2602.13855 (preprint). https://arxiv.org/abs/2602.13855
+Rasheed, R. A., Banerjee, S., Mukherjee, A., and Hazra, R. (2026). From Fluent to Verifiable: Claim-Level Auditability for Deep Research Agents. arXiv:2602.13855 (preprint). [https://arxiv.org/abs/2602.13855](https://arxiv.org/abs/2602.13855)
 
-Robertson, S., and Zaragoza, H. (2009). The Probabilistic Relevance Framework: BM25 and Beyond. Foundations and Trends in Information Retrieval, 3(4), 333–389. https://doi.org/10.1561/1500000019
+Robertson, S., and Zaragoza, H. (2009). The Probabilistic Relevance Framework: BM25 and Beyond. Foundations and Trends in Information Retrieval, 3(4), 333–389. [https://doi.org/10.1561/1500000019](https://doi.org/10.1561/1500000019)
 
-Souza, R., Gueroudji, A., DeWitt, S., Rosendo, D., Ghosal, T., Ross, R., Balaprakash, P., and Ferreira da Silva, R. (2025). PROV-AGENT: Unified Provenance for Tracking AI Agent Interactions in Agentic Workflows. 2025 IEEE International Conference on eScience (eScience), 467–473. https://doi.org/10.1109/eScience65000.2025.00093
+Souza, R., Gueroudji, A., DeWitt, S., Rosendo, D., Ghosal, T., Ross, R., Balaprakash, P., and Ferreira da Silva, R. (2025). PROV-AGENT: Unified Provenance for Tracking AI Agent Interactions in Agentic Workflows. 2025 IEEE International Conference on eScience (eScience), 467–473. [https://doi.org/10.1109/eScience65000.2025.00093](https://doi.org/10.1109/eScience65000.2025.00093)
 
-Trivedi, H., Balasubramanian, N., Khot, T., and Sabharwal, A. (2022). MuSiQue: Multihop Questions via Single-hop Question Composition. Transactions of the Association for Computational Linguistics, 10, 539–554. https://doi.org/10.1162/tacl_a_00475
+Trivedi, H., Balasubramanian, N., Khot, T., and Sabharwal, A. (2022). MuSiQue: Multihop Questions via Single-hop Question Composition. Transactions of the Association for Computational Linguistics, 10, 539–554. [https://doi.org/10.1162/tacl_a_00475](https://doi.org/10.1162/tacl_a_00475)
 
-Vispute, N., and Kadam, A. (2026). Reasoning Provenance for Autonomous AI Agents: Structured Behavioral Analytics Beyond State Checkpoints and Execution Traces. arXiv:2603.21692 (preprint). https://arxiv.org/abs/2603.21692
+Vispute, N., and Kadam, A. (2026). Reasoning Provenance for Autonomous AI Agents: Structured Behavioral Analytics Beyond State Checkpoints and Execution Traces. arXiv:2603.21692 (preprint). [https://arxiv.org/abs/2603.21692](https://arxiv.org/abs/2603.21692)
 
-Wang, Y., Zhang, J., Wu, Z., Cai, T., Liu, Z., Sun, Z., Dong, M., Zheng, M., Duan, Y., Yin, X., and Zhu, Y. (2026). From Agent Traces to Trust: A Survey of Evidence Tracing and Execution Provenance in LLM Agents. arXiv:2606.04990 (preprint). https://arxiv.org/abs/2606.04990
+Wang, Y., Zhang, J., Wu, Z., Cai, T., Liu, Z., Sun, Z., Dong, M., Zheng, M., Duan, Y., Yin, X., and Zhu, Y. (2026). From Agent Traces to Trust: A Survey of Evidence Tracing and Execution Provenance in LLM Agents. arXiv:2606.04990 (preprint). [https://arxiv.org/abs/2606.04990](https://arxiv.org/abs/2606.04990)
 
-Wu, G., Li, D., Jiang, K., Niu, J., Wang, C., and Zhang, Y. (2026). Safe to Resume? Breaking Execution Continuity of Agent Execution via Rollback. arXiv:2608.29381 (preprint). https://arxiv.org/abs/2608.29381
+Wu, G., Li, D., Jiang, K., Niu, J., Wang, C., and Zhang, Y. (2026). Safe to Resume? Breaking Execution Continuity of Agent Execution via Rollback. arXiv:2608.29381 (preprint). [https://arxiv.org/abs/2608.29381](https://arxiv.org/abs/2608.29381)
 
-Wu, T., Chang, C., Cao, L., Gao, W., and Wang, W. (2026). Crab: A Semantics-Aware Checkpoint/Restore Runtime for Agent Sandboxes. arXiv:2604.28138 (preprint). https://arxiv.org/abs/2604.28138
+Wu, T., Chang, C., Cao, L., Gao, W., and Wang, W. (2026). Crab: A Semantics-Aware Checkpoint/Restore Runtime for Agent Sandboxes. arXiv:2604.28138 (preprint). [https://arxiv.org/abs/2604.28138](https://arxiv.org/abs/2604.28138)
 
-Zhang, S., Yin, M., Zhang, J., Liu, J., Han, Z., Zhang, J., Li, B., Wang, C., Wang, H., Chen, Y., and Wu, Q. (2025). Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems. Proceedings of the 42nd International Conference on Machine Learning, Proceedings of Machine Learning Research 267, 76583–76599. https://proceedings.mlr.press/v267/zhang25cq.html
+Zhang, S., Yin, M., Zhang, J., Liu, J., Han, Z., Zhang, J., Li, B., Wang, C., Wang, H., Chen, Y., and Wu, Q. (2025). Which Agent Causes Task Failures and When? On Automated Failure Attribution of LLM Multi-Agent Systems. Proceedings of the 42nd International Conference on Machine Learning, Proceedings of Machine Learning Research 267, 76583–76599. [https://proceedings.mlr.press/v267/zhang25cq.html](https://proceedings.mlr.press/v267/zhang25cq.html)
 
-Zhang, Y., Feng, B., Pei, C., Wang, Z., Peng, Z., Liu, X., Jiang, H., Ma, D., Zhang, J., Yao, Y., Zhao, Y., Sun, F., Huo, Y., Liu, Z., Li, J., Xie, G., and Pei, D. (2026). LongRCA Bench: Root-Cause Localization in Long-Horizon Agent Trajectories. arXiv:2608.15242, v4 (preprint; v1 to v3 had the title "LongRCA Bench: Diagnosing Responsible Roles and Root Causes in Long-Horizon Agent Failures"). https://arxiv.org/abs/2608.15242
+Zhang, Y., Feng, B., Pei, C., Wang, Z., Peng, Z., Liu, X., Jiang, H., Ma, D., Zhang, J., Yao, Y., Zhao, Y., Sun, F., Huo, Y., Liu, Z., Li, J., Xie, G., and Pei, D. (2026). LongRCA Bench: Root-Cause Localization in Long-Horizon Agent Trajectories. arXiv:2608.15242, v4 (preprint; v1 to v3 had the title "LongRCA Bench: Diagnosing Responsible Roles and Root Causes in Long-Horizon Agent Failures"). [https://arxiv.org/abs/2608.15242](https://arxiv.org/abs/2608.15242)
 
-Zhao, Y. (2026). GRADE: Graph Representation of LLM Agent Dependency and Execution. arXiv:2606.22741, v2 (preprint). https://arxiv.org/abs/2606.22741
+Zhao, Y. (2026). GRADE: Graph Representation of LLM Agent Dependency and Execution. arXiv:2606.22741, v2 (preprint). [https://arxiv.org/abs/2606.22741](https://arxiv.org/abs/2606.22741)
 
-Zhao, Y., Li, M., Li, R., Wang, P. Z., Jiang, S., Pang, L., Xiao, X., and Hu, X. (2026). CatchBench: When Can an Agent Failure Be Caught?. arXiv:2608.22808, v4 (preprint). https://arxiv.org/abs/2608.22808
+Zhao, Y., Li, M., Li, R., Wang, P. Z., Jiang, S., Pang, L., Xiao, X., and Hu, X. (2026). CatchBench: When Can an Agent Failure Be Caught?. arXiv:2608.22808, v4 (preprint). [https://arxiv.org/abs/2608.22808](https://arxiv.org/abs/2608.22808)
 
-Wilson, E. B. (1927). Probable Inference, the Law of Succession, and Statistical Inference. Journal of the American Statistical Association, 22(158), 209–212. https://doi.org/10.1080/01621459.1927.10502953
+Wilson, E. B. (1927). Probable Inference, the Law of Succession, and Statistical Inference. Journal of the American Statistical Association, 22(158), 209–212. [https://doi.org/10.1080/01621459.1927.10502953](https://doi.org/10.1080/01621459.1927.10502953)
 
-Zhu, Y., and Pu, P. (2026). TelemetrySuffBench: Is Agent Telemetry Sufficient for Failure-Origin Diagnosis?. arXiv:2608.07899 (preprint). https://arxiv.org/abs/2608.07899
+Zhu, Y., and Pu, P. (2026). TelemetrySuffBench: Is Agent Telemetry Sufficient for Failure-Origin Diagnosis?. arXiv:2608.07899 (preprint). [https://arxiv.org/abs/2608.07899](https://arxiv.org/abs/2608.07899)
 
-Zhuang, Y., Chen, K., Duan, Y., Zheng, S., Li, J., and Zhang, X. Y. (2026). AgentRewind: Recoverable Execution for Long-Horizon LLM Agents. arXiv:2608.14380 (preprint). https://arxiv.org/abs/2608.14380
+Zhuang, Y., Chen, K., Duan, Y., Zheng, S., Li, J., and Zhang, X. Y. (2026). AgentRewind: Recoverable Execution for Long-Horizon LLM Agents. arXiv:2608.14380 (preprint). [https://arxiv.org/abs/2608.14380](https://arxiv.org/abs/2608.14380)
 
 ---
 
