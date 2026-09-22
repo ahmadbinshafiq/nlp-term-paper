@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__88707_91850_685675",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 16,
+ "k_bin": 2,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "132601ea1d1a"
+   }
+  },
+  "tool_return": {
+   "pid": "132601ea1d1a",
+   "title": "Jorge Posada",
+   "text": "Jorge Rafael Posada Villeta (born August 17, 1971) is a Puerto Rican former professional baseball catcher who played 17 seasons in Major League Baseball (MLB) for the New York Yankees. Posada produced strong offensive numbers for his position, recording a .273 batting average, 275 home runs, and 1,065 runs batted in (RBIs) during his career. A switch hitter, Posada was a five-time All-Star, won five Silver Slugger Awards, and was on the roster for four World Series championship teams."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "132601ea1d1a"
+      }
+     },
+     "tool_return": {
+      "pid": "132601ea1d1a",
+      "title": "Jorge Posada",
+      "text": "Jorge Rafael Posada Villeta (born August 17, 1971) is a Puerto Rican former professional baseball catcher who played 17 seasons in Major League Baseball (MLB) for the New York Yankees. Posada produced strong offensive numbers for his position, recording a .273 batting average, 275 home runs, and 1,065 runs batted in (RBIs) during his career. A switch hitter, Posada was a five-time All-Star, won five Silver Slugger Awards, and was on the roster for four World Series championship teams."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/132601ea1d1a",
+    "value": {
+     "title": "Jorge Posada",
+     "text": "Jorge Rafael Posada Villeta (born August 17, 1971) is a Puerto Rican former professional baseball catcher who played 17 seasons in Major League Baseball (MLB) for the New York Yankees. Posada produced strong offensive numbers for his position, recording a .273 batting average, 275 home runs, and 1,065 runs batted in (RBIs) during his career. A switch hitter, Posada was a five-time All-Star, won five Silver Slugger Awards, and was on the roster for four World Series championship teams."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "132601ea1d1a"
+   }
+  },
+  "tool_return": {
+   "pid": "132601ea1d1a",
+   "title": "Jorge Posada",
+   "text": "Helen Epstein (born 1961) is an American writer, molecular biologist, and independent consultant specializing in public health in developing countries. She has conducted research on reproductive health and AIDS in Africa for such organizations as the Rockefeller Foundation, the Population Council, and Human Rights Watch, and her articles have appeared in \"The New York Review of Books\", \"The New York Times Magazine\", \"Granta Magazine\", and many other publications. Her research interests include the right to health care in developing countries and the relationship between poverty and health in industrialized countries."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "132601ea1d1a"
+      }
+     },
+     "tool_return": {
+      "pid": "132601ea1d1a",
+      "title": "Jorge Posada",
+      "text": "Helen Epstein (born 1961) is an American writer, molecular biologist, and independent consultant specializing in public health in developing countries. She has conducted research on reproductive health and AIDS in Africa for such organizations as the Rockefeller Foundation, the Population Council, and Human Rights Watch, and her articles have appeared in \"The New York Review of Books\", \"The New York Times Magazine\", \"Granta Magazine\", and many other publications. Her research interests include the right to health care in developing countries and the relationship between poverty and health in industrialized countries."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/132601ea1d1a",
+    "value": {
+     "title": "Jorge Posada",
+     "text": "Helen Epstein (born 1961) is an American writer, molecular biologist, and independent consultant specializing in public health in developing countries. She has conducted research on reproductive health and AIDS in Africa for such organizations as the Rockefeller Foundation, the Population Council, and Human Rights Watch, and her articles have appeared in \"The New York Review of Books\", \"The New York Times Magazine\", \"Granta Magazine\", and many other publications. Her research interests include the right to health care in developing countries and the relationship between poverty and health in industrialized countries."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 8.1
+}

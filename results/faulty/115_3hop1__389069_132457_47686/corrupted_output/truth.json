@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__389069_132457_47686",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 4,
+ "k_bin": 0,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 4,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "0926530c873e"
+   }
+  },
+  "tool_return": {
+   "pid": "0926530c873e",
+   "title": "Sleep Is the Enemy",
+   "text": "Sleep Is The Enemy is the third studio album by Canadian rock band Danko Jones. The album was released on February 17, 2006 in Europe and February 21 in Canada. The album was released in the US on May 23. \"She's Drugs\" was featured in the Swedish vampire film \"Frostbiten\". \"Baby Hates Me\" served as the theme song for WWE Backlash."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/4",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "0926530c873e"
+      }
+     },
+     "tool_return": {
+      "pid": "0926530c873e",
+      "title": "Sleep Is the Enemy",
+      "text": "Sleep Is The Enemy is the third studio album by Canadian rock band Danko Jones. The album was released on February 17, 2006 in Europe and February 21 in Canada. The album was released in the US on May 23. \"She's Drugs\" was featured in the Swedish vampire film \"Frostbiten\". \"Baby Hates Me\" served as the theme song for WWE Backlash."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/0926530c873e",
+    "value": {
+     "title": "Sleep Is the Enemy",
+     "text": "Sleep Is The Enemy is the third studio album by Canadian rock band Danko Jones. The album was released on February 17, 2006 in Europe and February 21 in Canada. The album was released in the US on May 23. \"She's Drugs\" was featured in the Swedish vampire film \"Frostbiten\". \"Baby Hates Me\" served as the theme song for WWE Backlash."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 4,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "0926530c873e"
+   }
+  },
+  "tool_return": {
+   "pid": "0926530c873e",
+   "title": "Sleep Is the Enemy",
+   "text": "One night, as they sleep, the delusional Captain Benson wanders away from the boys and into the jungle, eventually making his way to a cave deep inland. Jack brings all of his hunters to hunt in the jungle, leaving no one watching the fire. The fire goes out, preventing a passing helicopter from noticing them. Ralph blames Jack for failing to keep it going. During the ensuing fight, Jack, tired of listening to Ralph and Piggy, leaves and forms his own camp, taking many of the boys with him. As more and more boys defect to Jack's side, one of the younger boys, Larry, finds Captain Benson in the cave, mistakes him for a monster and stabs him, and then tells the other boys. Jack and his second - in - command Roger (Gary Rule) then go to the cave's entrance and mistakes Captain Benson's dying groans for the sounds of a monster."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/4",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "0926530c873e"
+      }
+     },
+     "tool_return": {
+      "pid": "0926530c873e",
+      "title": "Sleep Is the Enemy",
+      "text": "One night, as they sleep, the delusional Captain Benson wanders away from the boys and into the jungle, eventually making his way to a cave deep inland. Jack brings all of his hunters to hunt in the jungle, leaving no one watching the fire. The fire goes out, preventing a passing helicopter from noticing them. Ralph blames Jack for failing to keep it going. During the ensuing fight, Jack, tired of listening to Ralph and Piggy, leaves and forms his own camp, taking many of the boys with him. As more and more boys defect to Jack's side, one of the younger boys, Larry, finds Captain Benson in the cave, mistakes him for a monster and stabs him, and then tells the other boys. Jack and his second - in - command Roger (Gary Rule) then go to the cave's entrance and mistakes Captain Benson's dying groans for the sounds of a monster."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/0926530c873e",
+    "value": {
+     "title": "Sleep Is the Enemy",
+     "text": "One night, as they sleep, the delusional Captain Benson wanders away from the boys and into the jungle, eventually making his way to a cave deep inland. Jack brings all of his hunters to hunt in the jungle, leaving no one watching the fire. The fire goes out, preventing a passing helicopter from noticing them. Ralph blames Jack for failing to keep it going. During the ensuing fight, Jack, tired of listening to Ralph and Piggy, leaves and forms his own camp, taking many of the boys with him. As more and more boys defect to Jack's side, one of the younger boys, Larry, finds Captain Benson in the cave, mistakes him for a monster and stabs him, and then tells the other boys. Jack and his second - in - command Roger (Gary Rule) then go to the cave's entrance and mistakes Captain Benson's dying groans for the sounds of a monster."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 24.4
+}

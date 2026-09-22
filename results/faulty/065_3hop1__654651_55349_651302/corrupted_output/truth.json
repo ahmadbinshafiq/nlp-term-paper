@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop1__654651_55349_651302",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 8,
+ "k_bin": 1,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 8,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "who does the voice of Stan on South Park"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "879b062efa08",
+     "title": "Dog with a Blog",
+     "snippet": "The Voice of ``Stan ''(Stephen Full) is the James - Jennings family's new dog who blogs and talks. He keeps his secret of talking from Ellen and Bennett, and the only people who know that Stan can tal"
+    },
+    {
+     "handle": "4e89b891a772",
+     "title": "Chef (South Park)",
+     "snippet": "Jerome ``Chef ''McElroy is a cartoon character on the Comedy Central series South Park who was voiced by Isaac Hayes. A cafeteria worker at the local elementary school in the town of South Park, Color"
+    },
+    {
+     "handle": "1e9514091d35",
+     "title": "Randy and Sharon Marsh",
+     "snippet": "Randy Marsh and Sharon Marsh (née Kimble) are fictional characters in the animated television series \"South Park\". They are the most prominent set of parents on the show and a middle-class married cou"
+    },
+    {
+     "handle": "53994af5f833",
+     "title": "List of South Park cast members",
+     "snippet": "Trey Parker voices four of the main characters: Stan Marsh, Eric Cartman, Randy Marsh and Mr. Garrison. He also provides the voices of several recurring characters, such as Clyde Donovan, Mr. Hankey, "
+    },
+    {
+     "handle": "bddac671b7b7",
+     "title": "Seed of Chucky",
+     "snippet": "Brad Dourif as the voice of Chucky Jennifer Tilly as herself / the voice of Tiffany Billy Boyd as the voice of Glen Beans El - Balawi as Human Glen Kristina Hewitt as Human Glenda Redman as himself Ha"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/8",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "who does the voice of Stan on South Park"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "879b062efa08",
+        "title": "Dog with a Blog",
+        "snippet": "The Voice of ``Stan ''(Stephen Full) is the James - Jennings family's new dog who blogs and talks. He keeps his secret of talking from Ellen and Bennett, and the only people who know that Stan can tal"
+       },
+       {
+        "handle": "4e89b891a772",
+        "title": "Chef (South Park)",
+        "snippet": "Jerome ``Chef ''McElroy is a cartoon character on the Comedy Central series South Park who was voiced by Isaac Hayes. A cafeteria worker at the local elementary school in the town of South Park, Color"
+       },
+       {
+        "handle": "1e9514091d35",
+        "title": "Randy and Sharon Marsh",
+        "snippet": "Randy Marsh and Sharon Marsh (née Kimble) are fictional characters in the animated television series \"South Park\". They are the most prominent set of parents on the show and a middle-class married cou"
+       },
+       {
+        "handle": "53994af5f833",
+        "title": "List of South Park cast members",
+        "snippet": "Trey Parker voices four of the main characters: Stan Marsh, Eric Cartman, Randy Marsh and Mr. Garrison. He also provides the voices of several recurring characters, such as Clyde Donovan, Mr. Hankey, "
+       },
+       {
+        "handle": "bddac671b7b7",
+        "title": "Seed of Chucky",
+        "snippet": "Brad Dourif as the voice of Chucky Jennifer Tilly as herself / the voice of Tiffany Billy Boyd as the voice of Glen Beans El - Balawi as Human Glen Kristina Hewitt as Human Glenda Redman as himself Ha"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 8,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "who does the voice of Stan on South Park"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "c398c09075e2",
+     "title": "Stan Pawloski",
+     "snippet": "Stanley Walter Pawloski (born September 6, 1931 in Wanamie, Pennsylvania) is an American former Major League Baseball second baseman who played in two games for the Cleveland Indians during the 1955 s"
+    },
+    {
+     "handle": "cfdf773596c4",
+     "title": "Northwest Territories",
+     "snippet": "Located in northern Canada, the territory borders Canada's two other territories, Yukon to the west and Nunavut to the east, as well as three provinces: British Columbia to the southwest, and Alberta "
+    },
+    {
+     "handle": "9aed23abf519",
+     "title": "Member states of NATO",
+     "snippet": "Of the 29 member countries, two are located in North America (Canada and the United States) and 27 are European countries while Turkey is in Eurasia. All members have militaries, except for Iceland wh"
+    },
+    {
+     "handle": "af8ddc4154bc",
+     "title": "Mount Ginini",
+     "snippet": "The summit of the mountain is located within the ACT, and is the third highest mountain in the Territory. The ACT portion of the mountain is located in Bimberi Nature Reserve and Namadgi National Park"
+    },
+    {
+     "handle": "cb36dc221a68",
+     "title": "Ford Motor Company Assembly Plant",
+     "snippet": "The Ford Richmond Plant, formally the Ford Motor Company Assembly Plant, in Richmond, California, was the largest assembly plant to be built on the West Coast and its conversion to wartime production "
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/8",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "who does the voice of Stan on South Park"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "c398c09075e2",
+        "title": "Stan Pawloski",
+        "snippet": "Stanley Walter Pawloski (born September 6, 1931 in Wanamie, Pennsylvania) is an American former Major League Baseball second baseman who played in two games for the Cleveland Indians during the 1955 s"
+       },
+       {
+        "handle": "cfdf773596c4",
+        "title": "Northwest Territories",
+        "snippet": "Located in northern Canada, the territory borders Canada's two other territories, Yukon to the west and Nunavut to the east, as well as three provinces: British Columbia to the southwest, and Alberta "
+       },
+       {
+        "handle": "9aed23abf519",
+        "title": "Member states of NATO",
+        "snippet": "Of the 29 member countries, two are located in North America (Canada and the United States) and 27 are European countries while Turkey is in Eurasia. All members have militaries, except for Iceland wh"
+       },
+       {
+        "handle": "af8ddc4154bc",
+        "title": "Mount Ginini",
+        "snippet": "The summit of the mountain is located within the ACT, and is the third highest mountain in the Territory. The ACT portion of the mountain is located in Bimberi Nature Reserve and Namadgi National Park"
+       },
+       {
+        "handle": "cb36dc221a68",
+        "title": "Ford Motor Company Assembly Plant",
+        "snippet": "The Ford Richmond Plant, formally the Ford Motor Company Assembly Plant, in Richmond, California, was the largest assembly plant to be built on the West Coast and its conversion to wartime production "
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "step_cap",
+ "n_steps": 38,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": true,
+ "seconds": 44.9
+}

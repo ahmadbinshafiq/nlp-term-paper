@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__222497_309482_80702",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 10,
+ "k_bin": 1,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 10,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "b8dd4a30f75e"
+   }
+  },
+  "tool_return": {
+   "pid": "b8dd4a30f75e",
+   "title": "Alessandro Zezzos",
+   "text": "He studied under Giacomo Favretto, Alessandro Milesi, and Luigi Nono at the Academy of Fine Arts in his native Venice. In 1873, he exhibited in Venice: \"Né sposo né figlio\" and \"Scena famigliare\". In 1877 at Paris, \"Les saltimbanques\" and \"Les pingeons de Saint Marc\". He was active as a painter in Venice. Among his watercolors are \"Le rondini\", exhibited at 1880 at Turin; \"Una calle\", exhibited at the 1891 Mostra Triennale of the Brera Academy. In 1881 at Milan, displayed the paintings: \"Mercante di ventagli\"; \"At the Predica\", \"Half-figure of a Girl\"; and \"Popolana\". In 1883 in Rome, exhibited: \"The Lovers\". He painted \"Love Letter\", \"Una fuga nel 1700\"; and \"The Dockside of San Marco\". He sent to Paris in 1877-1878, the paintings: \"Pigeons of St Mark\", \"El-Mazrama\" (Mouchoir of the Sultan), \"Los Saltimbanques\", and \"A venetian - A Daughter of the People\"."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/10",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "b8dd4a30f75e"
+      }
+     },
+     "tool_return": {
+      "pid": "b8dd4a30f75e",
+      "title": "Alessandro Zezzos",
+      "text": "He studied under Giacomo Favretto, Alessandro Milesi, and Luigi Nono at the Academy of Fine Arts in his native Venice. In 1873, he exhibited in Venice: \"Né sposo né figlio\" and \"Scena famigliare\". In 1877 at Paris, \"Les saltimbanques\" and \"Les pingeons de Saint Marc\". He was active as a painter in Venice. Among his watercolors are \"Le rondini\", exhibited at 1880 at Turin; \"Una calle\", exhibited at the 1891 Mostra Triennale of the Brera Academy. In 1881 at Milan, displayed the paintings: \"Mercante di ventagli\"; \"At the Predica\", \"Half-figure of a Girl\"; and \"Popolana\". In 1883 in Rome, exhibited: \"The Lovers\". He painted \"Love Letter\", \"Una fuga nel 1700\"; and \"The Dockside of San Marco\". He sent to Paris in 1877-1878, the paintings: \"Pigeons of St Mark\", \"El-Mazrama\" (Mouchoir of the Sultan), \"Los Saltimbanques\", and \"A venetian - A Daughter of the People\"."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/b8dd4a30f75e",
+    "value": {
+     "title": "Alessandro Zezzos",
+     "text": "He studied under Giacomo Favretto, Alessandro Milesi, and Luigi Nono at the Academy of Fine Arts in his native Venice. In 1873, he exhibited in Venice: \"Né sposo né figlio\" and \"Scena famigliare\". In 1877 at Paris, \"Les saltimbanques\" and \"Les pingeons de Saint Marc\". He was active as a painter in Venice. Among his watercolors are \"Le rondini\", exhibited at 1880 at Turin; \"Una calle\", exhibited at the 1891 Mostra Triennale of the Brera Academy. In 1881 at Milan, displayed the paintings: \"Mercante di ventagli\"; \"At the Predica\", \"Half-figure of a Girl\"; and \"Popolana\". In 1883 in Rome, exhibited: \"The Lovers\". He painted \"Love Letter\", \"Una fuga nel 1700\"; and \"The Dockside of San Marco\". He sent to Paris in 1877-1878, the paintings: \"Pigeons of St Mark\", \"El-Mazrama\" (Mouchoir of the Sultan), \"Los Saltimbanques\", and \"A venetian - A Daughter of the People\"."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 10,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "b8dd4a30f75e"
+   }
+  },
+  "tool_return": {
+   "pid": "b8dd4a30f75e",
+   "title": "Alessandro Zezzos",
+   "text": "Italian navigator and explorer Giovanni Caboto (known in English as John Cabot) is credited with the discovery of continental North America on June 24, 1497, under the commission of Henry VII of England. Though the exact location of his discovery remains disputed, the Canadian and United Kingdom governments' official position is that he landed on the island of Newfoundland. The English presence through Giovanni Caboto was signaled in Juan de la Cosa's map of 1500."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/10",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "b8dd4a30f75e"
+      }
+     },
+     "tool_return": {
+      "pid": "b8dd4a30f75e",
+      "title": "Alessandro Zezzos",
+      "text": "Italian navigator and explorer Giovanni Caboto (known in English as John Cabot) is credited with the discovery of continental North America on June 24, 1497, under the commission of Henry VII of England. Though the exact location of his discovery remains disputed, the Canadian and United Kingdom governments' official position is that he landed on the island of Newfoundland. The English presence through Giovanni Caboto was signaled in Juan de la Cosa's map of 1500."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/b8dd4a30f75e",
+    "value": {
+     "title": "Alessandro Zezzos",
+     "text": "Italian navigator and explorer Giovanni Caboto (known in English as John Cabot) is credited with the discovery of continental North America on June 24, 1497, under the commission of Henry VII of England. Though the exact location of his discovery remains disputed, the Canadian and United Kingdom governments' official position is that he landed on the island of Newfoundland. The English presence through Giovanni Caboto was signaled in Juan de la Cosa's map of 1500."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 14.1
+}

@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__222497_309482_80702",
+ "fault_type": "overwritten_note",
+ "fault_class": "state",
+ "k": 12,
+ "k_bin": 0,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "work_location",
+    "text": "Luigi Nono worked at the Academy of Fine Arts in Venice.",
+    "source_pid": "b8dd4a30f75e"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "work_location",
+       "text": "Luigi Nono worked at the Academy of Fine Arts in Venice.",
+       "source_pid": "b8dd4a30f75e"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/work_location",
+    "value": {
+     "text": "Luigi Nono worked at the Academy of Fine Arts in Venice.",
+     "source_pid": "b8dd4a30f75e"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "work_location",
+    "text": "Luigi Nono worked at the Academy of Fine Arts in Venice.",
+    "source_pid": "b8dd4a30f75e"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "work_location",
+       "text": "Luigi Nono worked at the Academy of Fine Arts in Venice.",
+       "source_pid": "b8dd4a30f75e"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "replace",
+    "path": "/notes/composer",
+    "value": {
+     "text": "Luigi Nono worked at the Academy of Fine Arts in Venice.",
+     "source_pid": "b8dd4a30f75e"
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 0
+}

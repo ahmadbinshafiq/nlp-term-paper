@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__579562_629431_64412",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 16,
+ "k_bin": 2,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "71fc5b812c35"
+   }
+  },
+  "tool_return": {
+   "pid": "71fc5b812c35",
+   "title": "Vatican City",
+   "text": "The name Vatican city was first used in the Lateran Treaty, signed on 11 February 1929, which established the modern city - state. The name is taken from Vatican Hill, the geographic location of the state. ``Vatican ''is derived from the name of an Etruscan settlement, Vatica or Vaticum meaning garden, located in the general area the Romans called vaticanus ager,`` Vatican territory''."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "71fc5b812c35"
+      }
+     },
+     "tool_return": {
+      "pid": "71fc5b812c35",
+      "title": "Vatican City",
+      "text": "The name Vatican city was first used in the Lateran Treaty, signed on 11 February 1929, which established the modern city - state. The name is taken from Vatican Hill, the geographic location of the state. ``Vatican ''is derived from the name of an Etruscan settlement, Vatica or Vaticum meaning garden, located in the general area the Romans called vaticanus ager,`` Vatican territory''."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/71fc5b812c35",
+    "value": {
+     "title": "Vatican City",
+     "text": "The name Vatican city was first used in the Lateran Treaty, signed on 11 February 1929, which established the modern city - state. The name is taken from Vatican Hill, the geographic location of the state. ``Vatican ''is derived from the name of an Etruscan settlement, Vatica or Vaticum meaning garden, located in the general area the Romans called vaticanus ager,`` Vatican territory''."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "71fc5b812c35"
+   }
+  },
+  "tool_return": {
+   "pid": "71fc5b812c35",
+   "title": "Vatican City",
+   "text": "The Greater Mexico City has a gross domestic product (GDP) of US$411 billion in 2011, making Mexico City urban agglomeration one of the economically largest metropolitan areas in the world. The city was responsible for generating 15.8% of Mexico's Gross Domestic Product and the metropolitan area accounted for about 22% of total national GDP. As a stand-alone country, in 2013, Mexico City would be the fifth-largest economy in Latin America—five times as large as Costa Rica's and about the same size as Peru's."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "71fc5b812c35"
+      }
+     },
+     "tool_return": {
+      "pid": "71fc5b812c35",
+      "title": "Vatican City",
+      "text": "The Greater Mexico City has a gross domestic product (GDP) of US$411 billion in 2011, making Mexico City urban agglomeration one of the economically largest metropolitan areas in the world. The city was responsible for generating 15.8% of Mexico's Gross Domestic Product and the metropolitan area accounted for about 22% of total national GDP. As a stand-alone country, in 2013, Mexico City would be the fifth-largest economy in Latin America—five times as large as Costa Rica's and about the same size as Peru's."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/71fc5b812c35",
+    "value": {
+     "title": "Vatican City",
+     "text": "The Greater Mexico City has a gross domestic product (GDP) of US$411 billion in 2011, making Mexico City urban agglomeration one of the economically largest metropolitan areas in the world. The city was responsible for generating 15.8% of Mexico's Gross Domestic Product and the metropolitan area accounted for about 22% of total national GDP. As a stand-alone country, in 2013, Mexico City would be the fifth-largest economy in Latin America—five times as large as Costa Rica's and about the same size as Peru's."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 6.5
+}

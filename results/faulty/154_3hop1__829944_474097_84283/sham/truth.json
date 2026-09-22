@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__829944_474097_84283",
+ "fault_type": "sham",
+ "fault_class": "none",
+ "k": 12,
+ "k_bin": 1,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "record_label",
+    "text": "Terry Dexter's debut album was released via Warner Bros. Records.",
+    "source_pid": "967e0a32d69f"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "record_label",
+       "text": "Terry Dexter's debut album was released via Warner Bros. Records.",
+       "source_pid": "967e0a32d69f"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/record_label",
+    "value": {
+     "text": "Terry Dexter's debut album was released via Warner Bros. Records.",
+     "source_pid": "967e0a32d69f"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "record_label",
+    "text": "Terry Dexter's debut album was released via Warner Bros. Records.",
+    "source_pid": "967e0a32d69f"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "record_label",
+       "text": "Terry Dexter's debut album was released via Warner Bros. Records.",
+       "source_pid": "967e0a32d69f"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/record_label",
+    "value": {
+     "text": "Terry Dexter's debut album was released via Warner Bros. Records.",
+     "source_pid": "967e0a32d69f"
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 0
+}

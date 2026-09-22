@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__315504_629431_124169",
+ "fault_type": "overwritten_note",
+ "fault_class": "state",
+ "k": 18,
+ "k_bin": 2,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 18,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "governor_vatican_end_date",
+    "text": "The Governor of Vatican City held the post until his death in 1952.",
+    "source_pid": "465c6470ecf4"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/18",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "governor_vatican_end_date",
+       "text": "The Governor of Vatican City held the post until his death in 1952.",
+       "source_pid": "465c6470ecf4"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/governor_vatican_end_date",
+    "value": {
+     "text": "The Governor of Vatican City held the post until his death in 1952.",
+     "source_pid": "465c6470ecf4"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 18,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "governor_vatican_end_date",
+    "text": "The Governor of Vatican City held the post until his death in 1952.",
+    "source_pid": "465c6470ecf4"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/18",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "governor_vatican_end_date",
+       "text": "The Governor of Vatican City held the post until his death in 1952.",
+       "source_pid": "465c6470ecf4"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "replace",
+    "path": "/notes/john_xxiii_death_date",
+    "value": {
+     "text": "The Governor of Vatican City held the post until his death in 1952.",
+     "source_pid": "465c6470ecf4"
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": true,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 0
+}

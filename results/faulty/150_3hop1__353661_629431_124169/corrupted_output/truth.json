@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__353661_629431_124169",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 16,
+ "k_bin": 1,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "15ef6cadea21"
+   }
+  },
+  "tool_return": {
+   "pid": "15ef6cadea21",
+   "title": "Canonization of Pope John XXIII and Pope John Paul II",
+   "text": "Pope John XXIII (25 November 1881 – 3 June 1963) and Pope John Paul II (18 May 1920 – 2 April 2005) reigned as popes of the Roman Catholic Church and the sovereigns of Vatican City (respectively from 1958 to 1963 and 1978 to 2005). Their canonizations were held on 27 April 2014. The decision to canonize was made official by Pope Francis on 5 July 2013 following the recognition of a miracle attributed to the intercession of John Paul II, while John XXIII was canonized for his merits of opening the Second Vatican Council. The date of the canonization was assigned on 30 September 2013."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "15ef6cadea21"
+      }
+     },
+     "tool_return": {
+      "pid": "15ef6cadea21",
+      "title": "Canonization of Pope John XXIII and Pope John Paul II",
+      "text": "Pope John XXIII (25 November 1881 – 3 June 1963) and Pope John Paul II (18 May 1920 – 2 April 2005) reigned as popes of the Roman Catholic Church and the sovereigns of Vatican City (respectively from 1958 to 1963 and 1978 to 2005). Their canonizations were held on 27 April 2014. The decision to canonize was made official by Pope Francis on 5 July 2013 following the recognition of a miracle attributed to the intercession of John Paul II, while John XXIII was canonized for his merits of opening the Second Vatican Council. The date of the canonization was assigned on 30 September 2013."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/15ef6cadea21",
+    "value": {
+     "title": "Canonization of Pope John XXIII and Pope John Paul II",
+     "text": "Pope John XXIII (25 November 1881 – 3 June 1963) and Pope John Paul II (18 May 1920 – 2 April 2005) reigned as popes of the Roman Catholic Church and the sovereigns of Vatican City (respectively from 1958 to 1963 and 1978 to 2005). Their canonizations were held on 27 April 2014. The decision to canonize was made official by Pope Francis on 5 July 2013 following the recognition of a miracle attributed to the intercession of John Paul II, while John XXIII was canonized for his merits of opening the Second Vatican Council. The date of the canonization was assigned on 30 September 2013."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "15ef6cadea21"
+   }
+  },
+  "tool_return": {
+   "pid": "15ef6cadea21",
+   "title": "Canonization of Pope John XXIII and Pope John Paul II",
+   "text": "Nicene Christianity became the state church of the Roman Empire with the Edict of Thessalonica in 380 AD, when Emperor Theodosius I made it the Empire's sole authorized religion. The Eastern Orthodox Church, Oriental Orthodoxy, and the Catholic Church each claim to be the historical continuation of this church in its original form, but do not identify with it in the caesaropapist form that it took later. Unlike Constantine I, who with the Edict of Milan of 313 AD had established tolerance for Christianity without placing it above other religions and whose involvement in matters of the Christian faith extended to convoking councils of bishops who were to determine doctrine and to presiding at their meetings, but not to determining doctrine himself, Theodosius established a single Christian doctrine (specified as that professed by Pope Damasus I of Rome and Pope Peter II of Alexandria) as the Empire's official religion."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "15ef6cadea21"
+      }
+     },
+     "tool_return": {
+      "pid": "15ef6cadea21",
+      "title": "Canonization of Pope John XXIII and Pope John Paul II",
+      "text": "Nicene Christianity became the state church of the Roman Empire with the Edict of Thessalonica in 380 AD, when Emperor Theodosius I made it the Empire's sole authorized religion. The Eastern Orthodox Church, Oriental Orthodoxy, and the Catholic Church each claim to be the historical continuation of this church in its original form, but do not identify with it in the caesaropapist form that it took later. Unlike Constantine I, who with the Edict of Milan of 313 AD had established tolerance for Christianity without placing it above other religions and whose involvement in matters of the Christian faith extended to convoking councils of bishops who were to determine doctrine and to presiding at their meetings, but not to determining doctrine himself, Theodosius established a single Christian doctrine (specified as that professed by Pope Damasus I of Rome and Pope Peter II of Alexandria) as the Empire's official religion."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/15ef6cadea21",
+    "value": {
+     "title": "Canonization of Pope John XXIII and Pope John Paul II",
+     "text": "Nicene Christianity became the state church of the Roman Empire with the Edict of Thessalonica in 380 AD, when Emperor Theodosius I made it the Empire's sole authorized religion. The Eastern Orthodox Church, Oriental Orthodoxy, and the Catholic Church each claim to be the historical continuation of this church in its original form, but do not identify with it in the caesaropapist form that it took later. Unlike Constantine I, who with the Edict of Milan of 313 AD had established tolerance for Christianity without placing it above other religions and whose involvement in matters of the Christian faith extended to convoking councils of bishops who were to determine doctrine and to presiding at their meetings, but not to determining doctrine himself, Theodosius established a single Christian doctrine (specified as that professed by Pope Damasus I of Rome and Pope Peter II of Alexandria) as the Empire's official religion."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 32,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": true,
+ "reread_after_k": true,
+ "seconds": 33.2
+}

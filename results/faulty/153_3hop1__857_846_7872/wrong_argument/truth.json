@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__857_846_7872",
+ "fault_type": "wrong_argument",
+ "fault_class": "tool",
+ "k": 10,
+ "k_bin": 2,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 10,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "a9a2b9a86e61"
+   }
+  },
+  "tool_return": {
+   "pid": "a9a2b9a86e61",
+   "title": "Nanjing",
+   "text": "As a major Chinese city, Nanjing is home to many professional sports teams. Jiangsu Sainty, the football club currently staying in Chinese Super League, is a long-term tenant of Nanjing Olympic Sports Center. Jiangsu Nangang Basketball Club is a competitive team which has long been one of the major clubs fighting for the title in China top level league, CBA. Jiangsu Volleyball men and women teams are also traditionally considered as at top level in China volleyball league."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/10",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "a9a2b9a86e61"
+      }
+     },
+     "tool_return": {
+      "pid": "a9a2b9a86e61",
+      "title": "Nanjing",
+      "text": "As a major Chinese city, Nanjing is home to many professional sports teams. Jiangsu Sainty, the football club currently staying in Chinese Super League, is a long-term tenant of Nanjing Olympic Sports Center. Jiangsu Nangang Basketball Club is a competitive team which has long been one of the major clubs fighting for the title in China top level league, CBA. Jiangsu Volleyball men and women teams are also traditionally considered as at top level in China volleyball league."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/a9a2b9a86e61",
+    "value": {
+     "title": "Nanjing",
+     "text": "As a major Chinese city, Nanjing is home to many professional sports teams. Jiangsu Sainty, the football club currently staying in Chinese Super League, is a long-term tenant of Nanjing Olympic Sports Center. Jiangsu Nangang Basketball Club is a competitive team which has long been one of the major clubs fighting for the title in China top level league, CBA. Jiangsu Volleyball men and women teams are also traditionally considered as at top level in China volleyball league."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 10,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "7824d67e7218"
+   }
+  },
+  "tool_return": {
+   "pid": "7824d67e7218",
+   "title": "Manchester United F.C.",
+   "text": "Manchester United Football Club, commonly known as Man. United or simply United, is a professional football club based in Old Trafford, Greater Manchester, England, that competes in the Premier League, the top flight of English football. Nicknamed ``the Red Devils '', the club was founded as Newton Heath LYR Football Club in 1878, changed its name to Manchester United in 1902 and moved to its current stadium, Old Trafford, in 1910."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/10",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "7824d67e7218"
+      }
+     },
+     "tool_return": {
+      "pid": "7824d67e7218",
+      "title": "Manchester United F.C.",
+      "text": "Manchester United Football Club, commonly known as Man. United or simply United, is a professional football club based in Old Trafford, Greater Manchester, England, that competes in the Premier League, the top flight of English football. Nicknamed ``the Red Devils '', the club was founded as Newton Heath LYR Football Club in 1878, changed its name to Manchester United in 1902 and moved to its current stadium, Old Trafford, in 1910."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/7824d67e7218",
+    "value": {
+     "title": "Manchester United F.C.",
+     "text": "Manchester United Football Club, commonly known as Man. United or simply United, is a professional football club based in Old Trafford, Greater Manchester, England, that competes in the Premier League, the top flight of English football. Nicknamed ``the Red Devils '', the club was founded as Newton Heath LYR Football Club in 1878, changed its name to Manchester United in 1902 and moved to its current stadium, Old Trafford, in 1910."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 14,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 8.3
+}

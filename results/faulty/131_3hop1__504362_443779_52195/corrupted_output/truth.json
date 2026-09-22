@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop1__504362_443779_52195",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 14,
+ "k_bin": 2,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 14,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "President of East Timor newly declared independent country 2002"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "31c564cece96",
+     "title": "Estanislau da Silva",
+     "snippet": "After Timor Leste achieved independence in 2002, Da Silva was appointed as the country's first Minister for Agriculture, Forestry and Fisheries. On 10 July 2006, he was sworn in as the First Deputy Pr"
+    },
+    {
+     "handle": "9112125c3790",
+     "title": "Indonesia–Timor Leste Commission of Truth and Friendship",
+     "snippet": "The Indonesia–Timor Leste Commission on Truth and Friendship was a truth commission established jointly by the governments of Indonesia and East Timor in August 2005. The commission was officially cre"
+    },
+    {
+     "handle": "6cdd1b5112c7",
+     "title": "East Timor",
+     "snippet": "Democratic Republic of Timor - Leste Repúblika Demokrátika Timór Lorosa'e (Tetum) República Democrática de Timor - Leste (Portuguese) Flag Coat of arms Motto: Unidade, Acção, Progresso (Portuguese) Un"
+    },
+    {
+     "handle": "8f972c6a5436",
+     "title": "United Nations Security Council Resolution 1264",
+     "snippet": "United Nations Security Council resolution 1264, adopted unanimously on 15 September 1999, after recalling previous resolutions on East Timor (Timor-Leste), the Council authorised the establishment of"
+    },
+    {
+     "handle": "33c22fcbfe93",
+     "title": "Central African Republic",
+     "snippet": "In the Ubangi-Shari Territorial Assembly election in 1957, MESAN captured 347,000 out of the total 356,000 votes, and won every legislative seat, which led to Boganda being elected president of the Gr"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/14",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "President of East Timor newly declared independent country 2002"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "31c564cece96",
+        "title": "Estanislau da Silva",
+        "snippet": "After Timor Leste achieved independence in 2002, Da Silva was appointed as the country's first Minister for Agriculture, Forestry and Fisheries. On 10 July 2006, he was sworn in as the First Deputy Pr"
+       },
+       {
+        "handle": "9112125c3790",
+        "title": "Indonesia–Timor Leste Commission of Truth and Friendship",
+        "snippet": "The Indonesia–Timor Leste Commission on Truth and Friendship was a truth commission established jointly by the governments of Indonesia and East Timor in August 2005. The commission was officially cre"
+       },
+       {
+        "handle": "6cdd1b5112c7",
+        "title": "East Timor",
+        "snippet": "Democratic Republic of Timor - Leste Repúblika Demokrátika Timór Lorosa'e (Tetum) República Democrática de Timor - Leste (Portuguese) Flag Coat of arms Motto: Unidade, Acção, Progresso (Portuguese) Un"
+       },
+       {
+        "handle": "8f972c6a5436",
+        "title": "United Nations Security Council Resolution 1264",
+        "snippet": "United Nations Security Council resolution 1264, adopted unanimously on 15 September 1999, after recalling previous resolutions on East Timor (Timor-Leste), the Council authorised the establishment of"
+       },
+       {
+        "handle": "33c22fcbfe93",
+        "title": "Central African Republic",
+        "snippet": "In the Ubangi-Shari Territorial Assembly election in 1957, MESAN captured 347,000 out of the total 356,000 votes, and won every legislative seat, which led to Boganda being elected president of the Gr"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 14,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "President of East Timor newly declared independent country 2002"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "6de9765e693c",
+     "title": "Egypt",
+     "snippet": "The Pew Forum on Religion & Public Life ranks Egypt as the fifth worst country in the world for religious freedom. The United States Commission on International Religious Freedom, a bipartisan indepen"
+    },
+    {
+     "handle": "1cedcc837dcf",
+     "title": "National parks and nature reserves of Israel",
+     "snippet": "National parks of Israel are declared historic sites or nature reserves, which are mostly operated and maintained by the National Nature and Parks Authority. As of 2015, Israel maintains more than 400"
+    },
+    {
+     "handle": "3f6bc97565cf",
+     "title": "Nigeria",
+     "snippet": "Nigeria is divided into thirty-six states and one Federal Capital Territory, which are further sub-divided into 774 Local Government Areas (LGAs). The plethora of states, of which there were only thre"
+    },
+    {
+     "handle": "3de6dc1a76d7",
+     "title": "Courtesy of the Red, White and Blue (The Angry American)",
+     "snippet": "``Courtesy of the Red, White and Blue (The Angry American) ''is a song written and recorded by American country music artist Toby Keith. The song was written in late 2001, and was inspired by Keith's "
+    },
+    {
+     "handle": "8bd1bbde1ea7",
+     "title": "Kanije Eyalet",
+     "snippet": "The province of Kanije was established in 1600 after the town of Kanije was captured from Habsburgs. This newly conquered area was joined with territory of Zigetvar Province, which was formed in 1596 "
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/14",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "President of East Timor newly declared independent country 2002"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "6de9765e693c",
+        "title": "Egypt",
+        "snippet": "The Pew Forum on Religion & Public Life ranks Egypt as the fifth worst country in the world for religious freedom. The United States Commission on International Religious Freedom, a bipartisan indepen"
+       },
+       {
+        "handle": "1cedcc837dcf",
+        "title": "National parks and nature reserves of Israel",
+        "snippet": "National parks of Israel are declared historic sites or nature reserves, which are mostly operated and maintained by the National Nature and Parks Authority. As of 2015, Israel maintains more than 400"
+       },
+       {
+        "handle": "3f6bc97565cf",
+        "title": "Nigeria",
+        "snippet": "Nigeria is divided into thirty-six states and one Federal Capital Territory, which are further sub-divided into 774 Local Government Areas (LGAs). The plethora of states, of which there were only thre"
+       },
+       {
+        "handle": "3de6dc1a76d7",
+        "title": "Courtesy of the Red, White and Blue (The Angry American)",
+        "snippet": "``Courtesy of the Red, White and Blue (The Angry American) ''is a song written and recorded by American country music artist Toby Keith. The song was written in late 2001, and was inspired by Keith's "
+       },
+       {
+        "handle": "8bd1bbde1ea7",
+        "title": "Kanije Eyalet",
+        "snippet": "The province of Kanije was established in 1600 after the town of Kanije was captured from Habsburgs. This newly conquered area was joined with territory of Zigetvar Province, which was formed in 1596 "
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 24,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": true,
+ "seconds": 16.6
+}

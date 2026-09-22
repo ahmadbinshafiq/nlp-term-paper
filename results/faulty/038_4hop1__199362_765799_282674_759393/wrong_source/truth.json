@@ -1,0 +1,99 @@
+{
+ "task_id": "4hop1__199362_765799_282674_759393",
+ "fault_type": "wrong_source",
+ "fault_class": "evidence",
+ "k": 22,
+ "k_bin": 1,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 22,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "3",
+    "text": "Brown County shares a border with Outagamie County.",
+    "source_pid": "94cfc2a89d87"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/22",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "3",
+       "text": "Brown County shares a border with Outagamie County.",
+       "source_pid": "94cfc2a89d87"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/3",
+    "value": {
+     "text": "Brown County shares a border with Outagamie County.",
+     "source_pid": "94cfc2a89d87"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 22,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "3",
+    "text": "Brown County shares a border with Outagamie County.",
+    "source_pid": "a772d7439976"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/22",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "3",
+       "text": "Brown County shares a border with Outagamie County.",
+       "source_pid": "a772d7439976"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/3",
+    "value": {
+     "text": "Brown County shares a border with Outagamie County.",
+     "source_pid": "a772d7439976"
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 30,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 13.4
+}

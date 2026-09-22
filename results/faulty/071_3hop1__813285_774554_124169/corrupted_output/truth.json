@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__813285_774554_124169",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 16,
+ "k_bin": 1,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "c7e6c7c75dce"
+   }
+  },
+  "tool_return": {
+   "pid": "c7e6c7c75dce",
+   "title": "Flag of Vatican City",
+   "text": "The flag of Vatican City was adopted on June 7, 1929, the year Pope Pius XI signed the Lateran Treaty with Italy, creating a new independent state governed by the Holy See. The Vatican flag is modeled on the 1808 yellow and white flag of the earlier Papal States, to which a papal tiara and keys were later added. The Vatican (and the Holy See) also refer to it, interchangeably, as the flag of the Holy See."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "c7e6c7c75dce"
+      }
+     },
+     "tool_return": {
+      "pid": "c7e6c7c75dce",
+      "title": "Flag of Vatican City",
+      "text": "The flag of Vatican City was adopted on June 7, 1929, the year Pope Pius XI signed the Lateran Treaty with Italy, creating a new independent state governed by the Holy See. The Vatican flag is modeled on the 1808 yellow and white flag of the earlier Papal States, to which a papal tiara and keys were later added. The Vatican (and the Holy See) also refer to it, interchangeably, as the flag of the Holy See."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/c7e6c7c75dce",
+    "value": {
+     "title": "Flag of Vatican City",
+     "text": "The flag of Vatican City was adopted on June 7, 1929, the year Pope Pius XI signed the Lateran Treaty with Italy, creating a new independent state governed by the Holy See. The Vatican flag is modeled on the 1808 yellow and white flag of the earlier Papal States, to which a papal tiara and keys were later added. The Vatican (and the Holy See) also refer to it, interchangeably, as the flag of the Holy See."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "c7e6c7c75dce"
+   }
+  },
+  "tool_return": {
+   "pid": "c7e6c7c75dce",
+   "title": "Flag of Vatican City",
+   "text": "Robert Fitz Richard (1064–1136) was an Anglo-Norman feudal baron of Little Dunmow, Essex and constable of Baynard's Castle in the City of London. His feudal barony, the caput of which was at Little Dunmow in Essex, was granted to him by the king after it had been forfeited in 1110 by William Baynard, whose grandfather Ralph Baynard was the first holder and the builder of Baynard's Castle in the City of London."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "c7e6c7c75dce"
+      }
+     },
+     "tool_return": {
+      "pid": "c7e6c7c75dce",
+      "title": "Flag of Vatican City",
+      "text": "Robert Fitz Richard (1064–1136) was an Anglo-Norman feudal baron of Little Dunmow, Essex and constable of Baynard's Castle in the City of London. His feudal barony, the caput of which was at Little Dunmow in Essex, was granted to him by the king after it had been forfeited in 1110 by William Baynard, whose grandfather Ralph Baynard was the first holder and the builder of Baynard's Castle in the City of London."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/c7e6c7c75dce",
+    "value": {
+     "title": "Flag of Vatican City",
+     "text": "Robert Fitz Richard (1064–1136) was an Anglo-Norman feudal baron of Little Dunmow, Essex and constable of Baynard's Castle in the City of London. His feudal barony, the caput of which was at Little Dunmow in Essex, was granted to him by the king after it had been forfeited in 1110 by William Baynard, whose grandfather Ralph Baynard was the first holder and the builder of Baynard's Castle in the City of London."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 26,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 20.7
+}

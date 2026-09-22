@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop1__73796_87694_64412",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 2,
+ "k_bin": 0,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 2,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "apostle crucified upside down"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "3b3e4ee00376",
+     "title": "Saint Peter",
+     "snippet": "According to Christian tradition, Peter was crucified in Rome under Emperor Nero Augustus Caesar. It is traditionally held that he was crucified upside down at his own request, since he saw himself un"
+    },
+    {
+     "handle": "909f4de54a65",
+     "title": "Jude the Apostle",
+     "snippet": "Saint Jude the Apostle Apostle Jude by Anthony van Dyck Apostle and Martyr 1st century AD Galilee, Judaea, Roman Empire 1st century AD Persia, or Ararat, Armenia Venerated in Eastern Orthodox Churches"
+    },
+    {
+     "handle": "dd66337802f9",
+     "title": "Thomasleeha",
+     "snippet": "Thomasleeha or St. Thomas is a 1975 Malayalam historical drama film based on the life of St. Thomas the Apostle and his missionary work in India. It was directed and produced by P. A. Thomas."
+    },
+    {
+     "handle": "1ce447961c1a",
+     "title": "Alcuéscar",
+     "snippet": "Alcuéscar is a municipality located in the province of Cáceres, Extremadura, Spain. The town is on the Silver Route (the Via de la Plata) branch of the Camino de Santiago, the pilgrimage trail to the "
+    },
+    {
+     "handle": "e6465794e77e",
+     "title": "Cathedral Basilica of Lima",
+     "snippet": "The Basilica Cathedral of Lima, otherwise Lima Cathedral, is a Roman Catholic cathedral located in the Plaza Mayor of downtown Lima, Peru.  Construction began in 1535, and the building has undergone m"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/2",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "apostle crucified upside down"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "3b3e4ee00376",
+        "title": "Saint Peter",
+        "snippet": "According to Christian tradition, Peter was crucified in Rome under Emperor Nero Augustus Caesar. It is traditionally held that he was crucified upside down at his own request, since he saw himself un"
+       },
+       {
+        "handle": "909f4de54a65",
+        "title": "Jude the Apostle",
+        "snippet": "Saint Jude the Apostle Apostle Jude by Anthony van Dyck Apostle and Martyr 1st century AD Galilee, Judaea, Roman Empire 1st century AD Persia, or Ararat, Armenia Venerated in Eastern Orthodox Churches"
+       },
+       {
+        "handle": "dd66337802f9",
+        "title": "Thomasleeha",
+        "snippet": "Thomasleeha or St. Thomas is a 1975 Malayalam historical drama film based on the life of St. Thomas the Apostle and his missionary work in India. It was directed and produced by P. A. Thomas."
+       },
+       {
+        "handle": "1ce447961c1a",
+        "title": "Alcuéscar",
+        "snippet": "Alcuéscar is a municipality located in the province of Cáceres, Extremadura, Spain. The town is on the Silver Route (the Via de la Plata) branch of the Camino de Santiago, the pilgrimage trail to the "
+       },
+       {
+        "handle": "e6465794e77e",
+        "title": "Cathedral Basilica of Lima",
+        "snippet": "The Basilica Cathedral of Lima, otherwise Lima Cathedral, is a Roman Catholic cathedral located in the Plaza Mayor of downtown Lima, Peru.  Construction began in 1535, and the building has undergone m"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 2,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "apostle crucified upside down"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "00f7b82ed218",
+     "title": "Holenderki",
+     "snippet": "Holenderki is a village in the administrative district of Gmina Przedecz, within Koło County, Greater Poland Voivodeship, in west-central Poland. It lies approximately north-east of Przedecz, north-ea"
+    },
+    {
+     "handle": "010ca1bc2c98",
+     "title": "Madonna (entertainer)",
+     "snippet": "Madonna's Italian-Catholic background and her relationship with her parents are reflected in the album Like a Prayer. It was an evocation of the impact religion had on her career. Her video for the ti"
+    },
+    {
+     "handle": "01c7f57835c2",
+     "title": "Portugal",
+     "snippet": "The armed forces have three branches: Navy, Army and Air Force. They serve primarily as a self-defense force whose mission is to protect the territorial integrity of the country and provide humanitari"
+    },
+    {
+     "handle": "01d89a197696",
+     "title": "Jim Delsing",
+     "snippet": "His first professional contract was at the age of 16 in 1942 with Green Bay in the Wisconsin State League; he would spend five seasons in the minor leagues. During his career, which spanned 822 games "
+    },
+    {
+     "handle": "01dea547cf3f",
+     "title": "British Empire",
+     "snippet": "The foundations of the British Empire were laid when England and Scotland were separate kingdoms. In 1496 King Henry VII of England, following the successes of Spain and Portugal in overseas explorati"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/2",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "apostle crucified upside down"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "00f7b82ed218",
+        "title": "Holenderki",
+        "snippet": "Holenderki is a village in the administrative district of Gmina Przedecz, within Koło County, Greater Poland Voivodeship, in west-central Poland. It lies approximately north-east of Przedecz, north-ea"
+       },
+       {
+        "handle": "010ca1bc2c98",
+        "title": "Madonna (entertainer)",
+        "snippet": "Madonna's Italian-Catholic background and her relationship with her parents are reflected in the album Like a Prayer. It was an evocation of the impact religion had on her career. Her video for the ti"
+       },
+       {
+        "handle": "01c7f57835c2",
+        "title": "Portugal",
+        "snippet": "The armed forces have three branches: Navy, Army and Air Force. They serve primarily as a self-defense force whose mission is to protect the territorial integrity of the country and provide humanitari"
+       },
+       {
+        "handle": "01d89a197696",
+        "title": "Jim Delsing",
+        "snippet": "His first professional contract was at the age of 16 in 1942 with Green Bay in the Wisconsin State League; he would spend five seasons in the minor leagues. During his career, which spanned 822 games "
+       },
+       {
+        "handle": "01dea547cf3f",
+        "title": "British Empire",
+        "snippet": "The foundations of the British Empire were laid when England and Scotland were separate kingdoms. In 1496 King Henry VII of England, following the successes of Spain and Portugal in overseas explorati"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 28,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 36.3
+}

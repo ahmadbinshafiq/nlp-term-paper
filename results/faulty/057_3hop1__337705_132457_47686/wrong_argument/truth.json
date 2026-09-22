@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__337705_132457_47686",
+ "fault_type": "wrong_argument",
+ "fault_class": "tool",
+ "k": 10,
+ "k_bin": 1,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 10,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "839a061577f7"
+   }
+  },
+  "tool_return": {
+   "pid": "839a061577f7",
+   "title": "Danko Jones",
+   "text": "Danko Jones is a Canadian rock trio from Toronto, Ontario. The band consists of Danko Jones (vocals/guitar), John 'JC' Calabrese (bass guitar) and Rich Knox (drums). The band's rock music includes elements of punk and they are known for their humorous lyrics and energetic live shows."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/10",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "839a061577f7"
+      }
+     },
+     "tool_return": {
+      "pid": "839a061577f7",
+      "title": "Danko Jones",
+      "text": "Danko Jones is a Canadian rock trio from Toronto, Ontario. The band consists of Danko Jones (vocals/guitar), John 'JC' Calabrese (bass guitar) and Rich Knox (drums). The band's rock music includes elements of punk and they are known for their humorous lyrics and energetic live shows."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/839a061577f7",
+    "value": {
+     "title": "Danko Jones",
+     "text": "Danko Jones is a Canadian rock trio from Toronto, Ontario. The band consists of Danko Jones (vocals/guitar), John 'JC' Calabrese (bass guitar) and Rich Knox (drums). The band's rock music includes elements of punk and they are known for their humorous lyrics and energetic live shows."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 10,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "01f116b58913"
+   }
+  },
+  "tool_return": {
+   "pid": "01f116b58913",
+   "title": "We Sweat Blood",
+   "text": "We Sweat Blood is the second album by Canadian rock band Danko Jones. The album was re-released on April 19, 2005 in the United States with two additional tracks from the 2002 album \"Born a Lion\", \"Lovercall\" and \"Sound of Love\"."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/10",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "01f116b58913"
+      }
+     },
+     "tool_return": {
+      "pid": "01f116b58913",
+      "title": "We Sweat Blood",
+      "text": "We Sweat Blood is the second album by Canadian rock band Danko Jones. The album was re-released on April 19, 2005 in the United States with two additional tracks from the 2002 album \"Born a Lion\", \"Lovercall\" and \"Sound of Love\"."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/01f116b58913",
+    "value": {
+     "title": "We Sweat Blood",
+     "text": "We Sweat Blood is the second album by Canadian rock band Danko Jones. The album was re-released on April 19, 2005 in the United States with two additional tracks from the 2002 album \"Born a Lion\", \"Lovercall\" and \"Sound of Love\"."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 16.8
+}

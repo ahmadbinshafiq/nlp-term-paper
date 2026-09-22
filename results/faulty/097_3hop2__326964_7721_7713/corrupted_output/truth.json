@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop2__326964_7721_7713",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 10,
+ "k_bin": 1,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 10,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "709cffd64665"
+   }
+  },
+  "tool_return": {
+   "pid": "709cffd64665",
+   "title": "Nanjing",
+   "text": "During the period of North–South division, Nanjing remained the capital of the Southern dynasties for more than two and a half centuries. During this time, Nanjing was the international hub of East Asia. Based on historical documents, the city had 280,000 registered households. Assuming an average Nanjing household had about 5.1 people at that time, the city had more than 1.4 million residents."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/10",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "709cffd64665"
+      }
+     },
+     "tool_return": {
+      "pid": "709cffd64665",
+      "title": "Nanjing",
+      "text": "During the period of North–South division, Nanjing remained the capital of the Southern dynasties for more than two and a half centuries. During this time, Nanjing was the international hub of East Asia. Based on historical documents, the city had 280,000 registered households. Assuming an average Nanjing household had about 5.1 people at that time, the city had more than 1.4 million residents."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/709cffd64665",
+    "value": {
+     "title": "Nanjing",
+     "text": "During the period of North–South division, Nanjing remained the capital of the Southern dynasties for more than two and a half centuries. During this time, Nanjing was the international hub of East Asia. Based on historical documents, the city had 280,000 registered households. Assuming an average Nanjing household had about 5.1 people at that time, the city had more than 1.4 million residents."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 10,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "709cffd64665"
+   }
+  },
+  "tool_return": {
+   "pid": "709cffd64665",
+   "title": "Nanjing",
+   "text": "The cell cycle or cell - division cycle is the series of events that take place in a cell leading to its division and duplication of its DNA (DNA replication) to produce two daughter cells. In bacteria, which lack a cell nucleus, the cell cycle is divided into the B, C, and D periods. The B period extends from the end of cell division to the beginning of DNA replication. DNA replication occurs during the C period. The D period refers to the stage between the end of DNA replication and the splitting of the bacterial cell into two daughter cells. In cells with a nucleus, as in eukaryotes, the cell cycle is also divided into three periods: interphase, the mitotic (M) phase, and cytokinesis. During interphase, the cell grows, accumulating nutrients needed for mitosis, preparing it for cell division and duplicating its DNA. During the mitotic phase, the chromosomes separate. During the final stage, cytokinesis, the chromosomes and cytoplasm separate into two new daughter cells. To ensure the proper division of the cell, there are control mechanisms known as cell cycle checkpoints."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/10",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "709cffd64665"
+      }
+     },
+     "tool_return": {
+      "pid": "709cffd64665",
+      "title": "Nanjing",
+      "text": "The cell cycle or cell - division cycle is the series of events that take place in a cell leading to its division and duplication of its DNA (DNA replication) to produce two daughter cells. In bacteria, which lack a cell nucleus, the cell cycle is divided into the B, C, and D periods. The B period extends from the end of cell division to the beginning of DNA replication. DNA replication occurs during the C period. The D period refers to the stage between the end of DNA replication and the splitting of the bacterial cell into two daughter cells. In cells with a nucleus, as in eukaryotes, the cell cycle is also divided into three periods: interphase, the mitotic (M) phase, and cytokinesis. During interphase, the cell grows, accumulating nutrients needed for mitosis, preparing it for cell division and duplicating its DNA. During the mitotic phase, the chromosomes separate. During the final stage, cytokinesis, the chromosomes and cytoplasm separate into two new daughter cells. To ensure the proper division of the cell, there are control mechanisms known as cell cycle checkpoints."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/709cffd64665",
+    "value": {
+     "title": "Nanjing",
+     "text": "The cell cycle or cell - division cycle is the series of events that take place in a cell leading to its division and duplication of its DNA (DNA replication) to produce two daughter cells. In bacteria, which lack a cell nucleus, the cell cycle is divided into the B, C, and D periods. The B period extends from the end of cell division to the beginning of DNA replication. DNA replication occurs during the C period. The D period refers to the stage between the end of DNA replication and the splitting of the bacterial cell into two daughter cells. In cells with a nucleus, as in eukaryotes, the cell cycle is also divided into three periods: interphase, the mitotic (M) phase, and cytokinesis. During interphase, the cell grows, accumulating nutrients needed for mitosis, preparing it for cell division and duplicating its DNA. During the mitotic phase, the chromosomes separate. During the final stage, cytokinesis, the chromosomes and cytoplasm separate into two new daughter cells. To ensure the proper division of the cell, there are control mechanisms known as cell cycle checkpoints."
+    }
+   }
+  ]
+ },
+ "ended": "step_cap",
+ "n_steps": 38,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": true,
+ "seconds": 45.5
+}

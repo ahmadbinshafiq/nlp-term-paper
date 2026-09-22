@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop1__273571_834494_34053",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 2,
+ "k_bin": 0,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 2,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Summit Utah county located in"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "f2c475ed86b0",
+     "title": "Summit, Arizona",
+     "snippet": "Summit is a census-designated place (CDP) in Pima County, Arizona, United States. The population was 3,702 at the 2000 census."
+    },
+    {
+     "handle": "7bda0955a820",
+     "title": "2005 NATO Headquarters summit",
+     "snippet": "The 2005 NATO Headquarters summit was a NATO summit held in the NATO Headquarters, Brussels, Belgium on February 22, 2005. During this summit, NATO leaders reaffirmed their support for building stabil"
+    },
+    {
+     "handle": "a1839aaaf15a",
+     "title": "Utah Jazz",
+     "snippet": "The Utah Jazz are an American professional basketball team based in Salt Lake City, Utah. The Jazz compete in the National Basketball Association (NBA) as a member club of the league's Western Confere"
+    },
+    {
+     "handle": "c999952437a8",
+     "title": "Mount Kipp",
+     "snippet": "Mount Kipp () is located in the Lewis Range, Glacier National Park in the U.S. state of Montana. Immediately east of the summit lies the retreating Chaney Glacier. Mount Kipp is situated along the Con"
+    },
+    {
+     "handle": "cc157208bdfc",
+     "title": "Aerotech Consumer Aerospace",
+     "snippet": "The company's headquarters are located in Cedar City, Utah and its products are sold mainly through US and international dealers. They specialize in APCP mid and high power rocket motors, as well as s"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/2",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Summit Utah county located in"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "f2c475ed86b0",
+        "title": "Summit, Arizona",
+        "snippet": "Summit is a census-designated place (CDP) in Pima County, Arizona, United States. The population was 3,702 at the 2000 census."
+       },
+       {
+        "handle": "7bda0955a820",
+        "title": "2005 NATO Headquarters summit",
+        "snippet": "The 2005 NATO Headquarters summit was a NATO summit held in the NATO Headquarters, Brussels, Belgium on February 22, 2005. During this summit, NATO leaders reaffirmed their support for building stabil"
+       },
+       {
+        "handle": "a1839aaaf15a",
+        "title": "Utah Jazz",
+        "snippet": "The Utah Jazz are an American professional basketball team based in Salt Lake City, Utah. The Jazz compete in the National Basketball Association (NBA) as a member club of the league's Western Confere"
+       },
+       {
+        "handle": "c999952437a8",
+        "title": "Mount Kipp",
+        "snippet": "Mount Kipp () is located in the Lewis Range, Glacier National Park in the U.S. state of Montana. Immediately east of the summit lies the retreating Chaney Glacier. Mount Kipp is situated along the Con"
+       },
+       {
+        "handle": "cc157208bdfc",
+        "title": "Aerotech Consumer Aerospace",
+        "snippet": "The company's headquarters are located in Cedar City, Utah and its products are sold mainly through US and international dealers. They specialize in APCP mid and high power rocket motors, as well as s"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 2,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Summit Utah county located in"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "74d05056ed9f",
+     "title": "Woodland Beach, Delaware",
+     "snippet": "Woodland Beach is an unincorporated community in Kent County, Delaware, United States. Woodland Beach is along the Delaware Bay east of Smyrna at the eastern terminus of Delaware Route 6. The Woodland"
+    },
+    {
+     "handle": "a1c5a824c282",
+     "title": "David, Kentucky",
+     "snippet": "David is an unincorporated community and coal town in Floyd County, Kentucky, United States along County Route 404. Located in the Appalachian Mountains, it lies approximately southeast of Lexington. "
+    },
+    {
+     "handle": "1b8abd5212e3",
+     "title": "Rawdon, Quebec",
+     "snippet": "Rawdon is a municipality located on the Ouareau River in southwestern Quebec, Canada, about 60 kilometres north of Montreal. It is the seat for the Regional County Municipality of Matawinie, in the La"
+    },
+    {
+     "handle": "ccd3224e4569",
+     "title": "Stirling, New Jersey",
+     "snippet": "Stirling is an unincorporated community located within Long Hill Township in Morris County, New Jersey, United States. The area is served as United States Postal Service ZIP Code 07980."
+    },
+    {
+     "handle": "8b98a8f609bd",
+     "title": "Eric Marcus Municipal Airport",
+     "snippet": "Eric Marcus Municipal Airport is a county-owned, public-use airport in Pima County, Arizona, United States. It is located north of the central business district of Ajo and is about southwest of Phoeni"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/2",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Summit Utah county located in"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "74d05056ed9f",
+        "title": "Woodland Beach, Delaware",
+        "snippet": "Woodland Beach is an unincorporated community in Kent County, Delaware, United States. Woodland Beach is along the Delaware Bay east of Smyrna at the eastern terminus of Delaware Route 6. The Woodland"
+       },
+       {
+        "handle": "a1c5a824c282",
+        "title": "David, Kentucky",
+        "snippet": "David is an unincorporated community and coal town in Floyd County, Kentucky, United States along County Route 404. Located in the Appalachian Mountains, it lies approximately southeast of Lexington. "
+       },
+       {
+        "handle": "1b8abd5212e3",
+        "title": "Rawdon, Quebec",
+        "snippet": "Rawdon is a municipality located on the Ouareau River in southwestern Quebec, Canada, about 60 kilometres north of Montreal. It is the seat for the Regional County Municipality of Matawinie, in the La"
+       },
+       {
+        "handle": "ccd3224e4569",
+        "title": "Stirling, New Jersey",
+        "snippet": "Stirling is an unincorporated community located within Long Hill Township in Morris County, New Jersey, United States. The area is served as United States Postal Service ZIP Code 07980."
+       },
+       {
+        "handle": "8b98a8f609bd",
+        "title": "Eric Marcus Municipal Airport",
+        "snippet": "Eric Marcus Municipal Airport is a county-owned, public-use airport in Pima County, Arizona, United States. It is located north of the central business district of Ajo and is about southwest of Phoeni"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "step_cap",
+ "n_steps": 38,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": true,
+ "reread_after_k": true,
+ "seconds": 53.1
+}

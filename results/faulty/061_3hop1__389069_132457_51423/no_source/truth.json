@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__389069_132457_51423",
+ "fault_type": "no_source",
+ "fault_class": "evidence",
+ "k": 18,
+ "k_bin": 1,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 18,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "no_castle_found",
+    "text": "The passage about Governor's Bridge did not contain information about a castle.",
+    "source_pid": "ed9431b5dd94"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/18",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "no_castle_found",
+       "text": "The passage about Governor's Bridge did not contain information about a castle.",
+       "source_pid": "ed9431b5dd94"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/no_castle_found",
+    "value": {
+     "text": "The passage about Governor's Bridge did not contain information about a castle.",
+     "source_pid": "ed9431b5dd94"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 18,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "no_castle_found",
+    "text": "The passage about Governor's Bridge did not contain information about a castle.",
+    "source_pid": null
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/18",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "no_castle_found",
+       "text": "The passage about Governor's Bridge did not contain information about a castle.",
+       "source_pid": null
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/no_castle_found",
+    "value": {
+     "text": "The passage about Governor's Bridge did not contain information about a castle.",
+     "source_pid": null
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 26,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 12.1
+}

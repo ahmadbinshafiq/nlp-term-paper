@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop2__67618_30587_44003",
+ "fault_type": "wrong_source",
+ "fault_class": "evidence",
+ "k": 12,
+ "k_bin": 0,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "miami_ocean",
+    "text": "Miami is located on the Atlantic Ocean.",
+    "source_pid": "159ceafd2b6c"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "miami_ocean",
+       "text": "Miami is located on the Atlantic Ocean.",
+       "source_pid": "159ceafd2b6c"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/miami_ocean",
+    "value": {
+     "text": "Miami is located on the Atlantic Ocean.",
+     "source_pid": "159ceafd2b6c"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "miami_ocean",
+    "text": "Miami is located on the Atlantic Ocean.",
+    "source_pid": "3a3fd1f1062b"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "miami_ocean",
+       "text": "Miami is located on the Atlantic Ocean.",
+       "source_pid": "3a3fd1f1062b"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/miami_ocean",
+    "value": {
+     "text": "Miami is located on the Atlantic Ocean.",
+     "source_pid": "3a3fd1f1062b"
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 14,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 3.7
+}

@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop2__655849_467331_162182",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 2,
+ "k_bin": 0,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 2,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "A Luoi district country Vietnam"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "6aa40203796f",
+     "title": "A Lưới District",
+     "snippet": "A Lưới is a rural district of Thừa Thiên-Huế Province in the North Central Coast region of Vietnam. It is located west in the highly mountainous area of A Shau Valley bordering Laos. The population in"
+    },
+    {
+     "handle": "5b0f67628aa2",
+     "title": "A Lim",
+     "snippet": "A Lim is a village in south-eastern Laos near the border with Vietnam. It is located in Kaleum District in Sekong Province."
+    },
+    {
+     "handle": "99200735e8f3",
+     "title": "A Don",
+     "snippet": "A Don is a village in south-eastern Laos near the border with Vietnam. It is located in Kaleum District in Sekong Province."
+    },
+    {
+     "handle": "be83909ce84d",
+     "title": "Leaders of the Vietnam War",
+     "snippet": "He left his country on a French steamer in 1911 and traveled extensively around the world participating actively in the Communist International before returning to Vietnam in 1941. He then organized a"
+    },
+    {
+     "handle": "c7de7596c2af",
+     "title": "Thới Bình District",
+     "snippet": "Thới Bình is a rural district of Cà Mau Province in the Mekong Delta region of Vietnam. As of 2003 the district had a population of 138,763. The district covers an area of 631 km². The district capita"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/2",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "A Luoi district country Vietnam"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "6aa40203796f",
+        "title": "A Lưới District",
+        "snippet": "A Lưới is a rural district of Thừa Thiên-Huế Province in the North Central Coast region of Vietnam. It is located west in the highly mountainous area of A Shau Valley bordering Laos. The population in"
+       },
+       {
+        "handle": "5b0f67628aa2",
+        "title": "A Lim",
+        "snippet": "A Lim is a village in south-eastern Laos near the border with Vietnam. It is located in Kaleum District in Sekong Province."
+       },
+       {
+        "handle": "99200735e8f3",
+        "title": "A Don",
+        "snippet": "A Don is a village in south-eastern Laos near the border with Vietnam. It is located in Kaleum District in Sekong Province."
+       },
+       {
+        "handle": "be83909ce84d",
+        "title": "Leaders of the Vietnam War",
+        "snippet": "He left his country on a French steamer in 1911 and traveled extensively around the world participating actively in the Communist International before returning to Vietnam in 1941. He then organized a"
+       },
+       {
+        "handle": "c7de7596c2af",
+        "title": "Thới Bình District",
+        "snippet": "Thới Bình is a rural district of Cà Mau Province in the Mekong Delta region of Vietnam. As of 2003 the district had a population of 138,763. The district covers an area of 631 km². The district capita"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 2,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "A Luoi district country Vietnam"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "db021e07c61c",
+     "title": "Mueang Phan",
+     "snippet": "Mueang Phan () is a village and \"tambon\" (subdistrict) of Phan District, in Chiang Rai Province, Thailand. In 2005 it had a total population of 19,326 people. The \"tambon\" contains 25 villages."
+    },
+    {
+     "handle": "8b135a32cfd0",
+     "title": "Red",
+     "snippet": "After the Communist Party of China took power in 1949, the flag of China became a red flag with a large star symbolizing the Communist Party, and smaller stars symbolizing workers, peasants, the urban"
+    },
+    {
+     "handle": "9ad7f6f8acc4",
+     "title": "Sang Divar",
+     "snippet": "Sang Divar (, also Romanized as Sang Dīvār; also known as Sangetown, Sangīfān, and Sangyufan) is a village in Hezarmasjed Rural District, in the Central District of Kalat County, Razavi Khorasan Provi"
+    },
+    {
+     "handle": "4915121c9b3c",
+     "title": "Muang Kham, Chiang Rai",
+     "snippet": "Muang Kham () is a village and \"tambon\" (subdistrict) of Phan District, in Chiang Rai Province, Thailand. In 2005 it had a total population of 8837 people. The \"tambon\" contains 17 villages."
+    },
+    {
+     "handle": "6b7fbb30d453",
+     "title": "Rio Linda High School",
+     "snippet": "Rio Linda High School is a high school located in Rio Linda, Sacramento, CA. It has an enrollment of 2,035 students. It is part of the Twin Rivers Unified School District, and was formerly part of the"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/2",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "A Luoi district country Vietnam"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "db021e07c61c",
+        "title": "Mueang Phan",
+        "snippet": "Mueang Phan () is a village and \"tambon\" (subdistrict) of Phan District, in Chiang Rai Province, Thailand. In 2005 it had a total population of 19,326 people. The \"tambon\" contains 25 villages."
+       },
+       {
+        "handle": "8b135a32cfd0",
+        "title": "Red",
+        "snippet": "After the Communist Party of China took power in 1949, the flag of China became a red flag with a large star symbolizing the Communist Party, and smaller stars symbolizing workers, peasants, the urban"
+       },
+       {
+        "handle": "9ad7f6f8acc4",
+        "title": "Sang Divar",
+        "snippet": "Sang Divar (, also Romanized as Sang Dīvār; also known as Sangetown, Sangīfān, and Sangyufan) is a village in Hezarmasjed Rural District, in the Central District of Kalat County, Razavi Khorasan Provi"
+       },
+       {
+        "handle": "4915121c9b3c",
+        "title": "Muang Kham, Chiang Rai",
+        "snippet": "Muang Kham () is a village and \"tambon\" (subdistrict) of Phan District, in Chiang Rai Province, Thailand. In 2005 it had a total population of 8837 people. The \"tambon\" contains 17 villages."
+       },
+       {
+        "handle": "6b7fbb30d453",
+        "title": "Rio Linda High School",
+        "snippet": "Rio Linda High School is a high school located in Rio Linda, Sacramento, CA. It has an enrollment of 2,035 students. It is part of the Twin Rivers Unified School District, and was formerly part of the"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 24.9
+}

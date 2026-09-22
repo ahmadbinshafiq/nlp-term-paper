@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__273571_834494_34053",
+ "fault_type": "wrong_argument",
+ "fault_class": "tool",
+ "k": 10,
+ "k_bin": 2,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 10,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "ce88aa470c59"
+   }
+  },
+  "tool_return": {
+   "pid": "ce88aa470c59",
+   "title": "Tucson, Arizona",
+   "text": "At the University of Arizona, where records have been kept since 1894, the record maximum temperature was 115 °F (46 °C) on June 19, 1960, and July 28, 1995, and the record minimum temperature was 6 °F (−14 °C) on January 7, 1913. There are an average of 150.1 days annually with highs of 90 °F (32 °C) or higher and an average of 26.4 days with lows reaching or below the freezing mark. Average annual precipitation is 11.15 in (283 mm). There is an average of 49 days with measurable precipitation. The wettest year was 1905 with 24.17 in (614 mm) and the driest year was 1924 with 5.07 in (129 mm). The most precipitation in one month was 7.56 in (192 mm) in July 1984. The most precipitation in 24 hours was 4.16 in (106 mm) on October 1, 1983. Annual snowfall averages 0.7 in (1.8 cm). The most snow in one year was 7.2 in (18 cm) in 1987. The most snow in one month was 6.0 in (15 cm) in January 1898 and March 1922."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/10",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "ce88aa470c59"
+      }
+     },
+     "tool_return": {
+      "pid": "ce88aa470c59",
+      "title": "Tucson, Arizona",
+      "text": "At the University of Arizona, where records have been kept since 1894, the record maximum temperature was 115 °F (46 °C) on June 19, 1960, and July 28, 1995, and the record minimum temperature was 6 °F (−14 °C) on January 7, 1913. There are an average of 150.1 days annually with highs of 90 °F (32 °C) or higher and an average of 26.4 days with lows reaching or below the freezing mark. Average annual precipitation is 11.15 in (283 mm). There is an average of 49 days with measurable precipitation. The wettest year was 1905 with 24.17 in (614 mm) and the driest year was 1924 with 5.07 in (129 mm). The most precipitation in one month was 7.56 in (192 mm) in July 1984. The most precipitation in 24 hours was 4.16 in (106 mm) on October 1, 1983. Annual snowfall averages 0.7 in (1.8 cm). The most snow in one year was 7.2 in (18 cm) in 1987. The most snow in one month was 6.0 in (15 cm) in January 1898 and March 1922."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/ce88aa470c59",
+    "value": {
+     "title": "Tucson, Arizona",
+     "text": "At the University of Arizona, where records have been kept since 1894, the record maximum temperature was 115 °F (46 °C) on June 19, 1960, and July 28, 1995, and the record minimum temperature was 6 °F (−14 °C) on January 7, 1913. There are an average of 150.1 days annually with highs of 90 °F (32 °C) or higher and an average of 26.4 days with lows reaching or below the freezing mark. Average annual precipitation is 11.15 in (283 mm). There is an average of 49 days with measurable precipitation. The wettest year was 1905 with 24.17 in (614 mm) and the driest year was 1924 with 5.07 in (129 mm). The most precipitation in one month was 7.56 in (192 mm) in July 1984. The most precipitation in 24 hours was 4.16 in (106 mm) on October 1, 1983. Annual snowfall averages 0.7 in (1.8 cm). The most snow in one year was 7.2 in (18 cm) in 1987. The most snow in one month was 6.0 in (15 cm) in January 1898 and March 1922."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 10,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "08f1e9877011"
+   }
+  },
+  "tool_return": {
+   "pid": "08f1e9877011",
+   "title": "Alaska",
+   "text": "The climate in Southeast Alaska is a mid-latitude oceanic climate (Köppen climate classification: Cfb) in the southern sections and a subarctic oceanic climate (Köppen Cfc) in the northern parts. On an annual basis, Southeast is both the wettest and warmest part of Alaska with milder temperatures in the winter and high precipitation throughout the year. Juneau averages over 50 in (130 cm) of precipitation a year, and Ketchikan averages over 150 in (380 cm). This is also the only region in Alaska in which the average daytime high temperature is above freezing during the winter months."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/10",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "08f1e9877011"
+      }
+     },
+     "tool_return": {
+      "pid": "08f1e9877011",
+      "title": "Alaska",
+      "text": "The climate in Southeast Alaska is a mid-latitude oceanic climate (Köppen climate classification: Cfb) in the southern sections and a subarctic oceanic climate (Köppen Cfc) in the northern parts. On an annual basis, Southeast is both the wettest and warmest part of Alaska with milder temperatures in the winter and high precipitation throughout the year. Juneau averages over 50 in (130 cm) of precipitation a year, and Ketchikan averages over 150 in (380 cm). This is also the only region in Alaska in which the average daytime high temperature is above freezing during the winter months."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/08f1e9877011",
+    "value": {
+     "title": "Alaska",
+     "text": "The climate in Southeast Alaska is a mid-latitude oceanic climate (Köppen climate classification: Cfb) in the southern sections and a subarctic oceanic climate (Köppen Cfc) in the northern parts. On an annual basis, Southeast is both the wettest and warmest part of Alaska with milder temperatures in the winter and high precipitation throughout the year. Juneau averages over 50 in (130 cm) of precipitation a year, and Ketchikan averages over 150 in (380 cm). This is also the only region in Alaska in which the average daytime high temperature is above freezing during the winter months."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 16.8
+}

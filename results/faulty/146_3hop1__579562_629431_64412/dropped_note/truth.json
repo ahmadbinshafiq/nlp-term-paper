@@ -1,0 +1,91 @@
+{
+ "task_id": "3hop1__579562_629431_64412",
+ "fault_type": "dropped_note",
+ "fault_class": "state",
+ "k": 6,
+ "k_bin": 0,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 6,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "author_death",
+    "text": "Pope John XXIII died on 3 June 1963.",
+    "source_pid": "886afa5a9830"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/6",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "author_death",
+       "text": "Pope John XXIII died on 3 June 1963.",
+       "source_pid": "886afa5a9830"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/author_death",
+    "value": {
+     "text": "Pope John XXIII died on 3 June 1963.",
+     "source_pid": "886afa5a9830"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 6,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "author_death",
+    "text": "Pope John XXIII died on 3 June 1963.",
+    "source_pid": "886afa5a9830"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/6",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "author_death",
+       "text": "Pope John XXIII died on 3 June 1963.",
+       "source_pid": "886afa5a9830"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 0
+}

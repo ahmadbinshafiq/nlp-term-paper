@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__401538_132457_47686",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 4,
+ "k_bin": 0,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 4,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "01f116b58913"
+   }
+  },
+  "tool_return": {
+   "pid": "01f116b58913",
+   "title": "We Sweat Blood",
+   "text": "We Sweat Blood is the second album by Canadian rock band Danko Jones. The album was re-released on April 19, 2005 in the United States with two additional tracks from the 2002 album \"Born a Lion\", \"Lovercall\" and \"Sound of Love\"."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/4",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "01f116b58913"
+      }
+     },
+     "tool_return": {
+      "pid": "01f116b58913",
+      "title": "We Sweat Blood",
+      "text": "We Sweat Blood is the second album by Canadian rock band Danko Jones. The album was re-released on April 19, 2005 in the United States with two additional tracks from the 2002 album \"Born a Lion\", \"Lovercall\" and \"Sound of Love\"."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/01f116b58913",
+    "value": {
+     "title": "We Sweat Blood",
+     "text": "We Sweat Blood is the second album by Canadian rock band Danko Jones. The album was re-released on April 19, 2005 in the United States with two additional tracks from the 2002 album \"Born a Lion\", \"Lovercall\" and \"Sound of Love\"."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 4,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "01f116b58913"
+   }
+  },
+  "tool_return": {
+   "pid": "01f116b58913",
+   "title": "We Sweat Blood",
+   "text": "Christian Aid's essential belief is summed up in the statement ``We believe in life before death '', often used alongside the Christian Aid logo. Christian Aid states it works where the need is greatest, regardless of religion, nationality or race. One of its other messages is`` Poverty Over'', represented by the word ``Over ''highlighted within the word`` Poverty''. It works with 570 local partner organisations in 45 countries around the world to help the world's poorest communities. It is a major member of the Stop Climate Chaos, The Fairtrade Foundation and Trade Justice Movement campaigns. Christian Aid's headquarters are in London and it has regional teams across the UK and Ireland. Christian Aid also organises the UK's largest door - to - door collection, Christian Aid Week, which takes place in May each year."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/4",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "01f116b58913"
+      }
+     },
+     "tool_return": {
+      "pid": "01f116b58913",
+      "title": "We Sweat Blood",
+      "text": "Christian Aid's essential belief is summed up in the statement ``We believe in life before death '', often used alongside the Christian Aid logo. Christian Aid states it works where the need is greatest, regardless of religion, nationality or race. One of its other messages is`` Poverty Over'', represented by the word ``Over ''highlighted within the word`` Poverty''. It works with 570 local partner organisations in 45 countries around the world to help the world's poorest communities. It is a major member of the Stop Climate Chaos, The Fairtrade Foundation and Trade Justice Movement campaigns. Christian Aid's headquarters are in London and it has regional teams across the UK and Ireland. Christian Aid also organises the UK's largest door - to - door collection, Christian Aid Week, which takes place in May each year."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/01f116b58913",
+    "value": {
+     "title": "We Sweat Blood",
+     "text": "Christian Aid's essential belief is summed up in the statement ``We believe in life before death '', often used alongside the Christian Aid logo. Christian Aid states it works where the need is greatest, regardless of religion, nationality or race. One of its other messages is`` Poverty Over'', represented by the word ``Over ''highlighted within the word`` Poverty''. It works with 570 local partner organisations in 45 countries around the world to help the world's poorest communities. It is a major member of the Stop Climate Chaos, The Fairtrade Foundation and Trade Justice Movement campaigns. Christian Aid's headquarters are in London and it has regional teams across the UK and Ireland. Christian Aid also organises the UK's largest door - to - door collection, Christian Aid Week, which takes place in May each year."
+    }
+   }
+  ]
+ },
+ "ended": "step_cap",
+ "n_steps": 38,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": true,
+ "seconds": 45.6
+}

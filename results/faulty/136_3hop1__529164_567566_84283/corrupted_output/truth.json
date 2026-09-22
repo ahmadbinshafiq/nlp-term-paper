@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__529164_567566_84283",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 16,
+ "k_bin": 2,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "bcdca897f812"
+   }
+  },
+  "tool_return": {
+   "pid": "bcdca897f812",
+   "title": "Warner Records",
+   "text": "Warner Bros. Records Parent company Warner Music Group Founded March 19, 1958; 60 years ago (1958 - 03 - 19) Founder James Conkling Distributor (s) Self - distributed (In the US) WEA International (Outside the US) Rhino Entertainment Company (Re-issues) Genre Various Country of origin United States Location Burbank, California, U.S. Official website warnerbrosrecords.com"
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "bcdca897f812"
+      }
+     },
+     "tool_return": {
+      "pid": "bcdca897f812",
+      "title": "Warner Records",
+      "text": "Warner Bros. Records Parent company Warner Music Group Founded March 19, 1958; 60 years ago (1958 - 03 - 19) Founder James Conkling Distributor (s) Self - distributed (In the US) WEA International (Outside the US) Rhino Entertainment Company (Re-issues) Genre Various Country of origin United States Location Burbank, California, U.S. Official website warnerbrosrecords.com"
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/bcdca897f812",
+    "value": {
+     "title": "Warner Records",
+     "text": "Warner Bros. Records Parent company Warner Music Group Founded March 19, 1958; 60 years ago (1958 - 03 - 19) Founder James Conkling Distributor (s) Self - distributed (In the US) WEA International (Outside the US) Rhino Entertainment Company (Re-issues) Genre Various Country of origin United States Location Burbank, California, U.S. Official website warnerbrosrecords.com"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "bcdca897f812"
+   }
+  },
+  "tool_return": {
+   "pid": "bcdca897f812",
+   "title": "Warner Records",
+   "text": "Look What I Almost Stepped In... is the eighth studio album by the southern California punk rock band The Vandals, released in 2000 by Nitro Records. It was the band's final album for Nitro, as they moved to their own label Kung Fu Records the following year. Between June and August 2001, the group performed on the Warped Tour. Much of the album is characterized by the pop-punk music and humorous lyrics for which the band is known."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "bcdca897f812"
+      }
+     },
+     "tool_return": {
+      "pid": "bcdca897f812",
+      "title": "Warner Records",
+      "text": "Look What I Almost Stepped In... is the eighth studio album by the southern California punk rock band The Vandals, released in 2000 by Nitro Records. It was the band's final album for Nitro, as they moved to their own label Kung Fu Records the following year. Between June and August 2001, the group performed on the Warped Tour. Much of the album is characterized by the pop-punk music and humorous lyrics for which the band is known."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/bcdca897f812",
+    "value": {
+     "title": "Warner Records",
+     "text": "Look What I Almost Stepped In... is the eighth studio album by the southern California punk rock band The Vandals, released in 2000 by Nitro Records. It was the band's final album for Nitro, as they moved to their own label Kung Fu Records the following year. Between June and August 2001, the group performed on the Warped Tour. Much of the album is characterized by the pop-punk music and humorous lyrics for which the band is known."
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 28,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": true,
+ "seconds": 18.6
+}

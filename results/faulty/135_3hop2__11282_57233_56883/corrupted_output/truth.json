@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop2__11282_57233_56883",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 8,
+ "k_bin": 2,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 8,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Australia conscription Vietnam War start year"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "d4b47031b836",
+     "title": "Modern history",
+     "snippet": "The Russian Civil War was a multi-party war that occurred within the former Russian Empire after the Russian provisional government collapsed and the Soviets under the domination of the Bolshevik part"
+    },
+    {
+     "handle": "563003dd05d2",
+     "title": "Conscription in Australia",
+     "snippet": "In 1964 compulsory National Service for 20 - year - old males was introduced under the National Service Act (1964). The selection of conscripts was made by a sortition or lottery draw based on date of"
+    },
+    {
+     "handle": "775ff2008aa2",
+     "title": "Conscription in the United Kingdom",
+     "snippet": "Conscription in the United Kingdom has existed for two periods in modern times. The first was from 1916 to 1920, the second from 1939 to 1960, with the last conscripted soldiers leaving the service in"
+    },
+    {
+     "handle": "459477493740",
+     "title": "Zone 5 Military Museum, Danang",
+     "snippet": "The Zone 5 Military Museum (Bao Tang Khu 5) is a military museum located at 3 Duy Tân, Da Nang, Vietnam. It covers all Vietnamese resistance to foreign occupation from the Chinese occupation, the Firs"
+    },
+    {
+     "handle": "be83909ce84d",
+     "title": "Leaders of the Vietnam War",
+     "snippet": "He left his country on a French steamer in 1911 and traveled extensively around the world participating actively in the Communist International before returning to Vietnam in 1941. He then organized a"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/8",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Australia conscription Vietnam War start year"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "d4b47031b836",
+        "title": "Modern history",
+        "snippet": "The Russian Civil War was a multi-party war that occurred within the former Russian Empire after the Russian provisional government collapsed and the Soviets under the domination of the Bolshevik part"
+       },
+       {
+        "handle": "563003dd05d2",
+        "title": "Conscription in Australia",
+        "snippet": "In 1964 compulsory National Service for 20 - year - old males was introduced under the National Service Act (1964). The selection of conscripts was made by a sortition or lottery draw based on date of"
+       },
+       {
+        "handle": "775ff2008aa2",
+        "title": "Conscription in the United Kingdom",
+        "snippet": "Conscription in the United Kingdom has existed for two periods in modern times. The first was from 1916 to 1920, the second from 1939 to 1960, with the last conscripted soldiers leaving the service in"
+       },
+       {
+        "handle": "459477493740",
+        "title": "Zone 5 Military Museum, Danang",
+        "snippet": "The Zone 5 Military Museum (Bao Tang Khu 5) is a military museum located at 3 Duy Tân, Da Nang, Vietnam. It covers all Vietnamese resistance to foreign occupation from the Chinese occupation, the Firs"
+       },
+       {
+        "handle": "be83909ce84d",
+        "title": "Leaders of the Vietnam War",
+        "snippet": "He left his country on a French steamer in 1911 and traveled extensively around the world participating actively in the Communist International before returning to Vietnam in 1941. He then organized a"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 8,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Australia conscription Vietnam War start year"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "119b27148c8d",
+     "title": "Naas River",
+     "snippet": "The Naas River, a perennial stream of the Murrumbidgee catchment within the Murray-Darling basin, is located in the Australian Capital Territory, Australia."
+    },
+    {
+     "handle": "4512b2efa757",
+     "title": "Thredbo River",
+     "snippet": "The Thredbo River, a perennial river of the Snowy River catchment, is located in the Snowy Mountains region of New South Wales, Australia."
+    },
+    {
+     "handle": "6a86aef81c3e",
+     "title": "Pinch River",
+     "snippet": "The Pinch River, a perennial river of the Snowy River catchment, is located in the Snowy Mountains region of New South Wales, Australia."
+    },
+    {
+     "handle": "918a0457e691",
+     "title": "Gungarlin River",
+     "snippet": "The Gungarlin River, a perennial river of the Snowy River catchment, is located in the Snowy Mountains region of New South Wales, Australia."
+    },
+    {
+     "handle": "d6e157754cb1",
+     "title": "Lord of the Nutcracker Men",
+     "snippet": "Lord of the Nutcracker Men is a novel by Canadian author Iain Lawrence that takes place in England during the first year of World War I. The book was first published in October 2001 by the Delacorte P"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/8",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Australia conscription Vietnam War start year"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "119b27148c8d",
+        "title": "Naas River",
+        "snippet": "The Naas River, a perennial stream of the Murrumbidgee catchment within the Murray-Darling basin, is located in the Australian Capital Territory, Australia."
+       },
+       {
+        "handle": "4512b2efa757",
+        "title": "Thredbo River",
+        "snippet": "The Thredbo River, a perennial river of the Snowy River catchment, is located in the Snowy Mountains region of New South Wales, Australia."
+       },
+       {
+        "handle": "6a86aef81c3e",
+        "title": "Pinch River",
+        "snippet": "The Pinch River, a perennial river of the Snowy River catchment, is located in the Snowy Mountains region of New South Wales, Australia."
+       },
+       {
+        "handle": "918a0457e691",
+        "title": "Gungarlin River",
+        "snippet": "The Gungarlin River, a perennial river of the Snowy River catchment, is located in the Snowy Mountains region of New South Wales, Australia."
+       },
+       {
+        "handle": "d6e157754cb1",
+        "title": "Lord of the Nutcracker Men",
+        "snippet": "Lord of the Nutcracker Men is a novel by Canadian author Iain Lawrence that takes place in England during the first year of World War I. The book was first published in October 2001 by the Delacorte P"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "step_cap",
+ "n_steps": 38,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": true,
+ "reread_after_k": false,
+ "seconds": 33.7
+}

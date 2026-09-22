@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__273571_834494_34088",
+ "fault_type": "overwritten_note",
+ "fault_class": "state",
+ "k": 18,
+ "k_bin": 2,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 18,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "arizona_nascar",
+    "text": "Tucson Raceway Park hosts NASCAR-sanctioned auto racing events in Arizona.",
+    "source_pid": "d088f0836bb6"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/18",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "arizona_nascar",
+       "text": "Tucson Raceway Park hosts NASCAR-sanctioned auto racing events in Arizona.",
+       "source_pid": "d088f0836bb6"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/arizona_nascar",
+    "value": {
+     "text": "Tucson Raceway Park hosts NASCAR-sanctioned auto racing events in Arizona.",
+     "source_pid": "d088f0836bb6"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 18,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "arizona_nascar",
+    "text": "Tucson Raceway Park hosts NASCAR-sanctioned auto racing events in Arizona.",
+    "source_pid": "d088f0836bb6"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/18",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "arizona_nascar",
+       "text": "Tucson Raceway Park hosts NASCAR-sanctioned auto racing events in Arizona.",
+       "source_pid": "d088f0836bb6"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "replace",
+    "path": "/notes/pima_county_location",
+    "value": {
+     "text": "Tucson Raceway Park hosts NASCAR-sanctioned auto racing events in Arizona.",
+     "source_pid": "d088f0836bb6"
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": true,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 0
+}

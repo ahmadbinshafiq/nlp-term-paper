@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__353661_629431_124169",
+ "fault_type": "sham",
+ "fault_class": "none",
+ "k": 18,
+ "k_bin": 1,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 18,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "death_city",
+    "text": "Pope John XXIII was the sovereign of Vatican City.",
+    "source_pid": "15ef6cadea21"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/18",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "death_city",
+       "text": "Pope John XXIII was the sovereign of Vatican City.",
+       "source_pid": "15ef6cadea21"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/death_city",
+    "value": {
+     "text": "Pope John XXIII was the sovereign of Vatican City.",
+     "source_pid": "15ef6cadea21"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 18,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "death_city",
+    "text": "Pope John XXIII was the sovereign of Vatican City.",
+    "source_pid": "15ef6cadea21"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/18",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "death_city",
+       "text": "Pope John XXIII was the sovereign of Vatican City.",
+       "source_pid": "15ef6cadea21"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/death_city",
+    "value": {
+     "text": "Pope John XXIII was the sovereign of Vatican City.",
+     "source_pid": "15ef6cadea21"
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 26,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 0
+}

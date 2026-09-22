@@ -1,0 +1,91 @@
+{
+ "task_id": "3hop1__273571_834494_34053",
+ "fault_type": "dropped_note",
+ "fault_class": "state",
+ "k": 12,
+ "k_bin": 2,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "wettest_year_tucson",
+    "text": "The wettest year for Tucson, Arizona was 1905.",
+    "source_pid": "ce88aa470c59"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "wettest_year_tucson",
+       "text": "The wettest year for Tucson, Arizona was 1905.",
+       "source_pid": "ce88aa470c59"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/wettest_year_tucson",
+    "value": {
+     "text": "The wettest year for Tucson, Arizona was 1905.",
+     "source_pid": "ce88aa470c59"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "wettest_year_tucson",
+    "text": "The wettest year for Tucson, Arizona was 1905.",
+    "source_pid": "ce88aa470c59"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "wettest_year_tucson",
+       "text": "The wettest year for Tucson, Arizona was 1905.",
+       "source_pid": "ce88aa470c59"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 14,
+ "answer_changed": false,
+ "finish_note_missing": true,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 0
+}

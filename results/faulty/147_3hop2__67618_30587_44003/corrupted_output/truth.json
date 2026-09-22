@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop2__67618_30587_44003",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 2,
+ "k_bin": 0,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 2,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Mississippi River empties into the ocean where"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "3a3fd1f1062b",
+     "title": "Mississippi River",
+     "snippet": "The Mississippi River has the world's fourth - largest drainage basin (``watershed ''or`` catchment''). The basin covers more than 1,245,000 square miles (3,220,000 km), including all or parts of 31 U"
+    },
+    {
+     "handle": "81f71e61aa0c",
+     "title": "Monocacy River",
+     "snippet": "The Monocacy River is a free-flowing left tributary to the Potomac River, which empties into the Atlantic Ocean via the Chesapeake Bay. The river is long, with a drainage area of about . It is the lar"
+    },
+    {
+     "handle": "3b709e0ec209",
+     "title": "Mamaroneck River",
+     "snippet": "The Mamaroneck River is a freshwater stream located in Southern Westchester County, New York. The river forms in White Plains and Harrison and flows south through Mamaroneck Town and Village, where it"
+    },
+    {
+     "handle": "d0524f0cee21",
+     "title": "Bullards Bridge",
+     "snippet": "The Bullards Bridge (or simply Bullards Bridge) is a vertical-lift bridge that spans the Coquille River near where the river empties into the Pacific Ocean, just north of Bandon, Oregon, United States"
+    },
+    {
+     "handle": "e655236b27dd",
+     "title": "Ohlanga River",
+     "snippet": "The Ohlanga River is a river in KwaZulu-Natal, South Africa, which empties into the Indian Ocean just north of Umhlanga, KwaZulu-Natal, north of Durban. The river has extensive reed beds in the estuar"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/2",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Mississippi River empties into the ocean where"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "3a3fd1f1062b",
+        "title": "Mississippi River",
+        "snippet": "The Mississippi River has the world's fourth - largest drainage basin (``watershed ''or`` catchment''). The basin covers more than 1,245,000 square miles (3,220,000 km), including all or parts of 31 U"
+       },
+       {
+        "handle": "81f71e61aa0c",
+        "title": "Monocacy River",
+        "snippet": "The Monocacy River is a free-flowing left tributary to the Potomac River, which empties into the Atlantic Ocean via the Chesapeake Bay. The river is long, with a drainage area of about . It is the lar"
+       },
+       {
+        "handle": "3b709e0ec209",
+        "title": "Mamaroneck River",
+        "snippet": "The Mamaroneck River is a freshwater stream located in Southern Westchester County, New York. The river forms in White Plains and Harrison and flows south through Mamaroneck Town and Village, where it"
+       },
+       {
+        "handle": "d0524f0cee21",
+        "title": "Bullards Bridge",
+        "snippet": "The Bullards Bridge (or simply Bullards Bridge) is a vertical-lift bridge that spans the Coquille River near where the river empties into the Pacific Ocean, just north of Bandon, Oregon, United States"
+       },
+       {
+        "handle": "e655236b27dd",
+        "title": "Ohlanga River",
+        "snippet": "The Ohlanga River is a river in KwaZulu-Natal, South Africa, which empties into the Indian Ocean just north of Umhlanga, KwaZulu-Natal, north of Durban. The river has extensive reed beds in the estuar"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 2,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Mississippi River empties into the ocean where"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "b2d6a6ae2a96",
+     "title": "History of Canada",
+     "snippet": "With the end of the Seven Years' War and the signing of the Treaty of Paris (1763), France ceded almost all of its remaining territory in mainland North America, except for fishing rights off Newfound"
+    },
+    {
+     "handle": "cdc9fe8528ae",
+     "title": "Danube",
+     "snippet": "The Danube was once a long-standing frontier of the Roman Empire, and today flows through 10 countries, more than any other river in the world. Originating in Germany, the Danube flows southeast for ,"
+    },
+    {
+     "handle": "8a106b287fc0",
+     "title": "Baynard's Castle",
+     "snippet": "Baynard's Castle refers to buildings on two neighbouring sites in the City of London, between where Blackfriars station and St Paul's Cathedral now stand. The first was a Norman fortification construc"
+    },
+    {
+     "handle": "7dd160451192",
+     "title": "Phillip Buffington",
+     "snippet": "Phillip Buffington (born December 27, 1986) is an American soccer player who has played for Mississippi Brilla, Dandaloo Lions FC, and Harrisburg City Islanders professionally. He currently coaching a"
+    },
+    {
+     "handle": "e98bc103e764",
+     "title": "New York City",
+     "snippet": "The Hudson River flows through the Hudson Valley into New York Bay. Between New York City and Troy, New York, the river is an estuary. The Hudson River separates the city from the U.S. state of New Je"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/2",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Mississippi River empties into the ocean where"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "b2d6a6ae2a96",
+        "title": "History of Canada",
+        "snippet": "With the end of the Seven Years' War and the signing of the Treaty of Paris (1763), France ceded almost all of its remaining territory in mainland North America, except for fishing rights off Newfound"
+       },
+       {
+        "handle": "cdc9fe8528ae",
+        "title": "Danube",
+        "snippet": "The Danube was once a long-standing frontier of the Roman Empire, and today flows through 10 countries, more than any other river in the world. Originating in Germany, the Danube flows southeast for ,"
+       },
+       {
+        "handle": "8a106b287fc0",
+        "title": "Baynard's Castle",
+        "snippet": "Baynard's Castle refers to buildings on two neighbouring sites in the City of London, between where Blackfriars station and St Paul's Cathedral now stand. The first was a Norman fortification construc"
+       },
+       {
+        "handle": "7dd160451192",
+        "title": "Phillip Buffington",
+        "snippet": "Phillip Buffington (born December 27, 1986) is an American soccer player who has played for Mississippi Brilla, Dandaloo Lions FC, and Harrisburg City Islanders professionally. He currently coaching a"
+       },
+       {
+        "handle": "e98bc103e764",
+        "title": "New York City",
+        "snippet": "The Hudson River flows through the Hudson Valley into New York Bay. Between New York City and Troy, New York, the river is an estuary. The Hudson River separates the city from the U.S. state of New Je"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 25.5
+}

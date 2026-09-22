@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop1__337705_132457_51423",
+ "fault_type": "wrong_argument",
+ "fault_class": "tool",
+ "k": 8,
+ "k_bin": 0,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 8,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Danko Jones band formed city"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "839a061577f7",
+     "title": "Danko Jones",
+     "snippet": "Danko Jones is a Canadian rock trio from Toronto, Ontario. The band consists of Danko Jones (vocals/guitar), John 'JC' Calabrese (bass guitar) and Rich Knox (drums). The band's rock music includes ele"
+    },
+    {
+     "handle": "86620aa3c77c",
+     "title": "Born a Lion",
+     "snippet": "Born A Lion is the debut album by Canadian rock band Danko Jones. The album debuted at #51 on the Canadian Albums Chart."
+    },
+    {
+     "handle": "f4e75bcb501d",
+     "title": "Never Too Loud",
+     "snippet": "Never Too Loud is the fourth studio album by Canadian hard rock band Danko Jones. It was recorded at Studio 606 in Los Angeles, with the Grammy Award winning record producer Nick Raskulinecz."
+    },
+    {
+     "handle": "01f116b58913",
+     "title": "We Sweat Blood",
+     "snippet": "We Sweat Blood is the second album by Canadian rock band Danko Jones. The album was re-released on April 19, 2005 in the United States with two additional tracks from the 2002 album \"Born a Lion\", \"Lo"
+    },
+    {
+     "handle": "0926530c873e",
+     "title": "Sleep Is the Enemy",
+     "snippet": "Sleep Is The Enemy is the third studio album by Canadian rock band Danko Jones. The album was released on February 17, 2006 in Europe and February 21 in Canada. The album was released in the US on May"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/8",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Danko Jones band formed city"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "839a061577f7",
+        "title": "Danko Jones",
+        "snippet": "Danko Jones is a Canadian rock trio from Toronto, Ontario. The band consists of Danko Jones (vocals/guitar), John 'JC' Calabrese (bass guitar) and Rich Knox (drums). The band's rock music includes ele"
+       },
+       {
+        "handle": "86620aa3c77c",
+        "title": "Born a Lion",
+        "snippet": "Born A Lion is the debut album by Canadian rock band Danko Jones. The album debuted at #51 on the Canadian Albums Chart."
+       },
+       {
+        "handle": "f4e75bcb501d",
+        "title": "Never Too Loud",
+        "snippet": "Never Too Loud is the fourth studio album by Canadian hard rock band Danko Jones. It was recorded at Studio 606 in Los Angeles, with the Grammy Award winning record producer Nick Raskulinecz."
+       },
+       {
+        "handle": "01f116b58913",
+        "title": "We Sweat Blood",
+        "snippet": "We Sweat Blood is the second album by Canadian rock band Danko Jones. The album was re-released on April 19, 2005 in the United States with two additional tracks from the 2002 album \"Born a Lion\", \"Lo"
+       },
+       {
+        "handle": "0926530c873e",
+        "title": "Sleep Is the Enemy",
+        "snippet": "Sleep Is The Enemy is the third studio album by Canadian rock band Danko Jones. The album was released on February 17, 2006 in Europe and February 21 in Canada. The album was released in the US on May"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 8,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Never Too Loud band formed city"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "f4e75bcb501d",
+     "title": "Never Too Loud",
+     "snippet": "Never Too Loud is the fourth studio album by Canadian hard rock band Danko Jones. It was recorded at Studio 606 in Los Angeles, with the Grammy Award winning record producer Nick Raskulinecz."
+    },
+    {
+     "handle": "ee1a50f6496e",
+     "title": "The Loud House",
+     "snippet": "Lynn Loud, Sr. (voiced by Brian Stepanek) -- He is the father of the Loud children. His whole face is unseen until ``11 Louds a Leapin '. ''Lynn Sr. often breaks up fights between his children before "
+    },
+    {
+     "handle": "8ba1fd4e2f4c",
+     "title": "Loud Planes Fly Low",
+     "snippet": "Loud Planes Fly Low is the fifth album by the American band The Rosebuds, released in 2011 on Merge Records."
+    },
+    {
+     "handle": "896d2bad904f",
+     "title": "Blood Stain Child",
+     "snippet": "Blood Stain Child (stylised as BLOOD STAIN CHILD) is a Japanese heavy metal band from the city of Osaka. The band's musical style combines melodic death metal with electronic and trance. The band form"
+    },
+    {
+     "handle": "3adcd386ee0a",
+     "title": "Freak of Nature (band)",
+     "snippet": "Freak of Nature was an American hard rock band, formed in 1992 by former White Lion lead singer Mike Tramp. The band was formed after White Lion broke up and the follow up was significantly darker and"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/8",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Never Too Loud band formed city"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "f4e75bcb501d",
+        "title": "Never Too Loud",
+        "snippet": "Never Too Loud is the fourth studio album by Canadian hard rock band Danko Jones. It was recorded at Studio 606 in Los Angeles, with the Grammy Award winning record producer Nick Raskulinecz."
+       },
+       {
+        "handle": "ee1a50f6496e",
+        "title": "The Loud House",
+        "snippet": "Lynn Loud, Sr. (voiced by Brian Stepanek) -- He is the father of the Loud children. His whole face is unseen until ``11 Louds a Leapin '. ''Lynn Sr. often breaks up fights between his children before "
+       },
+       {
+        "handle": "8ba1fd4e2f4c",
+        "title": "Loud Planes Fly Low",
+        "snippet": "Loud Planes Fly Low is the fifth album by the American band The Rosebuds, released in 2011 on Merge Records."
+       },
+       {
+        "handle": "896d2bad904f",
+        "title": "Blood Stain Child",
+        "snippet": "Blood Stain Child (stylised as BLOOD STAIN CHILD) is a Japanese heavy metal band from the city of Osaka. The band's musical style combines melodic death metal with electronic and trance. The band form"
+       },
+       {
+        "handle": "3adcd386ee0a",
+        "title": "Freak of Nature (band)",
+        "snippet": "Freak of Nature was an American hard rock band, formed in 1992 by former White Lion lead singer Mike Tramp. The band was formed after White Lion broke up and the follow up was significantly darker and"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 32,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 36.5
+}

@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop1__622497_160088_821792",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 8,
+ "k_bin": 1,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 8,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Aaron Spelling nationality"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "65f0effb9f2f",
+     "title": "Aaron Spelling",
+     "snippet": "Aaron Spelling (April 22, 1923 – June 23, 2006) was an American film and television producer. Some of his works include the TV programs Charlie's Angels (1976–81), The Love Boat (1977–86), Hart to Har"
+    },
+    {
+     "handle": "13ac24c753bf",
+     "title": "The Wild Women of Chastity Gulch",
+     "snippet": "The Wild Women of Chastity Gulch is a 1982 American made-for-television western romantic comedy film directed by Philip Leacock and starring Priscilla Barnes, Lee Horsley, Joan Collins, Donny Osmond, "
+    },
+    {
+     "handle": "93353128d36f",
+     "title": "MacGruder and Loud",
+     "snippet": "This was one of the few failures from Aaron Spelling's production company in its history, since it was picked by ABC to debut right after the Super Bowl in 1985 and was heavily promoted during the gam"
+    },
+    {
+     "handle": "0e5bc70a819a",
+     "title": "EmArcy Records",
+     "snippet": "EmArcy Records is a jazz record label founded in 1954 by Mercury Records, and today a European jazz label owned by Universal Music Group. The name is a phonetic spelling of \"MRC\", the initials for Mer"
+    },
+    {
+     "handle": "dbabab9a9dfc",
+     "title": "Mexican passport",
+     "snippet": "1. Personally attend to any Secretaría de Relaciones Exteriores (SRE) delegation or SRE affiliated office, with an appointment. 2. Fill with black ink, and by hand and in print the application for an "
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/8",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Aaron Spelling nationality"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "65f0effb9f2f",
+        "title": "Aaron Spelling",
+        "snippet": "Aaron Spelling (April 22, 1923 – June 23, 2006) was an American film and television producer. Some of his works include the TV programs Charlie's Angels (1976–81), The Love Boat (1977–86), Hart to Har"
+       },
+       {
+        "handle": "13ac24c753bf",
+        "title": "The Wild Women of Chastity Gulch",
+        "snippet": "The Wild Women of Chastity Gulch is a 1982 American made-for-television western romantic comedy film directed by Philip Leacock and starring Priscilla Barnes, Lee Horsley, Joan Collins, Donny Osmond, "
+       },
+       {
+        "handle": "93353128d36f",
+        "title": "MacGruder and Loud",
+        "snippet": "This was one of the few failures from Aaron Spelling's production company in its history, since it was picked by ABC to debut right after the Super Bowl in 1985 and was heavily promoted during the gam"
+       },
+       {
+        "handle": "0e5bc70a819a",
+        "title": "EmArcy Records",
+        "snippet": "EmArcy Records is a jazz record label founded in 1954 by Mercury Records, and today a European jazz label owned by Universal Music Group. The name is a phonetic spelling of \"MRC\", the initials for Mer"
+       },
+       {
+        "handle": "dbabab9a9dfc",
+        "title": "Mexican passport",
+        "snippet": "1. Personally attend to any Secretaría de Relaciones Exteriores (SRE) delegation or SRE affiliated office, with an appointment. 2. Fill with black ink, and by hand and in print the application for an "
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 8,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Aaron Spelling nationality"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "0377864da491",
+     "title": "Papa Roach",
+     "snippet": "Papa Roach is an American rock band from Vacaville, California, formed in 1993. The original lineup consisted of lead vocalist Jacoby Shaddix, guitarist Jerry Horton, drummer Dave Buckner, bassist Wil"
+    },
+    {
+     "handle": "037eed7e2666",
+     "title": "Super Mario Bros. 2",
+     "snippet": "Super Mario Bros. 2 is a platform game developed and published by Nintendo for the Nintendo Entertainment System. The game was first released in North America in October 1988, and in PAL regions the f"
+    },
+    {
+     "handle": "03854a973588",
+     "title": "Somalis",
+     "snippet": "While the distribution of Somalis per country in Europe is hard to measure because the Somali community on the continent has grown so quickly in recent years, an official 2010 estimate reported 108,00"
+    },
+    {
+     "handle": "0386cdae4f5d",
+     "title": "Texas–Indian wars",
+     "snippet": "Although several Indian tribes occupied territory in the area, the preeminent nation was the Comanche, known as the ``Lords of the Plains. ''Their territory, the Comancheria, was the most powerful ent"
+    },
+    {
+     "handle": "038ebb905928",
+     "title": "Jimi Jamison",
+     "snippet": "Jimmy Wayne ``Jimi ''Jamison (August 23, 1951 -- September 1, 2014) was an American musician, singer, and songwriter. Jamison was the frontman of the platinum - selling rock band Survivor from 1984 to"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/8",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Aaron Spelling nationality"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "0377864da491",
+        "title": "Papa Roach",
+        "snippet": "Papa Roach is an American rock band from Vacaville, California, formed in 1993. The original lineup consisted of lead vocalist Jacoby Shaddix, guitarist Jerry Horton, drummer Dave Buckner, bassist Wil"
+       },
+       {
+        "handle": "037eed7e2666",
+        "title": "Super Mario Bros. 2",
+        "snippet": "Super Mario Bros. 2 is a platform game developed and published by Nintendo for the Nintendo Entertainment System. The game was first released in North America in October 1988, and in PAL regions the f"
+       },
+       {
+        "handle": "03854a973588",
+        "title": "Somalis",
+        "snippet": "While the distribution of Somalis per country in Europe is hard to measure because the Somali community on the continent has grown so quickly in recent years, an official 2010 estimate reported 108,00"
+       },
+       {
+        "handle": "0386cdae4f5d",
+        "title": "Texas–Indian wars",
+        "snippet": "Although several Indian tribes occupied territory in the area, the preeminent nation was the Comanche, known as the ``Lords of the Plains. ''Their territory, the Comancheria, was the most powerful ent"
+       },
+       {
+        "handle": "038ebb905928",
+        "title": "Jimi Jamison",
+        "snippet": "Jimmy Wayne ``Jimi ''Jamison (August 23, 1951 -- September 1, 2014) was an American musician, singer, and songwriter. Jamison was the frontman of the platinum - selling rock band Survivor from 1984 to"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 26,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 25.4
+}

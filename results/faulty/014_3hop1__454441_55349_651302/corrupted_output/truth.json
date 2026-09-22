@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop1__454441_55349_651302",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 14,
+ "k_bin": 2,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 14,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Trey Parker birthplace"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "53994af5f833",
+     "title": "List of South Park cast members",
+     "snippet": "Trey Parker voices four of the main characters: Stan Marsh, Eric Cartman, Randy Marsh and Mr. Garrison. He also provides the voices of several recurring characters, such as Clyde Donovan, Mr. Hankey, "
+    },
+    {
+     "handle": "a1a21438ab17",
+     "title": "Cancelled (South Park)",
+     "snippet": "The episode was written by series co-creator Trey Parker and is rated TV-MA in the United States, except on syndicated broadcasts, where it is rated TV-14, instead. It was originally intended to air a"
+    },
+    {
+     "handle": "1e9514091d35",
+     "title": "Randy and Sharon Marsh",
+     "snippet": "Randy Marsh and Sharon Marsh (née Kimble) are fictional characters in the animated television series \"South Park\". They are the most prominent set of parents on the show and a middle-class married cou"
+    },
+    {
+     "handle": "2f20d0625428",
+     "title": "Dian Bachar",
+     "snippet": "Dian Bachar (; born October 26, 1970 in Denver, Colorado) is an American actor most notable for his roles in various films by or starring his friends Trey Parker and Matt Stone, such as \"Cannibal! The"
+    },
+    {
+     "handle": "9db3c08e2a39",
+     "title": "Luna, Rajasthan",
+     "snippet": "Luna is a village in Rajasthan, India, famous as the birthplace of Mehdi Hassan. It is a panchayat village in ￼￼Al￼￼sisarTehseel of Jhunjhunu District."
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/14",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Trey Parker birthplace"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "53994af5f833",
+        "title": "List of South Park cast members",
+        "snippet": "Trey Parker voices four of the main characters: Stan Marsh, Eric Cartman, Randy Marsh and Mr. Garrison. He also provides the voices of several recurring characters, such as Clyde Donovan, Mr. Hankey, "
+       },
+       {
+        "handle": "a1a21438ab17",
+        "title": "Cancelled (South Park)",
+        "snippet": "The episode was written by series co-creator Trey Parker and is rated TV-MA in the United States, except on syndicated broadcasts, where it is rated TV-14, instead. It was originally intended to air a"
+       },
+       {
+        "handle": "1e9514091d35",
+        "title": "Randy and Sharon Marsh",
+        "snippet": "Randy Marsh and Sharon Marsh (née Kimble) are fictional characters in the animated television series \"South Park\". They are the most prominent set of parents on the show and a middle-class married cou"
+       },
+       {
+        "handle": "2f20d0625428",
+        "title": "Dian Bachar",
+        "snippet": "Dian Bachar (; born October 26, 1970 in Denver, Colorado) is an American actor most notable for his roles in various films by or starring his friends Trey Parker and Matt Stone, such as \"Cannibal! The"
+       },
+       {
+        "handle": "9db3c08e2a39",
+        "title": "Luna, Rajasthan",
+        "snippet": "Luna is a village in Rajasthan, India, famous as the birthplace of Mehdi Hassan. It is a panchayat village in ￼￼Al￼￼sisarTehseel of Jhunjhunu District."
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 14,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Trey Parker birthplace"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "03f1bc5db663",
+     "title": "Insecurity (South Park)",
+     "snippet": "\"Insecurity\" is the tenth episode of the sixteenth season of the American animated sitcom \"South Park\", and the 233rd episode of the series overall. It aired on Comedy Central in the United States on "
+    },
+    {
+     "handle": "03fb072b8749",
+     "title": "Sunset Man",
+     "snippet": "Sunset Man is the second studio album from American country music singer James Otto, released April 8, 2008 on Warner Bros. Records. The lead-off single, \"Just Got Started Lovin' You\", reached Number "
+    },
+    {
+     "handle": "040d06d77899",
+     "title": "Leisure World, Arizona",
+     "snippet": "Leisure World Arizona is a gated, resort style adult community located in Mesa, Arizona. The community is located about one mile north of U.S. Route 60 on Power Road. The community is bounded by South"
+    },
+    {
+     "handle": "042d7740cbe5",
+     "title": "What Is Love",
+     "snippet": "``What Is Love ''is a song recorded by Trinidadian - German Eurodance artist Haddaway for his debut album, The Album. The song is recognizable by its refrain`` What is love? Baby do n't hurt me, do n'"
+    },
+    {
+     "handle": "04527540cf58",
+     "title": "Ladurée",
+     "snippet": "Ladurée () is a French luxury bakery and sweets maker house created in 1862. It is one of the world's best-known premier sellers of the double-decker macaron, 15,000 of which are sold every day. The P"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/14",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Trey Parker birthplace"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "03f1bc5db663",
+        "title": "Insecurity (South Park)",
+        "snippet": "\"Insecurity\" is the tenth episode of the sixteenth season of the American animated sitcom \"South Park\", and the 233rd episode of the series overall. It aired on Comedy Central in the United States on "
+       },
+       {
+        "handle": "03fb072b8749",
+        "title": "Sunset Man",
+        "snippet": "Sunset Man is the second studio album from American country music singer James Otto, released April 8, 2008 on Warner Bros. Records. The lead-off single, \"Just Got Started Lovin' You\", reached Number "
+       },
+       {
+        "handle": "040d06d77899",
+        "title": "Leisure World, Arizona",
+        "snippet": "Leisure World Arizona is a gated, resort style adult community located in Mesa, Arizona. The community is located about one mile north of U.S. Route 60 on Power Road. The community is bounded by South"
+       },
+       {
+        "handle": "042d7740cbe5",
+        "title": "What Is Love",
+        "snippet": "``What Is Love ''is a song recorded by Trinidadian - German Eurodance artist Haddaway for his debut album, The Album. The song is recognizable by its refrain`` What is love? Baby do n't hurt me, do n'"
+       },
+       {
+        "handle": "04527540cf58",
+        "title": "Ladurée",
+        "snippet": "Ladurée () is a French luxury bakery and sweets maker house created in 1862. It is one of the world's best-known premier sellers of the double-decker macaron, 15,000 of which are sold every day. The P"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "step_cap",
+ "n_steps": 38,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": true,
+ "seconds": 36.3
+}

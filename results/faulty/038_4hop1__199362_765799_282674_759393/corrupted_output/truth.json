@@ -1,0 +1,99 @@
+{
+ "task_id": "4hop1__199362_765799_282674_759393",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 20,
+ "k_bin": 1,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 20,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "94cfc2a89d87"
+   }
+  },
+  "tool_return": {
+   "pid": "94cfc2a89d87",
+   "title": "Pulaski High School",
+   "text": "Pulaski High School is a public high school in Pulaski, Wisconsin, in Brown County, Wisconsin (school district also serves parts of Shawano, Outagamie and Oconto counties), that serves students in grades 9 through 12. Its mascot is the Red Raider."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/20",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "94cfc2a89d87"
+      }
+     },
+     "tool_return": {
+      "pid": "94cfc2a89d87",
+      "title": "Pulaski High School",
+      "text": "Pulaski High School is a public high school in Pulaski, Wisconsin, in Brown County, Wisconsin (school district also serves parts of Shawano, Outagamie and Oconto counties), that serves students in grades 9 through 12. Its mascot is the Red Raider."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/94cfc2a89d87",
+    "value": {
+     "title": "Pulaski High School",
+     "text": "Pulaski High School is a public high school in Pulaski, Wisconsin, in Brown County, Wisconsin (school district also serves parts of Shawano, Outagamie and Oconto counties), that serves students in grades 9 through 12. Its mascot is the Red Raider."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 20,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "94cfc2a89d87"
+   }
+  },
+  "tool_return": {
+   "pid": "94cfc2a89d87",
+   "title": "Pulaski High School",
+   "text": "Minneapolis is a city in and the county seat of Ottawa County, Kansas, United States. As of the 2010 census, the city population was 2,032."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/20",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "94cfc2a89d87"
+      }
+     },
+     "tool_return": {
+      "pid": "94cfc2a89d87",
+      "title": "Pulaski High School",
+      "text": "Minneapolis is a city in and the county seat of Ottawa County, Kansas, United States. As of the 2010 census, the city population was 2,032."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/94cfc2a89d87",
+    "value": {
+     "title": "Pulaski High School",
+     "text": "Minneapolis is a city in and the county seat of Ottawa County, Kansas, United States. As of the 2010 census, the city population was 2,032."
+    }
+   }
+  ]
+ },
+ "ended": "step_cap",
+ "n_steps": 38,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": true,
+ "reread_after_k": true,
+ "seconds": 35.0
+}

@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop1__131820_59747_60748",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 8,
+ "k_bin": 2,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 8,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Battle of Augusta Georgia date"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "0a4444e97b84",
+     "title": "WEKL",
+     "snippet": "WEKL, known on-air as \"102.3 K-Love\", is a Contemporary Christian radio station in the United States, licensed by the Federal Communications Commission (FCC) to Augusta, Georgia, broadcasting on 102.3"
+    },
+    {
+     "handle": "d4723b70fb3a",
+     "title": "List of municipalities in Georgia (U.S. state)",
+     "snippet": "The largest municipality by population in Georgia is Atlanta with 420,003 residents, and the smallest municipality by population is Edge Hill with 24 residents. The largest municipality by land area i"
+    },
+    {
+     "handle": "5726c467bb39",
+     "title": "Battle of Stoney Creek",
+     "snippet": "Battle of Stoney Creek Part of the War of 1812 Battle of Stoney Creek as portrayed by C.W. Jefferys Date 6 June 1813 Location present day Stoney Creek, Ontario Result British victory Belligerents Unit"
+    },
+    {
+     "handle": "6697d226b59e",
+     "title": "Princess Magdalena Augusta of Anhalt-Zerbst",
+     "snippet": "Princess Magdalena Augusta of Anhalt-Zerbst (13 October 1679 – 11 October 1740) was, by birth, a Princess of Anhalt-Zerbst and, by marriage, a Duchess of Saxe-Gotha-Altenburg. She was the maternal gra"
+    },
+    {
+     "handle": "7e18a53e2bfe",
+     "title": "Battle of Atlanta",
+     "snippet": "The Battle of Atlanta was a battle of the Atlanta Campaign fought during the American Civil War on July 22, 1864, just southeast of Atlanta, Georgia. Continuing their summer campaign to seize the impo"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/8",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Battle of Augusta Georgia date"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "0a4444e97b84",
+        "title": "WEKL",
+        "snippet": "WEKL, known on-air as \"102.3 K-Love\", is a Contemporary Christian radio station in the United States, licensed by the Federal Communications Commission (FCC) to Augusta, Georgia, broadcasting on 102.3"
+       },
+       {
+        "handle": "d4723b70fb3a",
+        "title": "List of municipalities in Georgia (U.S. state)",
+        "snippet": "The largest municipality by population in Georgia is Atlanta with 420,003 residents, and the smallest municipality by population is Edge Hill with 24 residents. The largest municipality by land area i"
+       },
+       {
+        "handle": "5726c467bb39",
+        "title": "Battle of Stoney Creek",
+        "snippet": "Battle of Stoney Creek Part of the War of 1812 Battle of Stoney Creek as portrayed by C.W. Jefferys Date 6 June 1813 Location present day Stoney Creek, Ontario Result British victory Belligerents Unit"
+       },
+       {
+        "handle": "6697d226b59e",
+        "title": "Princess Magdalena Augusta of Anhalt-Zerbst",
+        "snippet": "Princess Magdalena Augusta of Anhalt-Zerbst (13 October 1679 – 11 October 1740) was, by birth, a Princess of Anhalt-Zerbst and, by marriage, a Duchess of Saxe-Gotha-Altenburg. She was the maternal gra"
+       },
+       {
+        "handle": "7e18a53e2bfe",
+        "title": "Battle of Atlanta",
+        "snippet": "The Battle of Atlanta was a battle of the Atlanta Campaign fought during the American Civil War on July 22, 1864, just southeast of Atlanta, Georgia. Continuing their summer campaign to seize the impo"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 8,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Battle of Augusta Georgia date"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "88e4cf1de778",
+     "title": "Miss USA 1982",
+     "snippet": "The pageant was won by Terri Utley of Arkansas, who was crowned by outgoing titleholder Kim Seelbrede of Ohio. Utley was the first – and to date only – woman from Arkansas to win the Miss USA title, a"
+    },
+    {
+     "handle": "8b001d07c877",
+     "title": "Tallahassee, Florida",
+     "snippet": "Tallahassee / ˌtæləˈhæsi / is the capital of the U.S. state of Florida. It is the county seat and only incorporated municipality in Leon County. Tallahassee became the capital of Florida, then the Flo"
+    },
+    {
+     "handle": "3b41b517b6b3",
+     "title": "Modern history",
+     "snippet": "Many major events caused Europe to change around the start of the 16th century, starting with the Fall of Constantinople in 1453, the fall of Muslim Spain and the discovery of the Americas in 1492, an"
+    },
+    {
+     "handle": "afab31bfd390",
+     "title": "Giovanni Cifolelli",
+     "snippet": "Giovanni Cifolelli was an Italian mandolin virtuoso and dramatic composer whose date and place of birth are unknown. In 1764 he made his appearance in Paris as a mandolin virtuoso and was highly estee"
+    },
+    {
+     "handle": "b0f211c932fd",
+     "title": "Yang Meng",
+     "snippet": "Yang Meng was the third son of Yang Xingmi, a major warlord at the end of Tang Dynasty as the military governor (\"Jiedushi\") of Huainan Circuit (淮南, headquartered in modern Yangzhou, Jiangsu). It is n"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/8",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Battle of Augusta Georgia date"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "88e4cf1de778",
+        "title": "Miss USA 1982",
+        "snippet": "The pageant was won by Terri Utley of Arkansas, who was crowned by outgoing titleholder Kim Seelbrede of Ohio. Utley was the first – and to date only – woman from Arkansas to win the Miss USA title, a"
+       },
+       {
+        "handle": "8b001d07c877",
+        "title": "Tallahassee, Florida",
+        "snippet": "Tallahassee / ˌtæləˈhæsi / is the capital of the U.S. state of Florida. It is the county seat and only incorporated municipality in Leon County. Tallahassee became the capital of Florida, then the Flo"
+       },
+       {
+        "handle": "3b41b517b6b3",
+        "title": "Modern history",
+        "snippet": "Many major events caused Europe to change around the start of the 16th century, starting with the Fall of Constantinople in 1453, the fall of Muslim Spain and the discovery of the Americas in 1492, an"
+       },
+       {
+        "handle": "afab31bfd390",
+        "title": "Giovanni Cifolelli",
+        "snippet": "Giovanni Cifolelli was an Italian mandolin virtuoso and dramatic composer whose date and place of birth are unknown. In 1764 he made his appearance in Paris as a mandolin virtuoso and was highly estee"
+       },
+       {
+        "handle": "b0f211c932fd",
+        "title": "Yang Meng",
+        "snippet": "Yang Meng was the third son of Yang Xingmi, a major warlord at the end of Tang Dynasty as the military governor (\"Jiedushi\") of Huainan Circuit (淮南, headquartered in modern Yangzhou, Jiangsu). It is n"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "step_cap",
+ "n_steps": 38,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": true,
+ "reread_after_k": true,
+ "seconds": 54.7
+}

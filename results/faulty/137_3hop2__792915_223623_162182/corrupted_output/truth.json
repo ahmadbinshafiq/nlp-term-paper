@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop2__792915_223623_162182",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 2,
+ "k_bin": 0,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 2,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Cai River country location Vietnam"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "f2041e4a0f50",
+     "title": "Cái River",
+     "snippet": "The Cái River () is a river of Vietnam. It flows through Khánh Hòa Province and Đắk Lắk Province. The river has a basin area of 1904 km²."
+    },
+    {
+     "handle": "d5e84a6079d9",
+     "title": "Cơm rượu",
+     "snippet": "Cơm rượu () also known as rượu nếp cái is a traditional Vietnamese dessert from Southern Vietnam, made from glutinous rice."
+    },
+    {
+     "handle": "be83909ce84d",
+     "title": "Leaders of the Vietnam War",
+     "snippet": "He left his country on a French steamer in 1911 and traveled extensively around the world participating actively in the Communist International before returning to Vietnam in 1941. He then organized a"
+    },
+    {
+     "handle": "edf8d352e816",
+     "title": "Cascade City",
+     "snippet": "Cascade City or Cascade was a Canadian Pacific Railway construction era boom town in the Boundary Country of the West Kootenay region of British Columbia, Canada. Because of its location near the Cana"
+    },
+    {
+     "handle": "3820d73e09e5",
+     "title": "Kiewa River",
+     "snippet": "The river rises near Clover Power Station, on the slopes of Mount Bogong, the highest mountain in Victoria at . The main river is formed by the confluence of the Kiewa River East branch and West Kiewa"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/2",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Cai River country location Vietnam"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "f2041e4a0f50",
+        "title": "Cái River",
+        "snippet": "The Cái River () is a river of Vietnam. It flows through Khánh Hòa Province and Đắk Lắk Province. The river has a basin area of 1904 km²."
+       },
+       {
+        "handle": "d5e84a6079d9",
+        "title": "Cơm rượu",
+        "snippet": "Cơm rượu () also known as rượu nếp cái is a traditional Vietnamese dessert from Southern Vietnam, made from glutinous rice."
+       },
+       {
+        "handle": "be83909ce84d",
+        "title": "Leaders of the Vietnam War",
+        "snippet": "He left his country on a French steamer in 1911 and traveled extensively around the world participating actively in the Communist International before returning to Vietnam in 1941. He then organized a"
+       },
+       {
+        "handle": "edf8d352e816",
+        "title": "Cascade City",
+        "snippet": "Cascade City or Cascade was a Canadian Pacific Railway construction era boom town in the Boundary Country of the West Kootenay region of British Columbia, Canada. Because of its location near the Cana"
+       },
+       {
+        "handle": "3820d73e09e5",
+        "title": "Kiewa River",
+        "snippet": "The river rises near Clover Power Station, on the slopes of Mount Bogong, the highest mountain in Victoria at . The main river is formed by the confluence of the Kiewa River East branch and West Kiewa"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 2,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Cai River country location Vietnam"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "12f83565f92d",
+     "title": "Columbia River",
+     "snippet": "The Columbia River is the largest river in the Pacific Northwest region of North America. The river rises in the Rocky Mountains of British Columbia, Canada. It flows northwest and then south into the"
+    },
+    {
+     "handle": "d74cf092a236",
+     "title": "U.S. national anthem protests (2016–present)",
+     "snippet": "U.S. national anthem protests Colin Kaepernick with San Francisco 49ers (2013) Date August 14, 2016 -- ongoing Location National Football League stadiums Goals End police brutality and racial inequali"
+    },
+    {
+     "handle": "d28fb3d58d6a",
+     "title": "Mission San Carlos Borromeo de Carmelo",
+     "snippet": "Mission San Carlos Borromeo de Carmelo The façade of the capilla (chapel) at Mission San Carlos Borromeo de Carmelo. Location in the Monterey Peninsula Location 3080 Rio Rd. Carmel - by - the - Sea, C"
+    },
+    {
+     "handle": "3b709e0ec209",
+     "title": "Mamaroneck River",
+     "snippet": "The Mamaroneck River is a freshwater stream located in Southern Westchester County, New York. The river forms in White Plains and Harrison and flows south through Mamaroneck Town and Village, where it"
+    },
+    {
+     "handle": "466c96bffe4d",
+     "title": "Beaurivage River",
+     "snippet": "The Beaurivage River is a river in Quebec that flows from Thetford Mines and empties in the Chaudière River, near Saint-Romuald, Quebec. It is a body of water mostly known for its annual canoe race be"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/2",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Cai River country location Vietnam"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "12f83565f92d",
+        "title": "Columbia River",
+        "snippet": "The Columbia River is the largest river in the Pacific Northwest region of North America. The river rises in the Rocky Mountains of British Columbia, Canada. It flows northwest and then south into the"
+       },
+       {
+        "handle": "d74cf092a236",
+        "title": "U.S. national anthem protests (2016–present)",
+        "snippet": "U.S. national anthem protests Colin Kaepernick with San Francisco 49ers (2013) Date August 14, 2016 -- ongoing Location National Football League stadiums Goals End police brutality and racial inequali"
+       },
+       {
+        "handle": "d28fb3d58d6a",
+        "title": "Mission San Carlos Borromeo de Carmelo",
+        "snippet": "Mission San Carlos Borromeo de Carmelo The façade of the capilla (chapel) at Mission San Carlos Borromeo de Carmelo. Location in the Monterey Peninsula Location 3080 Rio Rd. Carmel - by - the - Sea, C"
+       },
+       {
+        "handle": "3b709e0ec209",
+        "title": "Mamaroneck River",
+        "snippet": "The Mamaroneck River is a freshwater stream located in Southern Westchester County, New York. The river forms in White Plains and Harrison and flows south through Mamaroneck Town and Village, where it"
+       },
+       {
+        "handle": "466c96bffe4d",
+        "title": "Beaurivage River",
+        "snippet": "The Beaurivage River is a river in Quebec that flows from Thetford Mines and empties in the Chaudière River, near Saint-Romuald, Quebec. It is a body of water mostly known for its annual canoe race be"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 26,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 35.5
+}

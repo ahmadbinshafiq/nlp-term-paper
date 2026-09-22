@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__145194_160545_34754",
+ "fault_type": "overwritten_note",
+ "fault_class": "state",
+ "k": 32,
+ "k_bin": 2,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 32,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "fact5",
+    "text": "The US Government policy is that Thailand was forced into actions by Japanese blackmail and occupied by Japanese troops.",
+    "source_pid": "6faf254d6369"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/32",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "fact5",
+       "text": "The US Government policy is that Thailand was forced into actions by Japanese blackmail and occupied by Japanese troops.",
+       "source_pid": "6faf254d6369"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/fact5",
+    "value": {
+     "text": "The US Government policy is that Thailand was forced into actions by Japanese blackmail and occupied by Japanese troops.",
+     "source_pid": "6faf254d6369"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 32,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "fact5",
+    "text": "The US Government policy is that Thailand was forced into actions by Japanese blackmail and occupied by Japanese troops.",
+    "source_pid": "6faf254d6369"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/32",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "fact5",
+       "text": "The US Government policy is that Thailand was forced into actions by Japanese blackmail and occupied by Japanese troops.",
+       "source_pid": "6faf254d6369"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "replace",
+    "path": "/notes/fact4",
+    "value": {
+     "text": "The US Government policy is that Thailand was forced into actions by Japanese blackmail and occupied by Japanese troops.",
+     "source_pid": "6faf254d6369"
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 34,
+ "answer_changed": false,
+ "finish_note_missing": true,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 0
+}

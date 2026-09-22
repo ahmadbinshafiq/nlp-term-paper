@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__639955_834494_34088",
+ "fault_type": "overwritten_note",
+ "fault_class": "state",
+ "k": 12,
+ "k_bin": 0,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "pima_county_tucson",
+    "text": "Pima County manages natural resources and parks including Tucson, AZ.",
+    "source_pid": "dcd54b52a38a"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "pima_county_tucson",
+       "text": "Pima County manages natural resources and parks including Tucson, AZ.",
+       "source_pid": "dcd54b52a38a"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/pima_county_tucson",
+    "value": {
+     "text": "Pima County manages natural resources and parks including Tucson, AZ.",
+     "source_pid": "dcd54b52a38a"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "pima_county_tucson",
+    "text": "Pima County manages natural resources and parks including Tucson, AZ.",
+    "source_pid": "dcd54b52a38a"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "pima_county_tucson",
+       "text": "Pima County manages natural resources and parks including Tucson, AZ.",
+       "source_pid": "dcd54b52a38a"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "replace",
+    "path": "/notes/helvetia_location",
+    "value": {
+     "text": "Pima County manages natural resources and parks including Tucson, AZ.",
+     "source_pid": "dcd54b52a38a"
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 0
+}

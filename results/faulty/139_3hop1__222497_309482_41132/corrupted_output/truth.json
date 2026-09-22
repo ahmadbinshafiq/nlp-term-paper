@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop1__222497_309482_41132",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 20,
+ "k_bin": 2,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 20,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "plague Venice outbreaks list number of times"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "fb8379b3b68b",
+     "title": "Black Death",
+     "snippet": "In 1466, perhaps 40,000 people died of the plague in Paris. During the 16th and 17th centuries, the plague was present in Paris around 30 per cent of the time. The Black Death ravaged Europe for three"
+    },
+    {
+     "handle": "4fa058d8fdea",
+     "title": "Black Death",
+     "snippet": "In addition to arguing that the rat population was insufficient to account for a bubonic plague pandemic, sceptics of the bubonic plague theory point out that the symptoms of the Black Death are not u"
+    },
+    {
+     "handle": "8a5d0275516c",
+     "title": "Black Death",
+     "snippet": "Medical knowledge had stagnated during the Middle Ages. The most authoritative account at the time came from the medical faculty in Paris in a report to the king of France that blamed the heavens, in "
+    },
+    {
+     "handle": "b8a3aa9f8542",
+     "title": "Black Death",
+     "snippet": "The plague theory was first significantly challenged by the work of British bacteriologist J. F. D. Shrewsbury in 1970, who noted that the reported rates of mortality in rural areas during the 14th-ce"
+    },
+    {
+     "handle": "0d6f715083a9",
+     "title": "Black Death",
+     "snippet": "The plague disease, caused by Yersinia pestis, is enzootic (commonly present) in populations of fleas carried by ground rodents, including marmots, in various areas including Central Asia, Kurdistan, "
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/20",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "plague Venice outbreaks list number of times"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "fb8379b3b68b",
+        "title": "Black Death",
+        "snippet": "In 1466, perhaps 40,000 people died of the plague in Paris. During the 16th and 17th centuries, the plague was present in Paris around 30 per cent of the time. The Black Death ravaged Europe for three"
+       },
+       {
+        "handle": "4fa058d8fdea",
+        "title": "Black Death",
+        "snippet": "In addition to arguing that the rat population was insufficient to account for a bubonic plague pandemic, sceptics of the bubonic plague theory point out that the symptoms of the Black Death are not u"
+       },
+       {
+        "handle": "8a5d0275516c",
+        "title": "Black Death",
+        "snippet": "Medical knowledge had stagnated during the Middle Ages. The most authoritative account at the time came from the medical faculty in Paris in a report to the king of France that blamed the heavens, in "
+       },
+       {
+        "handle": "b8a3aa9f8542",
+        "title": "Black Death",
+        "snippet": "The plague theory was first significantly challenged by the work of British bacteriologist J. F. D. Shrewsbury in 1970, who noted that the reported rates of mortality in rural areas during the 14th-ce"
+       },
+       {
+        "handle": "0d6f715083a9",
+        "title": "Black Death",
+        "snippet": "The plague disease, caused by Yersinia pestis, is enzootic (commonly present) in populations of fleas carried by ground rodents, including marmots, in various areas including Central Asia, Kurdistan, "
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 20,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "plague Venice outbreaks list number of times"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "dc64a6884dd0",
+     "title": "The Prince of Egypt",
+     "snippet": "Ofra Haza as Yocheved, the mother of Miriam and Aaron and birth mother of Moses. She also sang her character's number, ``Deliver Us '', in seventeen other languages for the film's dubbing)"
+    },
+    {
+     "handle": "9d2eb8d108c4",
+     "title": "Hart Memorial Trophy",
+     "snippet": "Wayne Gretzky won the award a record nine times during his career, eight consecutively. He has been named MVP more times than any other player in the history of the other three North American major pr"
+    },
+    {
+     "handle": "17482e3ea7c8",
+     "title": "Middle Ages",
+     "snippet": "The Late Middle Ages was marked by difficulties and calamities including famine, plague, and war, which significantly diminished the population of Europe; between 1347 and 1350, the Black Death killed"
+    },
+    {
+     "handle": "6829f94d0a30",
+     "title": "History of Everton F.C.",
+     "snippet": "Everton Football Club have a long and detailed history. The club's roots loosely lie with a Methodist New Connexion congregation who had a chapel on the corner of Breckfield Road North and St. Domingo"
+    },
+    {
+     "handle": "c2c709063bfa",
+     "title": "2017–18 NBA season",
+     "snippet": "2017 -- 18 NBA season League National Basketball Association Sport Basketball Duration October 17, 2017 -- April 11, 2018 April 14 -- May 28, 2018 (Playoffs) May 31 -- June 17, 2018 (Finals) Number of"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/20",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "plague Venice outbreaks list number of times"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "dc64a6884dd0",
+        "title": "The Prince of Egypt",
+        "snippet": "Ofra Haza as Yocheved, the mother of Miriam and Aaron and birth mother of Moses. She also sang her character's number, ``Deliver Us '', in seventeen other languages for the film's dubbing)"
+       },
+       {
+        "handle": "9d2eb8d108c4",
+        "title": "Hart Memorial Trophy",
+        "snippet": "Wayne Gretzky won the award a record nine times during his career, eight consecutively. He has been named MVP more times than any other player in the history of the other three North American major pr"
+       },
+       {
+        "handle": "17482e3ea7c8",
+        "title": "Middle Ages",
+        "snippet": "The Late Middle Ages was marked by difficulties and calamities including famine, plague, and war, which significantly diminished the population of Europe; between 1347 and 1350, the Black Death killed"
+       },
+       {
+        "handle": "6829f94d0a30",
+        "title": "History of Everton F.C.",
+        "snippet": "Everton Football Club have a long and detailed history. The club's roots loosely lie with a Methodist New Connexion congregation who had a chapel on the corner of Breckfield Road North and St. Domingo"
+       },
+       {
+        "handle": "c2c709063bfa",
+        "title": "2017–18 NBA season",
+        "snippet": "2017 -- 18 NBA season League National Basketball Association Sport Basketball Duration October 17, 2017 -- April 11, 2018 April 14 -- May 28, 2018 (Playoffs) May 31 -- June 17, 2018 (Finals) Number of"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 30,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": true,
+ "seconds": 16.6
+}

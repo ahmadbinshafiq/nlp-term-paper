@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop1__337705_132457_47686",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 14,
+ "k_bin": 2,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 14,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Greyhound bus station Toronto departure"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "c736c9c64588",
+     "title": "Toronto Coach Terminal",
+     "snippet": "The Toronto Coach Terminal is the central bus station for inter-city services in Toronto, Ontario, Canada. It is located at 610 Bay Street, in the city's Downtown. The terminal is owned by Toronto Coa"
+    },
+    {
+     "handle": "806e6a21b3ba",
+     "title": "Philadelphia",
+     "snippet": "Philadelphia is also a major hub for Greyhound Lines, which operates 24-hour service to points east of the Mississippi River. Most of Greyhound's services in Philadelphia operate to/from the Philadelp"
+    },
+    {
+     "handle": "985d8bd33848",
+     "title": "José Antunes Sobrinho",
+     "snippet": "In the original city plan, the interstate buses should also stop at the Central Station. Because of the growth of Brasília (and corresponding growth in the bus fleet), today the interstate buses leave"
+    },
+    {
+     "handle": "4a8f92251b4f",
+     "title": "Finsbury Park station",
+     "snippet": "The interchange consists of a National Rail station, a London Underground station and two bus stations, all interconnected. The main entrances are by the eastern bus station on Station Place. The Nati"
+    },
+    {
+     "handle": "a7402d15f056",
+     "title": "New York City",
+     "snippet": "New York City's public bus fleet is the largest in North America, and the Port Authority Bus Terminal, the main intercity bus terminal of the city, serves 7,000 buses and 200,000 commuters daily, maki"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/14",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Greyhound bus station Toronto departure"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "c736c9c64588",
+        "title": "Toronto Coach Terminal",
+        "snippet": "The Toronto Coach Terminal is the central bus station for inter-city services in Toronto, Ontario, Canada. It is located at 610 Bay Street, in the city's Downtown. The terminal is owned by Toronto Coa"
+       },
+       {
+        "handle": "806e6a21b3ba",
+        "title": "Philadelphia",
+        "snippet": "Philadelphia is also a major hub for Greyhound Lines, which operates 24-hour service to points east of the Mississippi River. Most of Greyhound's services in Philadelphia operate to/from the Philadelp"
+       },
+       {
+        "handle": "985d8bd33848",
+        "title": "José Antunes Sobrinho",
+        "snippet": "In the original city plan, the interstate buses should also stop at the Central Station. Because of the growth of Brasília (and corresponding growth in the bus fleet), today the interstate buses leave"
+       },
+       {
+        "handle": "4a8f92251b4f",
+        "title": "Finsbury Park station",
+        "snippet": "The interchange consists of a National Rail station, a London Underground station and two bus stations, all interconnected. The main entrances are by the eastern bus station on Station Place. The Nati"
+       },
+       {
+        "handle": "a7402d15f056",
+        "title": "New York City",
+        "snippet": "New York City's public bus fleet is the largest in North America, and the Port Authority Bus Terminal, the main intercity bus terminal of the city, serves 7,000 buses and 200,000 commuters daily, maki"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 14,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "Greyhound bus station Toronto departure"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "b64992c8a803",
+     "title": "DXAQ-AM",
+     "snippet": "DXAQ (1404 kHz Davao City) Kingdom Radio was a flagship AM station of ACQ-Kingdom Broadcasting Network in the Philippines. The station's studio is located along Philippine-Japan Friendship Highway, Ca"
+    },
+    {
+     "handle": "db8e8dda2963",
+     "title": "WNFL",
+     "snippet": "WNFL (1440 AM) is an American all-sports radio station located in Green Bay, Wisconsin. The station is locally owned and operated by Midwest Communications, which owns six other stations in Northeast "
+    },
+    {
+     "handle": "88ee54e899d3",
+     "title": "WWPT",
+     "snippet": "WWPT (90.3 FM, \"Wrecker Radio\") is a high school radio station licensed to serve Westport, Connecticut. The station is owned by Staples High School and licensed to the Westport Board of Education. It "
+    },
+    {
+     "handle": "aac7e74a2dcb",
+     "title": "KAGH-FM",
+     "snippet": "KAGH-FM (104.9 FM, \"Today's Country 104.9\") is a radio station licensed to serve Crossett, Arkansas, United States. The station is owned by Crossett Radio and licensed to Peggy S. Medlin's Ashley Coun"
+    },
+    {
+     "handle": "fc4679318399",
+     "title": "WEBZ",
+     "snippet": "WEBZ is a commercial Urban Adult Contemporary radio station located in Mexico Beach, Florida (Panama City metro). Owned by iHeartMedia, the station broadcasts at 99.3 MHz. WEBZ airs an Urban Adult Con"
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/14",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "Greyhound bus station Toronto departure"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "b64992c8a803",
+        "title": "DXAQ-AM",
+        "snippet": "DXAQ (1404 kHz Davao City) Kingdom Radio was a flagship AM station of ACQ-Kingdom Broadcasting Network in the Philippines. The station's studio is located along Philippine-Japan Friendship Highway, Ca"
+       },
+       {
+        "handle": "db8e8dda2963",
+        "title": "WNFL",
+        "snippet": "WNFL (1440 AM) is an American all-sports radio station located in Green Bay, Wisconsin. The station is locally owned and operated by Midwest Communications, which owns six other stations in Northeast "
+       },
+       {
+        "handle": "88ee54e899d3",
+        "title": "WWPT",
+        "snippet": "WWPT (90.3 FM, \"Wrecker Radio\") is a high school radio station licensed to serve Westport, Connecticut. The station is owned by Staples High School and licensed to the Westport Board of Education. It "
+       },
+       {
+        "handle": "aac7e74a2dcb",
+        "title": "KAGH-FM",
+        "snippet": "KAGH-FM (104.9 FM, \"Today's Country 104.9\") is a radio station licensed to serve Crossett, Arkansas, United States. The station is owned by Crossett Radio and licensed to Peggy S. Medlin's Ashley Coun"
+       },
+       {
+        "handle": "fc4679318399",
+        "title": "WEBZ",
+        "snippet": "WEBZ is a commercial Urban Adult Contemporary radio station located in Mexico Beach, Florida (Panama City metro). Owned by iHeartMedia, the station broadcasts at 99.3 MHz. WEBZ airs an Urban Adult Con"
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 26,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 19.1
+}

@@ -1,0 +1,99 @@
+{
+ "task_id": "3hop1__742780_567566_84283",
+ "fault_type": "wrong_argument",
+ "fault_class": "tool",
+ "k": 4,
+ "k_bin": 0,
+ "hook_tool": "read",
+ "original": {
+  "step_id": 4,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "fd62e4a5459e"
+   }
+  },
+  "tool_return": {
+   "pid": "fd62e4a5459e",
+   "title": "All Right",
+   "text": "\"All Right\" is a song written and recorded by American singer-songwriter Christopher Cross. It was released in January 1983 as the lead single from the album, \"Another Page\". On the heels of his Grammy winning first album, and following his #1 hits \"Sailing\" and \"Arthur's Theme (The Best that You Can Do)\" expectations were strong enough for this first single from his second album to allow \"All Right\" to debut on Billboard Magazine's hot 100 at the high-position of #29. It was the fifth-highest debuting single of the 1980s ranking behind Michael Jackson's \"Thriller\" (No. 20), USA for Africa's \"We Are the World\" (No. 21), Paul McCartney and Michael Jackson's \"Say Say Say\" (No. 26), and Men at Work's \"Overkill\" (No. 28), all of which at least made the top five of the chart. Unfortunately, \"All Right\" -- which featured former Doobie Brothers member Michael McDonald on background vocals-- did not repeat Cross's previous success, and stalled at #12, just outside the top 10."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/4",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "fd62e4a5459e"
+      }
+     },
+     "tool_return": {
+      "pid": "fd62e4a5459e",
+      "title": "All Right",
+      "text": "\"All Right\" is a song written and recorded by American singer-songwriter Christopher Cross. It was released in January 1983 as the lead single from the album, \"Another Page\". On the heels of his Grammy winning first album, and following his #1 hits \"Sailing\" and \"Arthur's Theme (The Best that You Can Do)\" expectations were strong enough for this first single from his second album to allow \"All Right\" to debut on Billboard Magazine's hot 100 at the high-position of #29. It was the fifth-highest debuting single of the 1980s ranking behind Michael Jackson's \"Thriller\" (No. 20), USA for Africa's \"We Are the World\" (No. 21), Paul McCartney and Michael Jackson's \"Say Say Say\" (No. 26), and Men at Work's \"Overkill\" (No. 28), all of which at least made the top five of the chart. Unfortunately, \"All Right\" -- which featured former Doobie Brothers member Michael McDonald on background vocals-- did not repeat Cross's previous success, and stalled at #12, just outside the top 10."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/fd62e4a5459e",
+    "value": {
+     "title": "All Right",
+     "text": "\"All Right\" is a song written and recorded by American singer-songwriter Christopher Cross. It was released in January 1983 as the lead single from the album, \"Another Page\". On the heels of his Grammy winning first album, and following his #1 hits \"Sailing\" and \"Arthur's Theme (The Best that You Can Do)\" expectations were strong enough for this first single from his second album to allow \"All Right\" to debut on Billboard Magazine's hot 100 at the high-position of #29. It was the fifth-highest debuting single of the 1980s ranking behind Michael Jackson's \"Thriller\" (No. 20), USA for Africa's \"We Are the World\" (No. 21), Paul McCartney and Michael Jackson's \"Say Say Say\" (No. 26), and Men at Work's \"Overkill\" (No. 28), all of which at least made the top five of the chart. Unfortunately, \"All Right\" -- which featured former Doobie Brothers member Michael McDonald on background vocals-- did not repeat Cross's previous success, and stalled at #12, just outside the top 10."
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 4,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "read",
+   "args": {
+    "handle": "2f3ed1568cef"
+   }
+  },
+  "tool_return": {
+   "pid": "2f3ed1568cef",
+   "title": "Love Is the Right Place",
+   "text": "\"Love Is the Right Place\" is a song written by Marcus Hummon and Tommy Sims, and recorded by American country music singer Bryan White. It was released in July 1997 as the first single from his album \"The Right Place\". The song peaked at number 4 on the U.S. country chart and at number 3 on the Canadian country chart. It also peaked at number 1 on the Bubbling Under Hot 100 chart."
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/4",
+    "value": {
+     "tool_call": {
+      "name": "read",
+      "args": {
+       "handle": "2f3ed1568cef"
+      }
+     },
+     "tool_return": {
+      "pid": "2f3ed1568cef",
+      "title": "Love Is the Right Place",
+      "text": "\"Love Is the Right Place\" is a song written by Marcus Hummon and Tommy Sims, and recorded by American country music singer Bryan White. It was released in July 1997 as the first single from his album \"The Right Place\". The song peaked at number 4 on the U.S. country chart and at number 3 on the Canadian country chart. It also peaked at number 1 on the Bubbling Under Hot 100 chart."
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/evidence/2f3ed1568cef",
+    "value": {
+     "title": "Love Is the Right Place",
+     "text": "\"Love Is the Right Place\" is a song written by Marcus Hummon and Tommy Sims, and recorded by American country music singer Bryan White. It was released in July 1997 as the first single from his album \"The Right Place\". The song peaked at number 4 on the U.S. country chart and at number 3 on the Canadian country chart. It also peaked at number 1 on the Bubbling Under Hot 100 chart."
+    }
+   }
+  ]
+ },
+ "ended": "step_cap",
+ "n_steps": 38,
+ "answer_changed": true,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 53.2
+}

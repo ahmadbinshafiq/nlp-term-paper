@@ -1,0 +1,91 @@
+{
+ "task_id": "3hop2__792915_223623_162182",
+ "fault_type": "dropped_note",
+ "fault_class": "state",
+ "k": 12,
+ "k_bin": 1,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "2",
+    "text": "John Phan was born in Da Nang, Vietnam.",
+    "source_pid": "4c07f91faff3"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "2",
+       "text": "John Phan was born in Da Nang, Vietnam.",
+       "source_pid": "4c07f91faff3"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/2",
+    "value": {
+     "text": "John Phan was born in Da Nang, Vietnam.",
+     "source_pid": "4c07f91faff3"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 12,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "2",
+    "text": "John Phan was born in Da Nang, Vietnam.",
+    "source_pid": "4c07f91faff3"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/12",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "2",
+       "text": "John Phan was born in Da Nang, Vietnam.",
+       "source_pid": "4c07f91faff3"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 20,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 0
+}

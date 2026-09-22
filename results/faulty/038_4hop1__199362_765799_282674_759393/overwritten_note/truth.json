@@ -1,0 +1,99 @@
+{
+ "task_id": "4hop1__199362_765799_282674_759393",
+ "fault_type": "overwritten_note",
+ "fault_class": "state",
+ "k": 16,
+ "k_bin": 0,
+ "hook_tool": "write_note",
+ "original": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "2",
+    "text": "Appleton, Wisconsin is in Outagamie County.",
+    "source_pid": "a772d7439976"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "2",
+       "text": "Appleton, Wisconsin is in Outagamie County.",
+       "source_pid": "a772d7439976"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "add",
+    "path": "/notes/2",
+    "value": {
+     "text": "Appleton, Wisconsin is in Outagamie County.",
+     "source_pid": "a772d7439976"
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 16,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "write_note",
+   "args": {
+    "key": "2",
+    "text": "Appleton, Wisconsin is in Outagamie County.",
+    "source_pid": "a772d7439976"
+   }
+  },
+  "tool_return": {
+   "ok": true
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/16",
+    "value": {
+     "tool_call": {
+      "name": "write_note",
+      "args": {
+       "key": "2",
+       "text": "Appleton, Wisconsin is in Outagamie County.",
+       "source_pid": "a772d7439976"
+      }
+     },
+     "tool_return": {
+      "ok": true
+     }
+    }
+   },
+   {
+    "op": "replace",
+    "path": "/notes/1",
+    "value": {
+     "text": "Appleton, Wisconsin is in Outagamie County.",
+     "source_pid": "a772d7439976"
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 30,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 0
+}

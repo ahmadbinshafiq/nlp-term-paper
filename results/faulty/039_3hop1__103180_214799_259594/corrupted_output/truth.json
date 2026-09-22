@@ -1,0 +1,179 @@
+{
+ "task_id": "3hop1__103180_214799_259594",
+ "fault_type": "corrupted_output",
+ "fault_class": "tool",
+ "k": 20,
+ "k_bin": 2,
+ "hook_tool": "search",
+ "original": {
+  "step_id": 20,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "GDR Border Troops country"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "14d5f7f1e69a",
+     "title": "Heinz-Josef Große",
+     "snippet": "Heinz-Josef Große was a 34-year-old East German (GDR) construction worker who was shot and killed on 29 March 1982 by GDR border guards on the Inner German border at Schifflersgrund, near Bad Sooden-A"
+    },
+    {
+     "handle": "d7e9a505fdb5",
+     "title": "Warsaw Pact",
+     "snippet": "In 1956, following the declaration of the Imre Nagy government of withdrawal of Hungary from the Warsaw Pact, Soviet troops entered the country and removed the government. Soviet forces crushed the na"
+    },
+    {
+     "handle": "ec34d37ec6da",
+     "title": "Canada",
+     "snippet": "Canada (/ ˈkænədə / (listen); French: (kanadɑ)) is a country in the northern part of North America. Its ten provinces and three territories extend from the Atlantic to the Pacific and northward into t"
+    },
+    {
+     "handle": "edf8d352e816",
+     "title": "Cascade City",
+     "snippet": "Cascade City or Cascade was a Canadian Pacific Railway construction era boom town in the Boundary Country of the West Kootenay region of British Columbia, Canada. Because of its location near the Cana"
+    },
+    {
+     "handle": "8b53b169bba9",
+     "title": "Namibia",
+     "snippet": "Namibia (i/nəˈmɪbiə/, /næˈ-/), officially the Republic of Namibia (German:  Republik Namibia (help·info); Afrikaans: Republiek van Namibië) is a country in southern Africa whose western border is the "
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/20",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "GDR Border Troops country"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "14d5f7f1e69a",
+        "title": "Heinz-Josef Große",
+        "snippet": "Heinz-Josef Große was a 34-year-old East German (GDR) construction worker who was shot and killed on 29 March 1982 by GDR border guards on the Inner German border at Schifflersgrund, near Bad Sooden-A"
+       },
+       {
+        "handle": "d7e9a505fdb5",
+        "title": "Warsaw Pact",
+        "snippet": "In 1956, following the declaration of the Imre Nagy government of withdrawal of Hungary from the Warsaw Pact, Soviet troops entered the country and removed the government. Soviet forces crushed the na"
+       },
+       {
+        "handle": "ec34d37ec6da",
+        "title": "Canada",
+        "snippet": "Canada (/ ˈkænədə / (listen); French: (kanadɑ)) is a country in the northern part of North America. Its ten provinces and three territories extend from the Atlantic to the Pacific and northward into t"
+       },
+       {
+        "handle": "edf8d352e816",
+        "title": "Cascade City",
+        "snippet": "Cascade City or Cascade was a Canadian Pacific Railway construction era boom town in the Boundary Country of the West Kootenay region of British Columbia, Canada. Because of its location near the Cana"
+       },
+       {
+        "handle": "8b53b169bba9",
+        "title": "Namibia",
+        "snippet": "Namibia (i/nəˈmɪbiə/, /næˈ-/), officially the Republic of Namibia (German:  Republik Namibia (help·info); Afrikaans: Republiek van Namibië) is a country in southern Africa whose western border is the "
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "changed": {
+  "step_id": 20,
+  "node_kind": "act",
+  "tool_call": {
+   "name": "search",
+   "args": {
+    "query": "GDR Border Troops country"
+   }
+  },
+  "tool_return": {
+   "results": [
+    {
+     "handle": "e23ff78916f4",
+     "title": "Krasnolipie",
+     "snippet": "Krasnolipie () is a village in the administrative district of Gmina Braniewo, within Braniewo County, Warmian-Masurian Voivodeship, in northern Poland, close to the border with the Kaliningrad Oblast "
+    },
+    {
+     "handle": "ce2ad554d4f8",
+     "title": "Bondary",
+     "snippet": "Bondary is a village in the administrative district of Gmina Michałowo, within Białystok County, Podlaskie Voivodeship, in north-eastern Poland, close to the border with Belarus. It lies approximately"
+    },
+    {
+     "handle": "e2d1e26162e6",
+     "title": "Gmina Włodawa",
+     "snippet": "Gmina Włodawa is a rural gmina (administrative district) in Włodawa County, Lublin Voivodeship, in eastern Poland, on the border with Belarus and Ukraine. Its seat is the town of Włodawa, although the"
+    },
+    {
+     "handle": "5077f8c1e687",
+     "title": "Virginia",
+     "snippet": "Virginia has a total area of , including of water, making it the 35th-largest state by area. Virginia is bordered by Maryland and Washington, D.C. to the north and east; by the Atlantic Ocean to the e"
+    },
+    {
+     "handle": "5ed910b01265",
+     "title": "Moroccan Communist Party",
+     "snippet": "The first congress of the Moroccan Communist Party, held in April 1946 issued an appeal to the people of Morocco to join forces in the struggle for independence, for democratic freedoms and improving "
+    }
+   ]
+  },
+  "state_patch": [
+   {
+    "op": "add",
+    "path": "/calls/20",
+    "value": {
+     "tool_call": {
+      "name": "search",
+      "args": {
+       "query": "GDR Border Troops country"
+      }
+     },
+     "tool_return": {
+      "results": [
+       {
+        "handle": "e23ff78916f4",
+        "title": "Krasnolipie",
+        "snippet": "Krasnolipie () is a village in the administrative district of Gmina Braniewo, within Braniewo County, Warmian-Masurian Voivodeship, in northern Poland, close to the border with the Kaliningrad Oblast "
+       },
+       {
+        "handle": "ce2ad554d4f8",
+        "title": "Bondary",
+        "snippet": "Bondary is a village in the administrative district of Gmina Michałowo, within Białystok County, Podlaskie Voivodeship, in north-eastern Poland, close to the border with Belarus. It lies approximately"
+       },
+       {
+        "handle": "e2d1e26162e6",
+        "title": "Gmina Włodawa",
+        "snippet": "Gmina Włodawa is a rural gmina (administrative district) in Włodawa County, Lublin Voivodeship, in eastern Poland, on the border with Belarus and Ukraine. Its seat is the town of Włodawa, although the"
+       },
+       {
+        "handle": "5077f8c1e687",
+        "title": "Virginia",
+        "snippet": "Virginia has a total area of , including of water, making it the 35th-largest state by area. Virginia is bordered by Maryland and Washington, D.C. to the north and east; by the Atlantic Ocean to the e"
+       },
+       {
+        "handle": "5ed910b01265",
+        "title": "Moroccan Communist Party",
+        "snippet": "The first congress of the Moroccan Communist Party, held in April 1946 issued an appeal to the people of Morocco to join forces in the struggle for independence, for democratic freedoms and improving "
+       }
+      ]
+     }
+    }
+   }
+  ]
+ },
+ "ended": "finish",
+ "n_steps": 38,
+ "answer_changed": false,
+ "finish_note_missing": false,
+ "requeried_after_k": false,
+ "reread_after_k": false,
+ "seconds": 28.5
+}
