@@ -101,7 +101,22 @@ Figure 2 shows the whole pipeline. Before the first run of the study was made, w
 
 ### 3.1 The agent and the task
 
-The agent answers questions from MuSiQue, a dataset of questions that need three or four facts chained together (Trivedi et al., 2022). Each question comes with about 20 passages; we pooled the passages of all our candidate questions into one collection of 2,795 passages and gave the agent a keyword search (BM25; Robertson and Zaragoza, 2009) over it. The agent has four tools. `search` returns the five best passages with a short preview. `read` returns the full text of one passage. `write_note` stores one fact with the passage it came from. `finish` gives the answer and names the note it rests on. The tools refuse a repeated query, a second read of the same passage and a reused note name, so that a correct run never contains such repeats by itself.
+**The task.** The questions come from MuSiQue (Trivedi et al., 2022), a dataset built so that each question can only be answered by chaining three or four facts. Take the example from Section 2.1: *"Where does the body of water by the city Astronautalis is from and the Ohio River meet?"* To answer it, the agent must find out that Astronautalis is from Minneapolis, then that Minneapolis lies on the Mississippi, then where the Mississippi meets the Ohio. Each fact is in a different passage, and no single passage gives the answer.
+
+**What the agent can read.** The dataset gives each question about 20 short passages of Wikipedia text; some hold the facts, most are distractors. We put the passages of all our candidate questions together into one collection of 2,795 passages. The agent does not see this collection directly. It can only search it, the way you would search a small library with a keyword search box. The search engine is BM25 (Robertson and Zaragoza, 2009), a standard method that ranks passages by how many of the query's words they contain, with rare words counting more.
+
+**The four tools.** The agent works only through these four actions:
+
+| Tool | What it does | In the example |
+|---|---|---|
+| `search(query)` | returns the five best-matching passages, each with its title and first words | "Astronautalis hometown" returns five passages, one of them about Astronautalis |
+| `read(handle)` | returns the full text of one passage | the agent reads the Astronautalis passage |
+| `write_note(key, text, source)` | stores one fact, together with the passage it came from | note "city": "Astronautalis is from Minneapolis", source: that passage |
+| `finish(answer, note)` | ends the run with the answer and names the note the answer rests on | answer "Cairo, Illinois", resting on the third note |
+
+Between any two of these actions the agent writes a short think text with its plan. A typical run is therefore: think, search, think, read, think, write a note, and again for the next fact, until finish.
+
+**One rule about repeats.** The tools refuse three kinds of repeat: sending the same search query twice, reading the same passage twice, and writing a note under a name that already exists. A refused call returns an error and changes nothing. We added this rule so that a correct run never contains, by accident, something that looks like one of the faults we plant later (for example, a note that overwrites another note).
 
 The agent is a small open-weights model, GLM-4.7-Flash (GLM-4.5 Team et al., 2025), with 30 billion parameters, run locally through Ollama (Ollama, 2026) at temperature 0 (the setting that makes the model always pick its most likely next word, so that its answers vary as little as possible). The loop is built with LangGraph (LangChain Inc, 2026), and a run may take at most 38 steps. The model is not a strong question answerer, so two choices made it usable. First, with each question it also gets MuSiQue's own breakdown into sub-questions, without answers, as a plan; without the plan it passed our gate (next paragraph) on 12% of the first 40 questions, with it on 30% of those 40 and on 35% of all 155 we ran (a rough comparison: the two trials also differed in one small prompt setting). Second, every action is written as a small JSON object in a fixed form, so an action can never be malformed. The paper studies auditors, not question answering, so these helps are acceptable, but they make the runs regular and short.
 
