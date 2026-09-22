@@ -189,9 +189,9 @@ The primary auditor is Qwen3.8 27B (Qwen Team, 2026), an open-weights model run 
 2. The structure-only guesser scores near its expected floor on the two tool faults, which shows that those faults do not leak through the record's structure.
 3. The auditor's real score beats what it would get if the fault positions were shuffled among the runs of the same fault type (we shuffled 2,000 times; the real score had to beat 97.5% of the shuffled ones). This shows that the auditor is reading the record and not guessing from position.
 
-### 3.6 Cost
+### 3.6 Compute
 
-Everything ran on one Apple laptop with 48 GB of memory and no API calls. Generating the 155 clean runs took 3.8 hours of model time. The 300 faulty and 20 sham runs took about one hour more, because the two state faults and the sham change nothing the agent sees, so those 120 runs replayed from the cache. The 1,035 GLM audits took 3.7 hours and the 1,035 Qwen audits 16.1 hours. The total cost in money was zero.
+Everything ran on one laptop with 48 GB of memory, with no paid API. Generating the 155 candidate runs took 3.8 hours of model time, the 320 faulty and sham runs about one more hour, and the 2,070 audits about 20 hours (3.7 for GLM, 16.1 for Qwen). Anyone with a similar machine can repeat the study.
 
 ## 4. Results
 
