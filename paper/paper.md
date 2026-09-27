@@ -227,15 +227,17 @@ Figure 3 and Table 2 show how often the primary auditor named the exact faulty s
 
 Over all faults the auditor found the exact step in 84% of the records, and 99% of its answers parsed. Five of the six faults were found about equally well in all three shapes; their differences are within a few points and inside the intervals. The exception is the dropped note. In the event log the auditor found it in 24 of 50 runs; in the diffs and in the graph in 43 of 50.
 
-The pre-registered test says that the effect of the shape does depend on the fault class; the chance of seeing a pattern this strong with no real dependence is far below one in a thousand (p < 0.0001). But the pattern is not the predicted one. Figure 4 shows the three margins.
+The pre-registered test says that the effect of the shape does depend on the fault class; the chance of seeing a pattern this strong with no real dependence is far below one in a thousand (p < 0.0001). But the pattern is not the predicted one. To see why, we look at the three margins.
+
+Recall what a margin is (Section 3.5). For each fault class, take the hit rate of the shape we predicted to be best, and subtract the average hit rate of the other two shapes. For the state faults, for example, the diffs scored 93%, the log 74% and the graph 93% (Table 2). The predicted shape was the diffs, so the margin is 93 minus the average of 74 and 93, which is 93 − 83.5 = +9.5 points. A margin of zero means the predicted shape did no better than the others; a margin of +10 means it did 10 points better. The interval next to each margin says how far the number could move with a different set of 50 questions: if the interval contains zero, we cannot tell whether there is any advantage at all. Figure 4 shows the three margins with their intervals.
 
 ![Figure 4](figures/fig4_margins.png)
 
-*Figure 4. For each fault class, the margin of the predicted shape over the mean of the other two, with 95% bootstrap intervals. The hypothesis needed all three margins to lie above 10 points.*
+*Figure 4. For each fault class, the margin of the predicted shape over the average of the other two, with its 95% interval. The hypothesis needed all three margins to lie above 10 points.*
 
-- **Tool faults, predicted best: the log.** Margin −1 point, interval −6 to +4. No difference.
-- **State faults, predicted best: the diffs.** Margin +9.5 points, interval +5 to +14.5. The diffs do beat the log, but the margin falls just short of the 10-point minimum, and the graph does exactly as well, so the diffs are not the single best shape. The prediction is not met on either count.
-- **Evidence faults, predicted best: the graph.** Margin +1 point, interval −3 to +5. Every shape is at 95% or above, so this prediction could not be tested: there was no room for any shape to be better.
+- **Tool faults, predicted best: the log.** The three shapes scored 68%, 68% and 70%. Margin −1 point, interval −6 to +4. The log was no better than the others.
+- **State faults, predicted best: the diffs.** Scores 74% (log), 93% (diffs), 93% (graph). Margin +9.5 points, interval +5 to +14.5. The diffs really did beat the log: the interval does not contain zero. But the margin is just under the 10-point minimum we had fixed, and the graph did exactly as well as the diffs, so the diffs are not the single best shape. The prediction fails on both counts.
+- **Evidence faults, predicted best: the graph.** Scores 97%, 95%, 97%. Margin +1 point, interval −3 to +5. All three shapes are at 95% or above, so there was no room for any shape to be better. This prediction could not be tested.
 
 Under the decision rules fixed before the study, the label is **"refuted: another interaction"**. The shape matters, but only for one fault, and not in the way the hypothesis said.
 
