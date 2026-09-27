@@ -53,7 +53,7 @@ The data refuted the hypothesis. This paper contributes:
 3. The result that, for five of the six fault types, the shape of the record made little difference to the auditor, while for one, the dropped note, it made a large difference: in the event log, the missing note is nothing more than a missing line, and the auditor found it only about half the time, against six times in seven in the other two shapes.
 4. The observation that a simple one-line rule, with no language model at all, finds three of the six fault types every time, and that switching to a better auditor model helped far more than switching to a better record shape.
 
-All code, data, records, model answers and the pre-registration are in the project repository.
+All code, data, records, model answers and the pre-registration are in the project repository; the link is given in the appendix note at the end of this paper.
 
 ## 2. Background
 
@@ -420,4 +420,4 @@ Zhuang, Y., Chen, K., Duan, Y., Zheng, S., Li, J., and Zhang, X. Y. (2026). Agen
 
 ---
 
-*Appendix (in the repository): the pre-registration with the full auditor prompt (`prereg/preregistration.md`), the fault catalogue (`prereg/fault_catalogue.md`), every decision in order (`DECISIONS.md`), all records and model answers (`results/`), and the code (`code/`).*
+*Appendix. Everything described in this paper is in the project repository at https://github.com/ahmadbinshafiq/nlp-term-paper: the pre-registration with the full auditor prompt (`prereg/preregistration.md`), the fault catalogue (`prereg/fault_catalogue.md`), every decision in order (`DECISIONS.md`), all records and model answers (`results/`), and the code (`code/`). The repository carries several git tags; the tag `prereg-v1` marks the frozen pre-registration.*
