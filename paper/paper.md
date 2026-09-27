@@ -301,7 +301,7 @@ The second auditor, GLM-4.7-Flash, is the same model that acted as the agent. It
 
 ![Figure 6](figures/fig6_cost.png)
 
-*Figure 6. Length of what the auditor reads (record plus instruction) and audit time per shape. The log is about a quarter shorter and audited about a fifth faster.*
+*Figure 6. Panel A: how long the text the auditor reads is (the record plus the instruction), in tokens, on average for each shape. Panel B: how many seconds one audit took with Qwen, on average. The colours are the same as in Figure 3. The log is about a quarter shorter than the other two shapes and is audited about a fifth faster.*
 
 ## 5. Discussion
 
