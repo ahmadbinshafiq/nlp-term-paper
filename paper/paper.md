@@ -324,7 +324,7 @@ The second auditor, GLM-4.7-Flash, is the same model that acted as the agent. It
 - **One primary auditor.** A different or stronger model might react to the shapes differently. The second auditor was too weak to tell.
 - **Length is tied to shape.** The log is shorter than the other two; we cannot separate the effect of length from the effect of shape in this design.
 - **Power.** With 50 questions the study can detect differences of about 10 points in the interaction test, but a null result can only rule out differences above 20 points.
-- **Most related work is unreviewed.** Of the 34 sources we cite, 16 are 2026 arXiv preprints, 2 more are 2025 arXiv preprints, and one is a workshop paper without proceedings. Two of the preprints report acceptance at a venue that had not yet published them. We cite what the papers say, not what they have been confirmed to show.
+- **Most related work is not yet peer-reviewed.** Most of the closest work is from 2026 and exists only as arXiv preprints or workshop papers. We cite what these papers report, not what has been confirmed by review.
 
 ## 7. Conclusion
 
