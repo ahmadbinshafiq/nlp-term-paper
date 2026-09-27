@@ -209,7 +209,7 @@ Figure 3 and Table 2 show how often the primary auditor named the exact faulty s
 
 ![Figure 3](figures/fig3_main_result.png)
 
-*Figure 3. Share of the 50 runs per fault in which the primary auditor (Qwen3.8 27B) named the exact faulty step, by record shape. Error bars are 95% Wilson intervals (Wilson, 1927), the usual interval for a share out of a small count.*
+*Figure 3. For each of the six planted faults, the share of the 50 runs in which the primary auditor (Qwen3.8 27B) named the exact faulty step, once for each record shape (blue: event log, orange: state diffs, green: PROV graph). The grey labels only name the class each pair of faults belongs to. Compare the three bars within a fault: the same height means the shape made no difference. The thin lines are 95% intervals (Wilson, 1927); where they overlap, the shapes cannot be told apart.*
 
 *Table 2. Exact step found by the primary auditor, 50 runs per cell.*
 
@@ -233,7 +233,7 @@ Recall what a margin is (Section 3.5). For each fault class, take the hit rate o
 
 ![Figure 4](figures/fig4_margins.png)
 
-*Figure 4. For each fault class, the margin of the predicted shape over the average of the other two, with its 95% interval. The hypothesis needed all three margins to lie above 10 points.*
+*Figure 4. One row per fault class. The dot is the margin: how many points better the predicted shape did than the average of the other two. The line through the dot is its 95% interval. If the line crosses the grey vertical line at 0, the predicted shape may have had no advantage at all. The dashed lines at 10 mark the smallest advantage the hypothesis needed; the grey band from −20 to +20 is the range a "no difference" result cannot rule out.*
 
 - **Tool faults, predicted best: the log.** The three shapes scored 68%, 68% and 70%. Margin −1 point, interval −6 to +4. The log was no better than the others.
 - **State faults, predicted best: the diffs.** Scores 74% (log), 93% (diffs), 93% (graph). Margin +9.5 points, interval +5 to +14.5. The diffs really did beat the log: the interval does not contain zero. But the margin is just under the 10-point minimum we had fixed, and the graph did exactly as well as the diffs, so the diffs are not the single best shape. The prediction fails on both counts.
@@ -274,7 +274,7 @@ Figure 5 puts the auditor next to the three no-model baselines and next to the s
 
 ![Figure 5](figures/fig5_baselines.png)
 
-*Figure 5. Exact step found per fault: the two language-model auditors (their best shape each) against three baselines that use no model.*
+*Figure 5. Same layout as Figure 3, but the bars now compare who is auditing, not which shape. Green bars are the two language-model auditors, each at its best shape. The black and grey bars are the three baselines that use no model. A black bar at 1.0 means the one-line rule found that fault every time.*
 
 The **rule auditor**, one line of logic, found the dropped note, the overwritten note and the missing source in 50 of 50 runs each, and nothing else. These three faults are structural: the record's shape alone gives them away. The **structure-only guesser**, which sees no text at all, found them in 78 to 86% of runs. For these faults a language model adds nothing that a rule does not already give. The rule costs nothing and runs in an instant. On the 300 faulty runs and the 45 control runs it never named a wrong step: it found the three structural faults every time and stayed silent on everything else. Its silence on clean runs is partly by construction, because our gate (Section 3.1) already removed clean runs with a note that has no source.
 
