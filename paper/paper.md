@@ -195,9 +195,13 @@ Everything ran on one laptop with 48 GB of memory, with no paid API. Generating 
 
 ## 4. Results
 
-### 4.1 The runs
+### 4.1 What the faulty runs look like
 
-The 300 faulty runs have 23.8 steps on average. In 263 of them the agent still reached `finish`; 37 hit the step limit. The planted fault changed the final answer in 20% of the runs: never for a dropped or overwritten note (by design: the agent only ever sees what a tool returns, and `write_note` still returns "ok", so these two faults cannot change what it does next), in 14 to 20% of the evidence faults, in 36% of wrong arguments and in 50% of corrupted outputs. So most faults were silent: the run went on and ended as if nothing had happened, which is exactly the case where an audit record is needed.
+A faulty run has 24 steps on average. In 263 of the 300 runs the agent still reached `finish`; in the other 37 it hit the step limit.
+
+Most planted faults were **silent**: the agent carried on and ended with the same answer as before, as if nothing had happened. Only 1 run in 5 ended with a different answer. How often the answer changed depended on the fault: never for a dropped or overwritten note, in 14 to 20% of the runs with an evidence fault, in 36% with a wrong argument, and in 50% with a corrupted output. (The two note faults can never change the answer, because the agent only sees what a tool returns, and `write_note` still returns "ok".)
+
+This is the situation an audit record is for. If a fault showed up in the final answer, one could catch it there. A silent fault can only be found by reading the record.
 
 ### 4.2 The main result
 
